@@ -15,10 +15,12 @@ public class Product {
 	private int stock;//	재고
 	private double grade;//	평점
 	private String descriptionImgName;//	상품상세사진
-	private List<ProductImg> productImg;//상품 사진들
+	private String imgName;
+	public Product() {
+		super();
+	}
 	public Product(String serialNum, String modelName, String company, int price, int ram, String cpu, int noteSize,
-			double noteWeight, String launchDate, int stock, double grade, String descriptionImgName,
-			List<ProductImg> productImg) {
+			double noteWeight, String launchDate, int stock, double grade, String descriptionImgName, String imgName) {
 		super();
 		this.serialNum = serialNum;
 		this.modelName = modelName;
@@ -32,7 +34,7 @@ public class Product {
 		this.stock = stock;
 		this.grade = grade;
 		this.descriptionImgName = descriptionImgName;
-		this.productImg = productImg;
+		this.imgName = imgName;
 	}
 	public String getSerialNum() {
 		return serialNum;
@@ -106,12 +108,13 @@ public class Product {
 	public void setDescriptionImgName(String descriptionImgName) {
 		this.descriptionImgName = descriptionImgName;
 	}
-	public List<ProductImg> getProductImg() {
-		return productImg;
+	public String getImgName() {
+		return imgName;
 	}
-	public void setProductImg(List<ProductImg> productImg) {
-		this.productImg = productImg;
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
 	}
+	
 	
 	
 }

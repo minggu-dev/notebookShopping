@@ -2,14 +2,21 @@ package notebook.domain;
 
 public class BoardAnswer {
 	private int ansNo;
+	private int qnaNo;
 	private String content;
 	private String createDate;
 	
-	public BoardAnswer(int ansNo, String content, String createDate) {
+
+	public BoardAnswer(int ansNo, int qnaNo, String content, String createDate) {
 		super();
 		this.ansNo = ansNo;
+		this.qnaNo = qnaNo;
 		this.content = content;
 		this.createDate = createDate;
+	}
+
+	public BoardAnswer() {
+		super();
 	}
 
 	public int getAnsNo() {
@@ -34,6 +41,14 @@ public class BoardAnswer {
 
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
+	}
+
+	public int getQnaNo() {
+		return qnaNo;
+	}
+
+	public void setQnaNo(int qnaNo) {
+		this.qnaNo = qnaNo;
 	}
 	
 	

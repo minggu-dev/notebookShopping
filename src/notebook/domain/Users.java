@@ -11,10 +11,11 @@ public class Users {
 	private String answer;//	답변내용
 	private Questions question;//	질문
 	private int state;//	상태값
-	private List<CartList> cartList;//		장바구니
-	private List<OrderInfo> orderInfo;//	구매내역
+	public Users() {
+		super();
+	}
 	public Users(String userId, String pwd, String name, String addr, String phone, String answer, Questions question,
-			int state, List<CartList> cartList, List<OrderInfo> orderInfo) {
+			int state) {
 		super();
 		this.userId = userId;
 		this.pwd = pwd;
@@ -24,8 +25,6 @@ public class Users {
 		this.answer = answer;
 		this.question = question;
 		this.state = state;
-		this.cartList = cartList;
-		this.orderInfo = orderInfo;
 	}
 	public String getUserId() {
 		return userId;
@@ -75,18 +74,5 @@ public class Users {
 	public void setState(int state) {
 		this.state = state;
 	}
-	public List<CartList> getCartList() {
-		return cartList;
-	}
-	public void setCartList(List<CartList> cartList) {
-		this.cartList = cartList;
-	}
-	public List<OrderInfo> getOrderInfo() {
-		return orderInfo;
-	}
-	public void setOrderInfo(List<OrderInfo> orderInfo) {
-		this.orderInfo = orderInfo;
-	}
-	
 	
 }

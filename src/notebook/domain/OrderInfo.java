@@ -4,12 +4,18 @@ import java.util.List;
 
 public class OrderInfo {
 	private int orderNo;
+	private String userId;
 	private String purchaseDate;
 	private int deliveryState;
 	private int refundState;
 	private int totalPrice;
 	private String addrDelivery;
 	private List<OrderList> orderList;
+	
+	public OrderInfo() {
+		super();
+	}
+	
 	public OrderInfo(int orderNo, String purchaseDate, int deliveryState, int refundState, int totalPrice,
 			String addrDelivery, List<OrderList> orderList) {
 		super();
@@ -63,7 +69,13 @@ public class OrderInfo {
 	public void setOrderList(List<OrderList> orderList) {
 		this.orderList = orderList;
 	}
-	
-	
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
 }

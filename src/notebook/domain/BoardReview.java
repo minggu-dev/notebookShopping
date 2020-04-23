@@ -7,8 +7,11 @@ public class BoardReview {
 	private String createDate;
 	private String content;
 	private String serialNum;
-	public BoardReview(int reviewNo, String userId, String imgName, String createDate, String content,
-			String serialNum) {
+	private int grade;
+	
+	
+	public BoardReview(int reviewNo, String userId, String imgName, String createDate, String content, String serialNum,
+			int grade) {
 		super();
 		this.reviewNo = reviewNo;
 		this.userId = userId;
@@ -16,6 +19,10 @@ public class BoardReview {
 		this.createDate = createDate;
 		this.content = content;
 		this.serialNum = serialNum;
+		this.grade = grade;
+	}
+	public BoardReview() {
+		super();
 	}
 	public int getReviewNo() {
 		return reviewNo;
@@ -53,7 +60,11 @@ public class BoardReview {
 	public void setSerialNum(String serialNum) {
 		this.serialNum = serialNum;
 	}
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
 	
-	
-
 }

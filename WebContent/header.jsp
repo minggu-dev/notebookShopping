@@ -16,7 +16,6 @@
 </head>
 <body>
 
-<div class="super_container">
 	<!-- Header -->
 	<header class="header">
 		<div class="header_container">
@@ -28,26 +27,16 @@
 							<nav class="main_nav">
 								<ul>
 									<li>
-										<a href="index.html">Home</a>
+										<a href="index.jsp">Home</a>
 									</li>
 									<li>
-										<a href="#">Products</a>
-									</li>
-									<li class="hassubs">
-										<a href="categories.html">Categories</a>
-										<ul>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-										</ul>
+										<a href="product.jsp">Products</a>
 									</li>
 									<li>
-										<a href="#">Q&A</a>
+										<a href="Q&A.jsp">Q&A</a>
 									</li>
 									<li>
-										<a href="#">Login</a>
+										<a href="login.jsp">Login</a>
 									</li>
 									<li>
 										<a href="#">JoinUs</a>
@@ -116,7 +105,6 @@
 		</div>
 	</header>
 
-</div>
 
 </body>
 </html>

@@ -3,6 +3,10 @@ package notebook.domain;
 public class Questions {
 	private int queNo; //질문번호
 	private String question; //질문내용
+	
+	public Questions() {
+		super();
+	}
 	public Questions(int queNo, String question) {
 		super();
 		this.queNo = queNo;

@@ -1,7 +1,5 @@
 package notebook.domain;
 
-import java.util.List;
-
 public class BoardQnA {
 	private int qnaNo;
 	private String userId;

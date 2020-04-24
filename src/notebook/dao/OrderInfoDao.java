@@ -27,14 +27,32 @@ public interface OrderInfoDao {
 	public List<OrderInfo> selectAll() throws SQLException;
 	
 	/**
-	 * 배송상태, 환불시
+	 * 배송상태 변경
 	 * @param info
 	 * @return
 	 */
-	public int update(OrderInfo info) throws SQLException;
+	public int updateDelivery(int orderNo, int deliveryState) throws SQLException;
 	
 	/**
-	 * 전체환불
+	 * 환불 요청
+	 * @param orderNo
+	 * @param request  true면 환불요청, false면 환불취소
+	 * @return
+	 * @throws SQLException
+	 */
+	public int updateRefundRequest(int orderNo, boolean request) throws SQLException;
+	
+	/**
+	 * 배송지 변경
+	 * @param orderNo
+	 * @param addrDelivery
+	 * @return
+	 * @throws SQLException
+	 */
+	public int updateAddr(int orderNo, String addrDelivery) throws SQLException;
+	
+	/**
+	 * 환불(관리자)
 	 * @param orderNo
 	 * @return
 	 */

@@ -16,10 +16,11 @@ public class OrderInfo {
 		super();
 	}
 	
-	public OrderInfo(int orderNo, String purchaseDate, int deliveryState, int refundState, int totalPrice,
-			String addrDelivery, List<OrderList> orderList) {
+	public OrderInfo(int orderNo, String userId, String purchaseDate, int deliveryState, int refundState,
+			int totalPrice, String addrDelivery, List<OrderList> orderList) {
 		super();
 		this.orderNo = orderNo;
+		this.userId = userId;
 		this.purchaseDate = purchaseDate;
 		this.deliveryState = deliveryState;
 		this.refundState = refundState;
@@ -27,6 +28,7 @@ public class OrderInfo {
 		this.addrDelivery = addrDelivery;
 		this.orderList = orderList;
 	}
+
 	public int getOrderNo() {
 		return orderNo;
 	}

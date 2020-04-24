@@ -24,7 +24,7 @@ public interface UserDao {
 	 * @param user
 	 * @return
 	 */
-	public int update(Users user) throws SQLException;
+	public int updateStatus(Users user) throws SQLException;
 	
 	/**
 	 * 회원가입
@@ -32,4 +32,14 @@ public interface UserDao {
 	 * @return
 	 */
 	public int insert(Users user) throws SQLException;
+	
+	
+	/**
+	 * 회원탈퇴, 관리자 기능 (비활성화)
+	 * @param userId
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 */
+	public int withdrawMember(String userId, String password)throws SQLException;
 }

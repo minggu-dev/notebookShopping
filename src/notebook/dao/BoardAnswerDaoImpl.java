@@ -24,12 +24,9 @@ public class BoardAnswerDaoImpl implements BoardAnswerDao {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, qnaNo);
 			rs = ps.executeQuery();
-			boolean isFirst = true;
 			
 			while(rs.next()) {
-				if(isFirst) {
-					list.add(new BoardAnswer(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)));
-				}
+				list.add(new BoardAnswer(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)));
 			}
 		}finally {
 			DbUtil.dbClose(con, ps, rs);

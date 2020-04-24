@@ -8,13 +8,13 @@ public class BoardQnA {
 	private String createDate;
 	private String password;
 	private int viewCnt;
-	private String answerState;
+	private int answerState;
 	private Product product;
 	public BoardQnA() {
 		super();
 	}
 	public BoardQnA(int qnaNo, String userId, String subject, String content, String createDate, String password,
-			int viewCnt, String answerState, Product product) {
+			int viewCnt, int answerState, Product product) {
 		super();
 		this.qnaNo = qnaNo;
 		this.userId = userId;
@@ -68,10 +68,10 @@ public class BoardQnA {
 	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
 	}
-	public String getAnswerState() {
+	public int getAnswerState() {
 		return answerState;
 	}
-	public void setAnswerState(String answerState) {
+	public void setAnswerState(int answerState) {
 		this.answerState = answerState;
 	}
 	public Product getProduct() {

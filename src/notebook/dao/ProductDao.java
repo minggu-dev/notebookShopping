@@ -47,7 +47,8 @@ public interface ProductDao {
 	public List<Product> selectSortProduct(String target) throws SQLException;
 	
 	/**
-	 * 상품 정보 수정, 구매시 재고량 감소, 환불시 재고량 증가
+	 * 상품 정보 수정, 구매시 재고량 감소, 환불시 재고량 증가, 평점 매기기
+	 * 정보는 다
 	 * @param product
 	 * @return
 	 */
@@ -59,4 +60,5 @@ public interface ProductDao {
 	 * @return
 	 */
 	public int insert(Product product) throws SQLException;
+	
 }

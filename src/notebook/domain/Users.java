@@ -1,7 +1,5 @@
 package notebook.domain;
 
-import java.util.List;
-
 public class Users {
 	private String userId;//	아이디
 	private String pwd;//	비밀번호

@@ -55,7 +55,7 @@ public interface BoardQnADao {
 	public int increamentView(int qnaNo) throws SQLException;
 	
 	/**
-	 * 답변시 상태값 변경, 삭제시도 마찬가지
+	 * 답변시 상태값 변경, 답변 삭제시도 마찬가지
 	 * @param qnaNo	게시물 번호
 	 * @param cnt 답변 갯수
 	 * @return

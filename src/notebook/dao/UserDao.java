@@ -14,13 +14,21 @@ public interface UserDao {
 	public Users selectById(String userId) throws SQLException;
 	
 	/**
+	 * 아이디 찾기, 회원가입시 중복 방지
+	 * @param phone
+	 * @return
+	 * @throws SQLException
+	 */
+	public Users selectByPhone(String phone) throws SQLException;
+	
+	/**
 	 * 전체회원 검색(관리자)
 	 * @return
 	 */
 	public List<Users> selectAll() throws SQLException;
 	
 	/**
-	 * 유저 정보수정(사용자 수정 비밀번호, 주소, 연락처, 회원탈퇴), 관리자 수정(비활성화)
+	 * 유저 정보수정(사용자 수정 비밀번호, 주소, 연락처)
 	 * @param user
 	 * @return
 	 */

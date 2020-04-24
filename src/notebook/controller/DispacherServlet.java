@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import notebook.controller.product.ProHomeController;
+
 /**
  * Servlet implementation class DispacherServlet
  */
@@ -27,7 +29,7 @@ public class DispacherServlet extends HttpServlet {
 		String key = request.getParameter("command");
 		Controller controller = null;
 		if(key == null || key.equals("")) {
-			//controller = new SelectController();
+			controller = new ProHomeController();
 		}else {
 			controller = map.get(key);
 		}
@@ -41,7 +43,7 @@ public class DispacherServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
-			request.getRequestDispatcher("errorView/error.jsp").forward(request, response);
+			request.getRequestDispatcher("에러페이지").forward(request, response);
 		}
 	}
 

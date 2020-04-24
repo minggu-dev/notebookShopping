@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 
-public class AnsbController implements Controller {
+public class AnsInsertController implements Controller {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {

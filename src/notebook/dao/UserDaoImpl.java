@@ -116,4 +116,26 @@ public class UserDaoImpl implements UserDao {
 		}
 		return result;
 	}
+
+	@Override
+	public Users selectByPhone(String phone) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Users users = null;
+		String sql = "SELECT user_id, pwd, name, addr, phone, answer, que_no, question, state FROM userview WHERE phone = ?";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, phone);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				users = new Users(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), new Questions(rs.getInt(7), rs.getString(8)), rs.getInt(9));
+			}
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return users;
+	}
 }

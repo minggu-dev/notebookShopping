@@ -12,8 +12,8 @@ public class Users {
 	public Users() {
 		super();
 	}
-	public Users(String userId, String pwd, String name, String addr, String phone, String answer, Questions question,
-			int state) {
+	
+	public Users(String userId, String pwd, String name, String addr, String phone, String answer, Questions question) {
 		super();
 		this.userId = userId;
 		this.pwd = pwd;
@@ -22,6 +22,11 @@ public class Users {
 		this.phone = phone;
 		this.answer = answer;
 		this.question = question;
+	}
+
+	public Users(String userId, String pwd, String name, String addr, String phone, String answer, Questions question,
+			int state) {
+		this(userId, pwd, name, addr, phone, answer, question);
 		this.state = state;
 	}
 	public String getUserId() {

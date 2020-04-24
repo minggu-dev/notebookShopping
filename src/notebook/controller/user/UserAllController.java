@@ -21,7 +21,7 @@ public class UserAllController implements Controller {
 		List<Users> list = UserService.selectAll();
 		ModelAndView mv = new ModelAndView();
 		request.setAttribute("list", list);
-		mv.setViewName("나중에추가");
+		mv.setViewName("관리자 페이지");
 		return mv;
 	}
 }

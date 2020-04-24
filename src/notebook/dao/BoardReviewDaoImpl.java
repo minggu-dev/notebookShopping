@@ -22,6 +22,7 @@ public class BoardReviewDaoImpl implements BoardReviewDao {
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
+			ps.setString(1, serialNum);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {

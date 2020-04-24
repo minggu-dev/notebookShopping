@@ -8,18 +8,20 @@ import javax.servlet.http.HttpServletResponse;
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 import notebook.domain.Users;
+import notebook.service.user.UserService;
 
 /**
  * 모든 사용자 보기
  * @author kosta
  *
  */
-public class UserAllController implements Controller {
-
+public class UserAllController implements Controller {	
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		List<Users> list = 
-		return null;
+		List<Users> list = UserService.selectAll();
+		ModelAndView mv = new ModelAndView();
+		request.setAttribute("list", list);
+		mv.setViewName("나중에추가");
+		return mv;
 	}
-
 }

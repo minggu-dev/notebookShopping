@@ -115,6 +115,9 @@ public class BoardQnADaoImpl implements BoardQnADao {
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
+			ps.setString(1, board.getSubject());
+			ps.setString(2, board.getContent());
+			ps.setString(3, board.getPassword());
 			result = ps.executeUpdate();
 		}finally {
 			DbUtil.dbClose(con, ps);

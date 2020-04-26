@@ -135,8 +135,7 @@ public class ProductDaoImpl implements ProductDao {
 		List<Product> list = new ArrayList<Product>();
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement(sql);
-			if(target == null) {
+			if(target == null || target.equals("")) {
 				sql += "serialnum";
 			}else if("price_desc".equals(target)) {	//가격높은순
 				sql += "price desc";	
@@ -147,6 +146,7 @@ public class ProductDaoImpl implements ProductDao {
 			}else if("grade".equals(target)) {	//평점
 				sql += "grade desc";
 			}
+			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				list.add(new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getDouble(8), rs.getString(9)
@@ -155,14 +155,14 @@ public class ProductDaoImpl implements ProductDao {
 		}finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
-		return null;
+		return list;
 	}
 
 	@Override
-	public int update(Product product) throws SQLException {
+	public int updateProduct(Product product) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "UPDATE product SET model_name = ?, company = ?, price = ?, ram = ?, cpu = ?, note_size = ?, note_weight = ?, stock = ?, grade = ?, description_img_name = ?, img_name = ? WHERE serialnum = ?";
+		String sql = "UPDATE product SET model_name = ?, company = ?, price = ?, ram = ?, cpu = ?, note_size = ?, note_weight = ?, stock = ?, description_img_name = ?, img_name = ? WHERE serialnum = ?";
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();
@@ -175,10 +175,9 @@ public class ProductDaoImpl implements ProductDao {
 			ps.setInt(6, product.getNoteSize());
 			ps.setDouble(7, product.getNoteWeight());
 			ps.setInt(8, product.getStock());
-			ps.setDouble(9, product.getGrade());
-			ps.setString(10, product.getDescriptionImgName());
-			ps.setString(11, product.getImgName());
-			ps.setString(12, product.getSerialNum());
+			ps.setString(9, product.getDescriptionImgName());
+			ps.setString(10, product.getImgName());
+			ps.setString(11, product.getSerialNum());
 			result = ps.executeUpdate();
 		}finally {
 			DbUtil.dbClose(con, ps);
@@ -206,6 +205,67 @@ public class ProductDaoImpl implements ProductDao {
 			ps.setString(9, product.getDescriptionImgName());
 			ps.setString(10, product.getImgName());
 			result = ps.executeUpdate();
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+
+	@Override
+	public List<Product> searchProduct(String target, String search) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM product WHERE ";
+		List<Product> list = new ArrayList<Product>();
+		try {
+			con = DbUtil.getConnection();
+			if("company".equals(target)) {
+				sql += "company LIKE ?";
+			}else if("model_name".equals(target)) {
+				sql += "model_name LIKE ?";
+			}
+			ps = con.prepareStatement(sql);
+			ps.setString(1, "%" + search + "%");
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				list.add(new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getDouble(8), rs.getString(9)
+						, rs.getInt(10), rs.getDouble(11), rs.getString(12), rs.getString(13)));
+			}
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return list;
+	}
+
+	@Override
+	public int grantGrade(String serialNum, double grade) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "UPDATE product SET grade = ? WHERE serialnum = ?";
+		int result = 0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setDouble(1, grade);
+			ps.setString(2, serialNum);
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+
+	@Override
+	public int updateStock(String serialNum, int stock) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "UPDATE product SET stock = ? WHERE serialnum = ?";
+		int result = 0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, stock);
+			ps.setString(2, serialNum);
 		}finally {
 			DbUtil.dbClose(con, ps);
 		}

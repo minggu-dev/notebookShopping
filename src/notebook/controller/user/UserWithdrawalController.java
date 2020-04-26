@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 import notebook.exception.NotEnoughParameterException;
-import notebook.service.user.UserService;
+import notebook.service.UserService;
 
 /**
  * 회원탈퇴 기능 / 비활성화 기능

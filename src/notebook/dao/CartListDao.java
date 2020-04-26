@@ -21,7 +21,7 @@ public interface CartListDao {
 	public int insert(CartList list) throws SQLException;
 	
 	/**
-	 * 장바구니 수정(비우기, 수량변경 등등)
+	 * 장바구니 수정(수량변경 등등)
 	 * @param list
 	 * @return
 	 */

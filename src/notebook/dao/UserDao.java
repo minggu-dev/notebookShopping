@@ -50,4 +50,13 @@ public interface UserDao {
 	 * @throws SQLException
 	 */
 	public int withdrawMember(String userId, String password)throws SQLException;
+	
+	/**
+	 * 유저 비밀번호 찾기
+	 * @param userId
+	 * @param phone
+	 * @return
+	 * @throws SQLException
+	 */
+	public Users selectByIdPhone(String userId, String phone)throws SQLException;
 }

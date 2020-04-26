@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import notebook.domain.OrderInfo;
+import notebook.exception.CannotModifyException;
+import notebook.exception.NotFoundException;
 
 public interface OrderInfoDao {
 	/**
@@ -56,12 +58,12 @@ public interface OrderInfoDao {
 	 * @param orderNo
 	 * @return
 	 */
-	public int delete(int orderNo) throws SQLException;
+	public void delete(int orderNo) throws SQLException, NotFoundException, CannotModifyException;
 	
 	/**
 	 * ±¸¸Å½Ã
 	 * @param info
 	 * @return
 	 */
-	public int insert(OrderInfo info) throws SQLException;
+	public void insert(OrderInfo info) throws SQLException, NotFoundException, CannotModifyException;
 }

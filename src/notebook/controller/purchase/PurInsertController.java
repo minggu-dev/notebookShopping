@@ -1,7 +1,5 @@
 package notebook.controller.purchase;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,25 +10,28 @@ import notebook.exception.NotEnoughParameterException;
 import notebook.service.PurchaseService;
 
 /**
- * 유저의 구매내역 전체보기
+ * 상품 구매시
  * @author 김민호
  *
  */
-public class PurSelectUserController implements Controller {
+public class PurInsertController implements Controller {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String userId = request.getParameter("userId");
+		String totalPrice = request.getParameter("totalPrice");
+		String addrDelivery = request.getParameter("addrDelivery");
 		
-		if(userId == null || userId.equals("")) {
+		if(userId == null || userId.equals("") || totalPrice == null || totalPrice.equals("") || addrDelivery == null || addrDelivery.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
-		List<OrderInfo> list = PurchaseService.selectById(userId);
-		request.setAttribute("list", list);
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("유저 구매내역 보기");
-		response.getWriter().print(list);
+		OrderInfo info = new OrderInfo();
+		info.setUserId(userId);
+		info.setTotalPrice(Integer.parseInt(totalPrice));
+		info.setAddrDelivery(addrDelivery);
+		PurchaseService.purchaseOrder(info);
+		ModelAndView mv = new ModelAndView(false, "구매성공 페이지");
+		
 		return mv;
 	}
-
 }

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 import notebook.domain.Product;
-import notebook.service.product.ProductService;
+import notebook.service.ProductService;
 
 /**
  * 화면 구성하기 위한 Controller
@@ -19,9 +19,11 @@ public class ProHomeController implements Controller {
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, List<Product>> map = ProductService.homePage();
+		request.setAttribute("map", map);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index.jsp");
 		
+		response.getWriter().print(map);
 		return mv;
 	}
 

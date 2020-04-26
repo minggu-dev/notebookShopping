@@ -45,14 +45,22 @@ public interface ProductDao {
 	 * @return
 	 */
 	public List<Product> selectSortProduct(String target) throws SQLException;
-	
+
+	/**
+	 * 회사, 모델명으로 상품 검색
+	 * @param targer
+	 * @param search
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Product> searchProduct(String target, String search) throws SQLException;
 	/**
 	 * 상품 정보 수정, 구매시 재고량 감소, 환불시 재고량 증가, 평점 매기기
 	 * 정보는 다
 	 * @param product
 	 * @return
 	 */
-	public int update(Product product) throws SQLException;
+	public int updateProduct(Product product) throws SQLException;
 	
 	/**
 	 * 상품 추가
@@ -61,4 +69,21 @@ public interface ProductDao {
 	 */
 	public int insert(Product product) throws SQLException;
 	
+	/**
+	 * 상품 평점 매기기
+	 * @param serialNum
+	 * @param grade
+	 * @return
+	 * @throws SQLException
+	 */
+	public int grantGrade(String serialNum, double grade) throws SQLException;
+	
+	/**
+	 * 상품 재고 추가, 감소
+	 * @param serialNum
+	 * @param stock
+	 * @return
+	 * @throws SQLException
+	 */
+	public int updateStock(String serialNum, int stock) throws SQLException;
 }

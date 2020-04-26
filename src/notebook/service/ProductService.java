@@ -1,4 +1,4 @@
-package notebook.service.product;
+package notebook.service;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -8,6 +8,7 @@ import java.util.Map;
 import notebook.dao.ProductDao;
 import notebook.dao.ProductDaoImpl;
 import notebook.domain.Product;
+import notebook.exception.CannotModifyException;
 import notebook.exception.NotFoundException;
 
 public class ProductService {
@@ -39,5 +40,35 @@ public class ProductService {
 	
 	public static void insert(Product product) throws SQLException{
 		proDao.insert(product);
+	}
+	
+	public static List<Product> searchProduct(String target, String search) throws SQLException{
+		List<Product> list = proDao.searchProduct(target, search);
+		return list;
+	}
+	
+	public static List<Product> selectAllSortProduct(String target) throws SQLException{
+		List<Product> list = proDao.selectSortProduct(target);
+		return list;
+	}
+	
+	public static List<Product> selectByPriceRange(int minPrice, int maxPrice) throws SQLException{
+		List<Product> list = proDao.selectByPriceRange(minPrice, maxPrice);
+		return list;
+	}
+	
+	public static Product selectBySerialNum(String serialNum) throws SQLException, NotFoundException{
+		Product product = proDao.selectByNum(serialNum);
+		if(product == null) {
+			throw new NotFoundException("상품 찾기 오류");
+		}
+		return product;
+	}
+	
+	public static void update(Product product) throws SQLException, CannotModifyException{
+		int result = proDao.updateProduct(product);
+		if(result == 0) {
+			throw new CannotModifyException("상품을 수정할 수 없습니다.");
+		}
 	}
 }

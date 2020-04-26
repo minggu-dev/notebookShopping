@@ -1,4 +1,4 @@
-package notebook.service.user;
+package notebook.service;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -51,6 +51,16 @@ public class UserService {
 		if(user == null) {
 			throw new NotFoundException("회원 정보가 없습니다.");
 		}
+		return user;
+	}
+	
+	public static Users selectByPhone(String phone) throws SQLException{
+		Users user = userDao.selectByPhone(phone);
+		return user;
+	}
+	
+	public static Users selectByIdPhone(String userId, String phone) throws SQLException{
+		Users user = userDao.selectByIdPhone(userId, phone);
 		return user;
 	}
 }

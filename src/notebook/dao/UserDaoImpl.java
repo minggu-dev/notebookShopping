@@ -67,8 +67,7 @@ public class UserDaoImpl implements UserDao {
 			ps.setString(1, user.getPwd());
 			ps.setString(2, user.getAddr());
 			ps.setString(3, user.getPhone());
-			ps.setInt(4, user.getState());
-			ps.setString(5, user.getUserId());
+			ps.setString(4, user.getUserId());
 			result = ps.executeUpdate();
 		}finally {
 			DbUtil.dbClose(con, ps);
@@ -104,7 +103,7 @@ public class UserDaoImpl implements UserDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
-		String sql = "UPDATE users SET state = 2, phone = 'trash' || seq_trash  WHERE user_id = ? and password = ?";
+		String sql = "UPDATE users SET state = 2, phone = 'trash' || seq_trash.NEXTVAL  WHERE user_id = ? and pwd = ?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -128,6 +127,29 @@ public class UserDaoImpl implements UserDao {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setString(1, phone);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				users = new Users(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), new Questions(rs.getInt(7), rs.getString(8)), rs.getInt(9));
+			}
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return users;
+	}
+	
+	@Override
+	public Users selectByIdPhone(String userId, String phone) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Users users = null;
+		String sql = "SELECT user_id, pwd, name, addr, phone, answer, que_no, question, state FROM userview WHERE phone = ? AND user_id = ?";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, phone);
+			ps.setString(2, userId);
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {

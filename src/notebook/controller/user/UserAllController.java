@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 import notebook.domain.Users;
-import notebook.service.user.UserService;
+import notebook.service.UserService;
 
 /**
  * 모든 사용자 보기

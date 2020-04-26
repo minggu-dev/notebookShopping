@@ -19,6 +19,41 @@ public class Product {
 	public Product() {
 		super();
 	}
+	
+	
+	public Product(String modelName, String company, int price, int ram, String cpu, int noteSize, double noteWeight,
+			String launchDate, String descriptionImgName, String imgName) {
+		super();
+		this.modelName = modelName;
+		this.company = company;
+		this.price = price;
+		this.ram = ram;
+		this.cpu = cpu;
+		this.noteSize = noteSize;
+		this.noteWeight = noteWeight;
+		this.launchDate = launchDate;
+		this.descriptionImgName = descriptionImgName;
+		this.imgName = imgName;
+	}
+
+
+	public Product(String serialNum, String modelName, String company, int price, int ram, String cpu, int noteSize,
+			double noteWeight, int stock, String descriptionImgName, String imgName) {
+		super();
+		this.serialNum = serialNum;
+		this.modelName = modelName;
+		this.company = company;
+		this.price = price;
+		this.ram = ram;
+		this.cpu = cpu;
+		this.noteSize = noteSize;
+		this.noteWeight = noteWeight;
+		this.stock = stock;
+		this.descriptionImgName = descriptionImgName;
+		this.imgName = imgName;
+	}
+
+
 	public Product(String serialNum, String modelName, String company, int price, int ram, String cpu, int noteSize,
 			double noteWeight, String launchDate, int stock, double grade, String descriptionImgName, String imgName) {
 		super();

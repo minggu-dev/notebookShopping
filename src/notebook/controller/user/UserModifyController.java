@@ -7,7 +7,7 @@ import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 import notebook.domain.Users;
 import notebook.exception.NotEnoughParameterException;
-import notebook.service.user.UserService;
+import notebook.service.UserService;
 
 /**
  * 회원정보 수정

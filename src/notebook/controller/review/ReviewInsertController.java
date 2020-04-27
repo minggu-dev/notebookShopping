@@ -1,7 +1,5 @@
  package notebook.controller.review;
 
-import java.text.SimpleDateFormat;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,7 +25,6 @@ public class ReviewInsertController implements Controller {
 		
 		
 		String userId = m.getParameter("userId");
-		String imgName = m.getParameter("imgName");
 		String content = m.getParameter("content");
 		String serialNum = m.getParameter("serialNum");
 		String grade = m.getParameter("grade");
@@ -38,8 +35,13 @@ public class ReviewInsertController implements Controller {
 			
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
+
+		BoardReview review = new BoardReview(userId, null, content, serialNum, Integer.parseInt(grade) );
 		
-		BoardReview review = new BoardReview(userId, imgName, content, serialNum, Integer.parseInt(grade) );
+		if(m.getFile("imgName") != null) {
+			String imgName = m.getFilesystemName("imgName");
+			review.setImgName(imgName);
+		}
 		
 		ReviewService.insert(review);
 		ModelAndView mv = new ModelAndView(false, "reviewSelectBySerialNum page");

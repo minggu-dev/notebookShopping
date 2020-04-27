@@ -14,12 +14,9 @@ public class ReviewUpdateController implements Controller {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		String content = request.getParameter("content");
-		String useId = request.getParameter("userId");
 		String reviewNo = request.getParameter("reviewNo");
 		String userId = request.getParameter("userId");
-		String imgName = request.getParameter("imgName");
 		String serialNum = request.getParameter("serialNum");
 		String grade = request.getParameter("grade");
 		
@@ -30,7 +27,7 @@ public class ReviewUpdateController implements Controller {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
 		
-		BoardReview review = new BoardReview(Integer.parseInt(reviewNo), userId, imgName, content, serialNum, Integer.parseInt(grade) );
+		BoardReview review = new BoardReview(Integer.parseInt(reviewNo), userId, null, content, serialNum, Integer.parseInt(grade) );
 		
 		ReviewService.update(review);
 		ModelAndView mv = new ModelAndView(true, "reviewSelectBySerialNum page");

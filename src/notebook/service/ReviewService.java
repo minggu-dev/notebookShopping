@@ -12,15 +12,8 @@ import notebook.exception.NotFoundException;
 public class ReviewService {
 	private static BoardReviewDao  reviewDao = new BoardReviewDaoImpl();
 	
-	public static List<BoardReview> searchByUserId(String userId) throws SQLException, NotFoundException{
-		List<BoardReview> re = reviewDao.selectByUserId(userId);
-		if(re == null) {
-			throw new NotFoundException("해당 유저는 등록한 리뷰가 없습니다.");
-		}
-		return re;
-	}
-	public static void delete(int reviewNo) throws SQLException, NotFoundException{
-		int result = reviewDao.delete(reviewNo);
+	public static void delete(int reviewNo, String userId) throws SQLException, NotFoundException, CannotModifyException{
+		int result = reviewDao.delete(reviewNo, userId);
 		if(result == 0) {
 			throw new NotFoundException("글번호에 해당하는 리뷰가 없습니다.");
 		}
@@ -28,7 +21,7 @@ public class ReviewService {
 	}
 
 	public static void insert(BoardReview review) throws SQLException, NotFoundException, CannotModifyException{
-		int result = reviewDao.insertAndUpdateProductGrade(review);
+		int result = reviewDao.insert(review);
 		if(result ==0) {
 			throw new SQLException("등록되지 않았습니다.");
 		}
@@ -44,10 +37,26 @@ public class ReviewService {
 	}
 	
 	public static void update(BoardReview review) throws SQLException, NotFoundException, CannotModifyException{
-		int result =reviewDao.insertAndUpdateProductGrade(review);
+		int result =reviewDao.update(review);
 		if(result == 0) {
 			throw new SQLException("수정되지 않았습니다.");
 		}
+	}
+	
+	public static BoardReview selectByNo(int reviewNo) throws SQLException, NotFoundException{
+		BoardReview review = reviewDao.selectByNo(reviewNo);
+		if(review == null) {
+			throw new NotFoundException("후기를 찾을 수 없습니다.");
+		}
+		return review;
+	}
+	
+	public static List<BoardReview> searchByUserId(String userId) throws SQLException, NotFoundException{
+		List<BoardReview> re = reviewDao.selectByUserId(userId);
+		if(re == null) {
+			throw new NotFoundException("해당 유저는 등록한 리뷰가 없습니다.");
+		}
+		return re;
 	}
 }
 

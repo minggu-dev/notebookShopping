@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import notebook.controller.product.ProHomeController;
@@ -38,7 +39,7 @@ public class AjaxServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		JSONObject jsonObj = new JSONObject();
-		
+	
 		try {
 			controller.handleRequest(request, response);
 		} catch (Exception e) {

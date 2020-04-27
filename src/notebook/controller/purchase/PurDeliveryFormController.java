@@ -1,34 +1,32 @@
-package notebook.controller.review;
-
-import java.util.List;
+package notebook.controller.purchase;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
-import notebook.domain.BoardReview;
+import notebook.domain.OrderInfo;
 import notebook.exception.NotEnoughParameterException;
-import notebook.service.ReviewService;
+import notebook.service.PurchaseService;
 
-public class ReviewSelectProductController implements Controller {
+/**
+ * 배송지 수정하기 폼
+ * @author kosta
+ *
+ */
+public class PurDeliveryFormController implements Controller {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String serialNum = request.getParameter("serialNum");
-		if(serialNum == null || serialNum.equals("")) {
+		String orderNo = request.getParameter("orderNo");
+		if(orderNo == null || orderNo.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
-		
-		List<BoardReview> list = ReviewService.select(serialNum);
-		request.setAttribute("list", list);
-		
-		
+		OrderInfo info = PurchaseService.selectByNo(Integer.parseInt(orderNo));
+		request.setAttribute("info", info);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("상품상세보기 때 가라");
+		mv.setViewName("배송지 수정하기 폼으로");
 		return mv;
-		
-
 	}
 
 }

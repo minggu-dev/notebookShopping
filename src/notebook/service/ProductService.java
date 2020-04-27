@@ -57,12 +57,10 @@ public class ProductService {
 		return list;
 	}
 	
-	public static Product selectBySerialNum(String serialNum) throws SQLException, NotFoundException{
-		Product product = proDao.selectByNum(serialNum);
-		if(product == null) {
-			throw new NotFoundException("상품 찾기 오류");
-		}
-		return product;
+	public static Map<String, Object> selectBySerialNum(String serialNum) throws SQLException, NotFoundException{
+		Map<String, Object> map = proDao.selectByNum(serialNum);
+		
+		return map;
 	}
 	
 	public static void update(Product product) throws SQLException, CannotModifyException{
@@ -70,5 +68,10 @@ public class ProductService {
 		if(result == 0) {
 			throw new CannotModifyException("상품을 수정할 수 없습니다.");
 		}
+	}
+	
+	public static List<Product> selectByCompany(String company) throws SQLException, NotFoundException{
+		List<Product> list = proDao.selectByCompany(company);
+		return list;
 	}
 }

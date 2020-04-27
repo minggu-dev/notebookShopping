@@ -8,37 +8,31 @@ import notebook.exception.CannotModifyException;
 import notebook.exception.NotFoundException;
 
 public interface BoardReviewDao {
-	
-	public List<BoardReview> selectByUserId(String userId) throws SQLException;
-
 	/**
-	 * ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½Ä±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	 * »óÇ°º° ÈÄ±â º¸±â
 	 * @param serialNum
 	 * @return
 	 */
 	public List<BoardReview> selectBySerialNum(String serialNum) throws SQLException;
 	
 	/**
-	 * ï¿½Ä±ï¿½ ï¿½ï¿½ï¿½ï¿½
+	 * ÈÄ±â ¼öÁ¤
 	 * @param review
 	 * @return
 	 */
 	public int update(BoardReview review) throws SQLException;
 	
 	/**
-	 * ï¿½Ä±ï¿½ ï¿½ï¿½ï¿½ï¿½
+	 * ÈÄ±â »èÁ¦
 	 * @param reviewNo
 	 * @return
 	 */
-	public int delete(int reviewNo) throws SQLException;
+	public int delete(int reviewNo) throws SQLException, NotFoundException, CannotModifyException;
 	
 	/**
-	 * ï¿½Ä±ï¿½ ï¿½ï¿½ï¿½
+	 * ÈÄ±â µî·Ï
 	 * @param review
 	 * @return
 	 */
-	public int insert(BoardReview review) throws SQLException;
-	
-	public int insertAndUpdateProductGrade(BoardReview review) 
-			throws SQLException, NotFoundException, CannotModifyException;
+	public int insert(BoardReview review) throws SQLException, NotFoundException, CannotModifyException;
 }

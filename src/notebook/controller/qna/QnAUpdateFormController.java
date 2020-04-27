@@ -7,7 +7,7 @@ import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 import notebook.domain.BoardQnA;
 import notebook.exception.NotEnoughParameterException;
-import notebook.service.BoardQnAService;
+import notebook.service.QnAService;
 
 public class QnAUpdateFormController implements Controller {
 	
@@ -20,10 +20,12 @@ public class QnAUpdateFormController implements Controller {
 		if(qnaNo == null || qnaNo.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
-		boolean flag = false;
+		String flag = request.getParameter("flag");
+		boolean state = flag == null ? false : true;
 		
-		BoardQnA list = BoardQnAService.selectByNo(Integer.parseInt(qnaNo), flag);
-		request.setAttribute("list", list);
+		BoardQnA board = QnAService.selectByNo(Integer.parseInt(qnaNo), state);
+		
+		request.setAttribute("board", board);
 		ModelAndView mv = new ModelAndView(false, "");//게시물 수정하기.jsp
 		return mv;
 		

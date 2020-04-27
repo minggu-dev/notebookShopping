@@ -21,7 +21,7 @@ public class QnASelectDetailController implements Controller {
 			throw new NotFoundException("해당 게시물의 정보가 존재하지 않습니다.");
 		}
 		String flag = request.getParameter("flag");
-		boolean state = flag == null ? false : true;//true 이면 null 이기 때문에 조회수 증가 x
+		boolean state = flag == null ? false : true;
 		
 		BoardQnA board = QnAService.selectByNo(Integer.parseInt(qnaNo), state);
 		

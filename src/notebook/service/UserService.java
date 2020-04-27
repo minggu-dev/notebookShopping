@@ -59,8 +59,27 @@ public class UserService {
 		return user;
 	}
 	
-	public static Users selectByIdPhone(String userId, String phone) throws SQLException{
+	public static Users selectByPhoneName(String phone, String name) throws SQLException, NotFoundException{
+		Users user = userDao.selectByPhone(phone);
+		if(!user.getName().equals(name)) {
+			throw new NotFoundException("찾고자 하는 회원 정보가 없습니다.");
+		}
+		return user;
+	}
+	
+	public static Users selectByIdPhoneName(String userId, String phone, String name) throws SQLException, NotFoundException{
 		Users user = userDao.selectByIdPhone(userId, phone);
+		if(!user.getName().equals(name)) {
+			throw new NotFoundException("찾고자 하는 회원 정보가 없습니다.");
+		}
+		return user;
+	}
+	
+	public static Users selectByPhoneAns(String phone, String answer) throws SQLException, NotFoundException{
+		Users user = userDao.selectByPhone(phone);
+		if(!user.getAnswer().equals(answer)) {
+			throw new NotFoundException("일치하지 않는 답변입니다.");
+		}
 		return user;
 	}
 }

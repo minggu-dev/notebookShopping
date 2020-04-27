@@ -80,4 +80,48 @@ public class CartListDaoImpl implements CartListDao {
 		return result;
 	}
 
+	@Override
+	public int delete(String userId) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "DELETE cart_list where user_id = ?";
+		int result = 0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
+			result = ps.executeUpdate();
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+	
+	@Override
+	public CartList selectByIdSerialNum(String userId, String serialNum) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT model_name, company, price, img_name, quantity FROM cartlistview where user_id = ? AND serianum = ?";
+		CartList cart = null;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				Product product = new Product();
+				product.setSerialNum(serialNum);
+				product.setModelName(rs.getString(1));
+				product.setCompany(rs.getString(2));
+				product.setPrice(rs.getInt(3));
+				product.setImgName(rs.getString(4));
+				cart = new CartList(userId, product, rs.getInt(5));
+			}
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return cart;
+	}
 }

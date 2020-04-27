@@ -1,6 +1,6 @@
 <%@page import="notebook.controller.cart.CartUpdateController"%>
 <%@page import="notebook.controller.purchase.PurSelectUserController"%>
-<%@page import="notebook.controller.purchase.PurSelectProductController"%>
+<%@page import="notebook.controller.purchase.PurDetailController"%>
 <%@page import="notebook.controller.purchase.PurSelectAllController"%>
 <%@page import="notebook.controller.purchase.PurRefundStateController"%>
 <%@page import="notebook.controller.purchase.PurRefundController"%>
@@ -14,7 +14,7 @@
 <%@page import="notebook.controller.product.ProSearchController"%>
 <%@page import="notebook.controller.product.ProInsertController"%>
 <%@page import="notebook.controller.product.ProHomeController"%>
-<%@page import="notebook.controller.user.UserFindController"%>
+<%@page import="notebook.controller.user.UserIdQuestionFindController"%>
 <%@page import="notebook.controller.user.UserDuplicatePhoneController"%>
 <%@page import="notebook.controller.user.UserWithdrawalController"%>
 <%@page import="notebook.controller.user.UserShowDetailController"%>

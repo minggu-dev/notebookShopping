@@ -64,8 +64,6 @@ public class QnAService {
 	 * @throws CannotModifyException 
 	 */
 	public static void update(BoardQnA board) throws SQLException, CannotModifyException{
-		
-		//BoardQnADao dbboard = bd.selectByNo(board.getPassword())
 		BoardQnADao b = new BoardQnADaoImpl();
 		int result = b.update(board);
 		if(result == 0) {

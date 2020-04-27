@@ -14,7 +14,7 @@ import notebook.service.PurchaseService;
  * @author ±ËπŒ»£
  *
  */
-public class PurSelectProductController implements Controller {
+public class PurDetailController implements Controller {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {

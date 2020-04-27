@@ -2,14 +2,13 @@
 package notebook.controller.qna;
 
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpServletResponse;
 
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 import notebook.domain.BoardQnA;
 import notebook.exception.NotEnoughParameterException;
-import notebook.service.BoardQnAService;
+import notebook.service.QnAService;
 
 public class QnAUpdateController implements Controller {
 
@@ -27,10 +26,16 @@ public class QnAUpdateController implements Controller {
 					password == null || password.equals("")|| qnaNo == null || qnaNo.equals("")) {
 					throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 				}
-				BoardQnA board = new BoardQnA(Integer.parseInt(qnaNo), subject, content, password);
-				BoardQnAService.update(board);//업데이트
+				BoardQnA board = new BoardQnA();
+				board.setSubject(subject);
+				board.setContent(content);
+				board.setPassword(password);
+				board.setQnaNo(Integer.parseInt(qnaNo));
+				
+				QnAService.update(board);//업데이트
 				ModelAndView mv = new ModelAndView();
-				mv.setViewName("");
+				//게시물 상세로
+				mv.setViewName("게시물로 가자");
 				return mv;
 	}
 

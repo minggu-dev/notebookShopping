@@ -110,7 +110,7 @@ public class BoardReviewDaoImpl implements BoardReviewDao {
 		return result;
 	}
 	
-	public int deleteAndUpdateProductGrade(int reviewNo) throws SQLException{
+	public int deleteAndUpdateProductGrade(int reviewNo) throws SQLException, NotFoundException, CannotModifyException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -118,50 +118,61 @@ public class BoardReviewDaoImpl implements BoardReviewDao {
 		
 		try {
 			
-			//reviewNo의 serialNum찾기 
-			String sql = "select serialnum from board_review";
-			
-			
-			
 			con =DbUtil.getConnection();
 			con.setAutoCommit(false);
-			//insertReview
-			String sql = "DELETE board_review WHERE review_no = ?";
+		
+			//reviewNo의 serialNum을 찾는다.
+			String sql = "select serialnum from board_review where review_no = ?";
+			String serialNum = null ;
+			int mygrade = 0;
+			
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, reviewNo);
-			ps.get
-			
-			
-			
-			result = ps.executeUpdate();
-			if(result == 0) {
-				con.rollback();
-				throw new SQLException("insert fail");
-			}
-			ps.close();
-			
-			//select product grade
-			sql = "select grade from product";
-			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
-			int oldgrade = 0;
 			if(rs.next()) {
-				oldgrade = rs.getInt("grade");
-				if(oldgrade == 0) {
-					throw new NotFoundException("grade == 0");
-				}
+				serialNum = rs.getString("serialnum");
+				mygrade = rs.getInt("grade");
+				
 			}
 			ps.close();
 			rs.close();
-
+			
+			//serialnum이 동일한리뷰의 개수를 찾아내서 reviewcnt에 담는다.
+			//grade의 모든 합계를 sum에 담는다.
+			sql = "select grade from board_review where serialnum=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, serialNum);
+			rs = ps.executeQuery();
+			
+			int sum = 0;
+			int reviewcnt = 0;
+				while(rs.next()) {
+					int grade = rs.getInt("grade");
+					sum = sum + grade;
+					reviewcnt++;
+					
+				}
+				ps.close();
+				rs.close();
+				
+			sql = "DELETE board_review WHERE review_no = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, reviewNo);
+			result = ps.executeUpdate();
+			if(result == 0) {
+				con.rollback();
+				throw new NotFoundException("삭제 불가능 ");
+			}
+			ps.close();
 			
 			//update product grade
 			sql = "UPDATE product SET grade = ?";
 			ps = con.prepareStatement(sql);
-			int refreshgrade = (newgrade + oldgrade)/2;
+			int refreshgrade = (sum-mygrade)/(reviewcnt);
 			ps.setInt(1, refreshgrade);
 			result = ps.executeUpdate();
 			if(result == 0) {
+				con.rollback();
 				throw new CannotModifyException("cannot modify grade");
 			}
 			
@@ -183,6 +194,7 @@ public class BoardReviewDaoImpl implements BoardReviewDao {
 	public int insert(BoardReview review) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
+		
 		String sql = "INSERT INTO board_review(review_no, user_id, serialnum, img_name, content, grade) VALUES(seq_board_review.NEXTVAL, ?, ?, ?, ?, ?)";
 		int result = 0;
 		try {
@@ -211,8 +223,27 @@ public class BoardReviewDaoImpl implements BoardReviewDao {
 		try {
 			con =DbUtil.getConnection();
 			con.setAutoCommit(false);
+			
+			//먼저 serialnum이 동일한리뷰의 개수를 찾아내서 reviewcnt에 담는다.
+			//grade의 모든 합계를 sum에 담는다.
+			String sql = "select grade from board_review where serialnum=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, review.getSerialNum());
+			rs = ps.executeQuery();
+			
+			int sum = 0;
+			int reviewcnt = 0;
+				while(rs.next()) {
+					int grade = rs.getInt("grade");
+					sum = sum + grade;
+					reviewcnt++;
+					
+				}
+				ps.close();
+				rs.close();
+			
 			//insertReview
-			String sql = "INSERT INTO board_review(review_no, user_id, serialnum, img_name, content, grade) VALUES(seq_board_review.NEXTVAL, ?, ?, ?, ?, ?)";
+			sql = "INSERT INTO board_review(review_no, user_id, serialnum, img_name, content, grade) VALUES(seq_board_review.NEXTVAL, ?, ?, ?, ?, ?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, review.getUserId());
 			ps.setString(2, review.getSerialNum());
@@ -227,28 +258,16 @@ public class BoardReviewDaoImpl implements BoardReviewDao {
 			}
 			ps.close();
 			
-			//select product grade
-			sql = "select grade from product";
-			ps = con.prepareStatement(sql);
-			rs = ps.executeQuery();
-			int oldgrade = 0;
-			if(rs.next()) {
-				oldgrade = rs.getInt("grade");
-				if(oldgrade == 0) {
-					throw new NotFoundException("grade == 0");
-				}
-			}
-			ps.close();
-			rs.close();
 
 			
 			//update product grade
 			sql = "UPDATE product SET grade = ?";
 			ps = con.prepareStatement(sql);
-			int refreshgrade = (newgrade + oldgrade)/2;
+			int refreshgrade = (newgrade + sum)/(reviewcnt+1);
 			ps.setInt(1, refreshgrade);
 			result = ps.executeUpdate();
 			if(result == 0) {
+				con.rollback();
 				throw new CannotModifyException("cannot modify grade");
 			}
 			

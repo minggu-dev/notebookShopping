@@ -1,6 +1,7 @@
 package notebook.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import notebook.dao.CartListDao;
 import notebook.dao.CartListDaoImpl;
@@ -16,4 +17,19 @@ public class CartService {
 		}
 		
 	}
+	
+	public static void cartEmpty(String userId) throws SQLException{
+		int result = cartDao.deleteAllItem(userId);
+	}
+	
+	public static void insert(CartList cart) throws SQLException{
+		int result = cartDao.insert(cart);
+	}
+	
+	public static List<CartList> showMyCart(String userId) throws SQLException{
+		List<CartList> list = cartDao.selectById(userId);
+		return list;
+		
+	}
+
 }

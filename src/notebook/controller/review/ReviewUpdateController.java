@@ -3,15 +3,40 @@ package notebook.controller.review;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
+import notebook.domain.BoardReview;
+import notebook.exception.NotEnoughParameterException;
+import notebook.service.ReviewService;
 
 public class ReviewUpdateController implements Controller {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String content = request.getParameter("content");
+		String useId = request.getParameter("userId");
+		String reviewNo = request.getParameter("reviewNo");
+		String userId = request.getParameter("userId");
+		String imgName = request.getParameter("imgName");
+		String serialNum = request.getParameter("serialNum");
+		String grade = request.getParameter("grade");
+		
+		if(userId == null || userId.equals("") || serialNum == null || serialNum.equals("")
+				|| grade==null || grade.equals("") ) {
+			
+			
+			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
+		}
+		
+		BoardReview review = new BoardReview(Integer.parseInt(reviewNo), userId, imgName, content, serialNum, Integer.parseInt(grade) );
+		
+		ReviewService.update(review);
+		ModelAndView mv = new ModelAndView(true, "reviewSelectBySerialNum page");
+		return mv;
+	
 	}
 
+	
 }

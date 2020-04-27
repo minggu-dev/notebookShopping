@@ -12,12 +12,12 @@ import notebook.domain.Product;
 import notebook.util.DbUtil;
 
 public class CartListDaoImpl implements CartListDao {
-
 	@Override
 	public List<CartList> selectById(String userId) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+
 		String sql = "SELECT serialnum, model_name, company, price, img_name, quantity FROM cartlistview where user_id = ?";
 		List<CartList> list = new ArrayList<CartList>();
 		try {
@@ -25,7 +25,7 @@ public class CartListDaoImpl implements CartListDao {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, userId);
 			rs = ps.executeQuery();
-			
+	
 			
 			while(rs.next()) {
 				Product product = new Product();
@@ -39,13 +39,16 @@ public class CartListDaoImpl implements CartListDao {
 		}finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
-		return list;
+			
+			return list;
+
 	}
 
 	@Override
 	public int insert(CartList list) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
+
 		String sql = "INSERT INTO cart_list VALUES(?, ?, ?)";
 		int result = 0;
 		try {
@@ -54,16 +57,19 @@ public class CartListDaoImpl implements CartListDao {
 			ps.setString(1, list.getProduct().getSerialNum());
 			ps.setString(2, list.getUserId());
 			ps.setInt(3, list.getQuantity());
+
 			result = ps.executeUpdate();
 		}finally {
 			DbUtil.dbClose(con, ps);
 		}
+
 		return result;
 	}
 
 	@Override
 	public int update(CartList list) throws SQLException {
 		Connection con = null;
+
 		PreparedStatement ps = null;
 		String sql = "UPDATE cart_list SET quantity = ? where serialnum = ? and user_id = ?";
 		int result = 0;
@@ -73,6 +79,23 @@ public class CartListDaoImpl implements CartListDao {
 			ps.setInt(1, list.getQuantity());
 			ps.setString(2, list.getProduct().getSerialNum());
 			ps.setString(3, list.getUserId());
+			result = ps.executeUpdate();
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+	
+	@Override
+	public int deleteAllItem(String userId) throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "DELETE cart_list where user_id = ?";
+		int result = 0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
 			result = ps.executeUpdate();
 		}finally {
 			DbUtil.dbClose(con, ps);

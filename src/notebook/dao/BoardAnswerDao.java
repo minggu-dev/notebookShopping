@@ -4,16 +4,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import notebook.domain.BoardAnswer;
+import notebook.exception.CannotModifyException;
+import notebook.exception.NotFoundException;
 
 public interface BoardAnswerDao {
-	/**
-	 * qna게시판 하나 눌렀을 때 답변 가져오기
-	 * @param qnaNo
-	 * @return
-	 * @throws SQLException 
-	 */
-	public List<BoardAnswer> selectByQnaNo(int qnaNo) throws SQLException;
-	
 	/**
 	 * 답변 수정
 	 * @param answer
@@ -26,12 +20,17 @@ public interface BoardAnswerDao {
 	 * @param ansNo
 	 * @return
 	 */
-	public int delete(int ansNo) throws SQLException;
+	public int delete(int ansNo, int qnaNo) throws SQLException, NotFoundException, CannotModifyException;
 	
 	/**
 	 * 답변 등록
 	 * @param answer
 	 * @return
 	 */
-	public int insert(BoardAnswer answer) throws SQLException;
+	public int insert(BoardAnswer answer) throws SQLException, CannotModifyException;
+	
+	/**
+	 * 게시물 답변 가져오기
+	 */
+	public List<BoardAnswer> selectByQnaNo(int qnaNo) throws SQLException;
 }

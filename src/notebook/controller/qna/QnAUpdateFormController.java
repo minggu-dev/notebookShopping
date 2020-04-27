@@ -1,17 +1,18 @@
 package notebook.controller.qna;
 
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpServletResponse;
+
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
+import notebook.domain.BoardQnA;
 import notebook.exception.NotEnoughParameterException;
-import notebook.service.QnAService;;
+import notebook.service.BoardQnAService;
 
-public class QnADeleteController implements Controller {
-
+public class QnAUpdateFormController implements Controller {
+	
 	/**
-	 * 게시물 삭제.
+	 * 수정하기 버튼 누르면 폼으로 이동
 	 */
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -19,13 +20,13 @@ public class QnADeleteController implements Controller {
 		if(qnaNo == null || qnaNo.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
+		boolean flag = false;
 		
-		QnAService.delete(Integer.parseInt(qnaNo));
-		ModelAndView mv = new ModelAndView();
-		mv.setRedirect(true);//true 이면 Redirect로 간다.
-		mv.setViewName("qna게시판?");//이동할 url
+		BoardQnA list = BoardQnAService.selectByNo(Integer.parseInt(qnaNo), flag);
+		request.setAttribute("list", list);
+		ModelAndView mv = new ModelAndView(false, "");//게시물 수정하기.jsp
 		return mv;
+		
 	}
 
 }
-

@@ -129,7 +129,7 @@ public class BoardQnADaoImpl implements BoardQnADao {
 	public int insert(BoardQnA board) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO board_qna(qna_no, user_id, serialnum, subject, content, password) VALUES(seq_board_qna, ?, ?, ?, ?, ?)";;
+		String sql = "INSERT INTO board_qna(qna_no, user_id, serialnum, subject, content, password) VALUES(seq_board_qna.NEXTVAL, ?, ?, ?, ?, ?)";;
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();

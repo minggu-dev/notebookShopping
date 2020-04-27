@@ -26,4 +26,21 @@ public interface CartListDao {
 	 * @return
 	 */
 	public int update(CartList list) throws SQLException;
+	
+	/**
+	 * 장바구니 비우기
+	 * @param list
+	 * @return
+	 * @throws SQLException
+	 */
+	public int delete(String userId) throws SQLException;
+	
+	/**
+	 * 장바구니에 상품 있는지 확인
+	 * @param userId
+	 * @param serialNum
+	 * @return
+	 * @throws SQLException
+	 */
+	public CartList selectByIdSerialNum(String userId, String serialNum) throws SQLException;
 }

@@ -33,7 +33,6 @@ public class DispacherServlet extends HttpServlet {
 		}else {
 			controller = map.get(key);
 		}
-		
 		try {
 			ModelAndView mv = controller.handleRequest(request, response);
 			if(mv.isRedirect()) {

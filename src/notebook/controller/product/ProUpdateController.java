@@ -27,18 +27,15 @@ public class ProUpdateController implements Controller {
 		String noteSize = request.getParameter("noteSize");
 		String noteWeight = request.getParameter("noteWeight");
 		String stock = request.getParameter("stock");
-		String descriptionImgName = request.getParameter("descriptionImgName");
-		String imgName = request.getParameter("imgName");
 		
 		if(serialNum == null || serialNum.equals("") || modelName == null || modelName.equals("") || company == null || company.equals("") || price == null || price.equals("")
 				|| ram == null || ram.equals("") || cpu == null || cpu.equals("") || noteSize == null || noteSize.equals("") || noteWeight == null || noteWeight.equals("")
-				|| stock == null || stock.equals("") || descriptionImgName == null 
-				|| descriptionImgName.equals("") || imgName == null || imgName.equals("")) {
+				|| stock == null || stock.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
 		
 		Product product = new Product(serialNum, modelName, company, Integer.parseInt(price), Integer.parseInt(ram), cpu,Integer.parseInt(noteSize), Double.parseDouble(noteWeight)
-				, Integer.parseInt(stock), descriptionImgName, imgName);
+				, Integer.parseInt(stock), null, null);
 		ProductService.update(product);
 		ModelAndView mv = new ModelAndView(false, "관리자 페이지");
 		return mv;

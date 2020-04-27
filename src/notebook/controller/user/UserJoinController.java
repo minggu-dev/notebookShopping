@@ -26,15 +26,16 @@ public class UserJoinController implements Controller {
 		String phone = request.getParameter("phone");
 		String answer = request.getParameter("answer");
 		String queNo = request.getParameter("queNo");
-		String question = request.getParameter("question");
 		
 		if(userId == null || userId.equals("") || pwd == null || pwd.equals("") || name == null || name.equals("") || addr == null 
 				|| addr.equals("") || phone == null || phone.equals("") || answer == null || answer.equals("") || queNo == null
-				|| queNo.equals("") || question == null || question.equals("")) {
+				|| queNo.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
 		ModelAndView mv = new ModelAndView(true, "note");
-		Users user = new Users(userId, pwd, name, addr, phone, answer, new Questions(Integer.parseInt(queNo), question));
+		Questions question = new Questions();
+		question.setQueNo(Integer.parseInt(queNo));
+		Users user = new Users(userId, pwd, name, addr, phone, answer, question);
 		
 		UserService.insert(user);
 		

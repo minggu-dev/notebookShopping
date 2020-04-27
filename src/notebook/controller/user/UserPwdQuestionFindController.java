@@ -10,24 +10,27 @@ import notebook.exception.NotEnoughParameterException;
 import notebook.service.UserService;
 
 /**
- * 폰번호와 답변으로 비밀번호 가져오기
- * @author kosta
+ * 폰번호랑 아이디로 질문 가져오기
+ * @author 김민호
  *
  */
-public class UserPwdFindController implements Controller {
+public class UserPwdQuestionFindController implements Controller {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String name = request.getParameter("name");
+		String userId = request.getParameter("userId");
 		String phone = request.getParameter("phone");
-		String answer = request.getParameter("answer");
-		if(phone == null || phone.equals("") || answer == null || answer.equals("")) {
+		if(userId == null || userId.equals("") || phone == null || phone.equals("") || name ==null ||name.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
-		Users user = UserService.selectByPhoneAns(phone, answer);
-		String pwd = user.getPwd();
-		request.setAttribute("pwd", pwd);
+		
+		Users user = UserService.selectByIdPhoneName(userId, phone, name);
+		String question = user.getQuestion().getQuestion();
+		request.setAttribute("question", question);
+		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("로그인 창으로");
+		mv.setViewName("질문묻기 창으로");
 		return mv;
 	}
 

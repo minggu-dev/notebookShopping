@@ -36,6 +36,22 @@ public class Product {
 		this.imgName = imgName;
 	}
 
+	
+
+
+	public Product(String modelName, String company, int price, int ram, String cpu, int noteSize, double noteWeight,
+			String launchDate) {
+		super();
+		this.modelName = modelName;
+		this.company = company;
+		this.price = price;
+		this.ram = ram;
+		this.cpu = cpu;
+		this.noteSize = noteSize;
+		this.noteWeight = noteWeight;
+		this.launchDate = launchDate;
+	}
+
 
 	public Product(String serialNum, String modelName, String company, int price, int ram, String cpu, int noteSize,
 			double noteWeight, int stock, String descriptionImgName, String imgName) {

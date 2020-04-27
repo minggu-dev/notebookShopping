@@ -110,7 +110,7 @@ public class BoardQnADaoImpl implements BoardQnADao {
 	public int update(BoardQnA board) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "UPDATE board_qna SET subject = ?, content = ?, create_date = sysdate, password = ?";
+		String sql = "UPDATE board_qna SET subject = ?, content = ?, create_date = sysdate, password = ? WHERE qna_no = ?";
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();
@@ -118,6 +118,7 @@ public class BoardQnADaoImpl implements BoardQnADao {
 			ps.setString(1, board.getSubject());
 			ps.setString(2, board.getContent());
 			ps.setString(3, board.getPassword());
+			ps.setInt(4, board.getQnaNo());
 			result = ps.executeUpdate();
 		}finally {
 			DbUtil.dbClose(con, ps);
@@ -129,7 +130,7 @@ public class BoardQnADaoImpl implements BoardQnADao {
 	public int insert(BoardQnA board) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO board_qna(qna_no, user_id, serialnum, subject, content, password) VALUES(seq_board_qna, ?, ?, ?, ?, ?)";;
+		String sql = "INSERT INTO board_qna(qna_no, user_id, serialnum, subject, content, password) VALUES(seq_board_qna.NEXTVAL, ?, ?, ?, ?, ?)";;
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();
@@ -179,24 +180,4 @@ public class BoardQnADaoImpl implements BoardQnADao {
 		}
 		return result;
 	}
-
-	@Override
-	public int updateState(int qnaNo, int cnt) throws SQLException {
-		Connection con = null;
-		PreparedStatement ps = null;
-		String sql = "UPDATE board_qna SET answer_state = ? WEHRE qna_no = ?";
-		int result = 0;
-		try {
-			con = DbUtil.getConnection();
-			ps = con.prepareStatement(sql);
-			int answerState = cnt == 0 ? 0 : 1;
-			ps.setInt(1, answerState);
-			ps.setInt(2, qnaNo);
-			result = ps.executeUpdate();
-		}finally {
-			DbUtil.dbClose(con, ps);
-		}
-		return result;
-	}
-
 }

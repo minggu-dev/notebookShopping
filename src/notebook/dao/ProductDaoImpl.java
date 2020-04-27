@@ -5,22 +5,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import notebook.domain.BoardReview;
 import notebook.domain.Product;
 import notebook.util.DbUtil;
 
 public class ProductDaoImpl implements ProductDao {
 
 	@Override
-	public Product selectByNum(String serialNum) throws SQLException {
+	public Map<String, Object> selectByNum(String serialNum) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM product WHERE serialnum = ?";
 		Product product = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		try {
 			con = DbUtil.getConnection();
+			con.setAutoCommit(false);
+			
+			//상품 정보들 가져오기
+			String sql = "SELECT * FROM product WHERE serialnum = ?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, serialNum);
 			rs = ps.executeQuery();
@@ -28,11 +36,41 @@ public class ProductDaoImpl implements ProductDao {
 			if(rs.next()) {
 				product = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getDouble(8), rs.getString(9)
 						, rs.getInt(10), rs.getDouble(11), rs.getString(12), rs.getString(13));
+				map.put("product", product);
 			}
+			if(product == null) {
+				con.rollback();
+				throw new SQLException("상품찾기 오류");
+			}
+			rs.close();
+			ps.close();
+			
+			//상품 후기들 가져오기
+			sql = "select * from board_review where serialnum=?";
+			
+			ps = con.prepareStatement(sql);
+			ps.setString(1, serialNum);
+			rs = ps.executeQuery();
+			
+			List<BoardReview> list = new ArrayList<BoardReview>();
+			
+			while(rs.next()) {
+				int reviewNo = rs.getInt("review_no");
+				String userId = rs.getString("user_id");
+				String imgName = rs.getString("img_name");
+				String createDate = rs.getString("create_date");
+				String content = rs.getString("content");
+				int grade = rs.getInt("grade");
+				
+				list.add(new BoardReview(reviewNo, userId, imgName, createDate, content, serialNum, grade));
+			}
+			map.put("boardReview", list);
+			
+			con.commit();
 		}finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
-		return product;
+		return map;
 	}
 
 	@Override
@@ -88,7 +126,7 @@ public class ProductDaoImpl implements ProductDao {
 		ResultSet rs = null;
 		String sql = "SELECT serialnum, model_name, company, price, ram, cpu, note_size, note_weight, launch_date, stock, grade, description_img_name, img_name"
 				+ " FROM (select rownum, p.* FROM (SELECT * FROM product order by grade desc) p)pro"
-				+ " WHERE rownum < 4";
+				+ " WHERE rownum < 5";
 		List<Product> list = new ArrayList<Product>();
 		try {
 			con = DbUtil.getConnection();
@@ -110,7 +148,7 @@ public class ProductDaoImpl implements ProductDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "SELECT serialnum, model_name, company, price, ram, cpu, note_size, note_weight, launch_date, stock, grade, description_img_name, img_name"
-				+ " FROM (SELECT rownum, p.* FROM (SELECT * FROM product order by dbms_random.value) p) WHERE rownum < 4";
+				+ " FROM (SELECT rownum, p.* FROM (SELECT * FROM product order by dbms_random.value) p) WHERE rownum < 5";
 		List<Product> list = new ArrayList<Product>();
 		try {
 			con = DbUtil.getConnection();
@@ -162,7 +200,7 @@ public class ProductDaoImpl implements ProductDao {
 	public int updateProduct(Product product) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "UPDATE product SET model_name = ?, company = ?, price = ?, ram = ?, cpu = ?, note_size = ?, note_weight = ?, stock = ?, description_img_name = ?, img_name = ? WHERE serialnum = ?";
+		String sql = "UPDATE product SET model_name = ?, company = ?, price = ?, ram = ?, cpu = ?, note_size = ?, note_weight = ?, stock = ? WHERE serialnum = ?";
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();
@@ -175,9 +213,7 @@ public class ProductDaoImpl implements ProductDao {
 			ps.setInt(6, product.getNoteSize());
 			ps.setDouble(7, product.getNoteWeight());
 			ps.setInt(8, product.getStock());
-			ps.setString(9, product.getDescriptionImgName());
-			ps.setString(10, product.getImgName());
-			ps.setString(11, product.getSerialNum());
+			ps.setString(9, product.getSerialNum());
 			result = ps.executeUpdate();
 		}finally {
 			DbUtil.dbClose(con, ps);
@@ -270,6 +306,28 @@ public class ProductDaoImpl implements ProductDao {
 			DbUtil.dbClose(con, ps);
 		}
 		return result;
+	}
+	
+	@Override
+	public List<Product> selectByCompany(String company) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM product WHERE company = ? ORDER BY serialnum";
+		List<Product> list = new ArrayList<Product>();
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, company);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				list.add(new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getDouble(8), rs.getString(9)
+						, rs.getInt(10), rs.getDouble(11), rs.getString(12), rs.getString(13)));
+			}
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return list;
 	}
 
 }

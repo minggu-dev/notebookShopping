@@ -1,6 +1,6 @@
 <%@page import="notebook.controller.cart.CartUpdateController"%>
 <%@page import="notebook.controller.purchase.PurSelectUserController"%>
-<%@page import="notebook.controller.purchase.PurSelectProductController"%>
+<%@page import="notebook.controller.purchase.PurDetailController"%>
 <%@page import="notebook.controller.purchase.PurSelectAllController"%>
 <%@page import="notebook.controller.purchase.PurRefundStateController"%>
 <%@page import="notebook.controller.purchase.PurRefundController"%>
@@ -14,7 +14,7 @@
 <%@page import="notebook.controller.product.ProSearchController"%>
 <%@page import="notebook.controller.product.ProInsertController"%>
 <%@page import="notebook.controller.product.ProHomeController"%>
-<%@page import="notebook.controller.user.UserFindController"%>
+<%@page import="notebook.controller.user.UserIdQuestionFindController"%>
 <%@page import="notebook.controller.user.UserDuplicatePhoneController"%>
 <%@page import="notebook.controller.user.UserWithdrawalController"%>
 <%@page import="notebook.controller.user.UserShowDetailController"%>
@@ -79,8 +79,8 @@
 // 	con = new ProSelectByPriceRangeController();
 // 	con.handleRequest(request, response);
 	
-// 	con = new ProShowDetailController();
-// 	con.handleRequest(request, response);
+	con = new ProShowDetailController();
+	con.handleRequest(request, response);
 
 // 	con = new ProUpdateController();
 // 	con.handleRequest(request, response);
@@ -106,12 +106,26 @@
 // 	con = new PurSelectUserController();
 // 	con.handleRequest(request, response);
 	
-	con = new PurRefundController();
-	con.handleRequest(request, response);
+// 	con = new PurRefundController();
+// 	con.handleRequest(request, response);
 
 // 	con = new CartUpdateController();
 // 	con.handleRequest(request, response);
 %>
+
+<!-- <form action="note?command=proInsert" method="post" enctype="multipart/form-data"> -->
+<!-- 	<input type="text" name="modelName"> -->
+<!-- 	<input type="text" name="company"> -->
+<!-- 	<input type="number" name="price"> -->
+<!-- 	<input type="number" name="ram"> -->
+<!-- 	<input type="text" name="cpu"> -->
+<!-- 	<input type="number" name="noteSize"> -->
+<!-- 	<input type="text" name="noteWeight"> -->
+<!-- 	<input type="text" name="launchDate"> -->
+<!-- 	<input type="file" name="imgName"> -->
+<!-- 	<input type="file" name="descriptionImgName"> -->
+<!-- 	<input type="submit"> -->
+<!-- </form> -->
 
 </body>
 </html>

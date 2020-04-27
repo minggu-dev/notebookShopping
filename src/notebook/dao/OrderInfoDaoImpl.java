@@ -31,6 +31,7 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 			rs = ps.executeQuery();
 			
 			boolean isFirst = true;
+			//가격 추가해야함
 			List<OrderList> orderLists = new ArrayList<OrderList>();
 			while(rs.next()) {
 				if(isFirst) {
@@ -43,6 +44,7 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 				product.setModelName(rs.getString(10));
 				product.setCompany(rs.getString(11));
 				product.setImgName(rs.getString(12));
+				product.setPrice(rs.getInt(13));
 				orderList.setProduct(product);
 				orderLists.add(orderList);
 			}

@@ -2,6 +2,7 @@ package notebook.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import notebook.domain.Product;
 
@@ -11,7 +12,7 @@ public interface ProductDao {
 	 * @param serialNum
 	 * @return
 	 */
-	public Product selectByNum(String serialNum) throws SQLException;
+	public Map<String, Object> selectByNum(String serialNum) throws SQLException;
 
 	/**
 	 * 가격으로 검색
@@ -86,4 +87,12 @@ public interface ProductDao {
 	 * @throws SQLException
 	 */
 	public int updateStock(String serialNum, int stock) throws SQLException;
+	
+	/**
+	 * 회사들 기준으로 상품들 검색
+	 * @param company
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Product> selectByCompany(String company) throws SQLException;
 }

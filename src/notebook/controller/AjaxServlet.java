@@ -38,7 +38,7 @@ public class AjaxServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		JSONObject jsonObj = new JSONObject();
-		
+	
 		try {
 			controller.handleRequest(request, response);
 		} catch (Exception e) {

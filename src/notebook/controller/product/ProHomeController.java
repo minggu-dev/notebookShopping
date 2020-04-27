@@ -23,8 +23,6 @@ public class ProHomeController implements Controller {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index.jsp");
 		
-		response.getWriter().print(map);
 		return mv;
 	}
-
 }

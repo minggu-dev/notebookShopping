@@ -25,6 +25,10 @@ public interface BoardReviewDao {
 	 */
 	public int update(BoardReview review) throws SQLException;
 	
+	public int updateReviewAndProductGrade(BoardReview review) throws SQLException, CannotModifyException;
+	
+	
+	
 	/**
 	 * �ı� ����
 	 * @param reviewNo
@@ -32,6 +36,8 @@ public interface BoardReviewDao {
 	 */
 	public int delete(int reviewNo) throws SQLException;
 	
+	public int deleteAndUpdateProductGrade(int reviewNo) throws SQLException, NotFoundException, CannotModifyException;
+
 	/**
 	 * �ı� ���
 	 * @param review

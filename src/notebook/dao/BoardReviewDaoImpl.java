@@ -92,6 +92,66 @@ public class BoardReviewDaoImpl implements BoardReviewDao {
 		}
 		return result;
 	}
+	
+	public int updateReviewAndProductGrade(BoardReview review) throws SQLException, CannotModifyException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			con =DbUtil.getConnection();
+			con.setAutoCommit(false);
+			
+			//먼저 serialnum이 동일한리뷰의 개수를 찾아내서 reviewcnt에 담는다.
+			//grade의 모든 합계를 sum에 담는다.
+			String sql = "select grade from board_review where serialnum=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, review.getSerialNum());
+			rs = ps.executeQuery();
+			
+			int sum = 0;
+			int reviewcnt = 0;
+				while(rs.next()) {
+					int grade = rs.getInt("grade");
+					sum = sum + grade;
+					reviewcnt++;
+					
+				}
+				ps.close();
+				rs.close();
+			
+			//insertReview
+			sql = "UPDATE board_review SET create_date=sysdate, content=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, review.getContent());
+			result = ps.executeUpdate();
+			if(result == 0 ) {
+				con.rollback();
+				throw new CannotModifyException("리뷰를 수정할 수 없습니다.");
+			}
+			
+			//update product grade
+			sql = "UPDATE product SET grade = ?";
+			ps = con.prepareStatement(sql);
+			int mygrade = review.getGrade();
+			int refreshgrade = (mygrade + sum)/(reviewcnt+1);
+			ps.setInt(1, refreshgrade);
+			result = ps.executeUpdate();
+			if(result == 0) {
+				con.rollback();
+				throw new CannotModifyException("cannot modify product's grade");
+			}
+			
+			con.commit();
+		
+			
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+			
+		}
+		
+		return result;
+	}
 
 	@Override
 	public int delete(int reviewNo) throws SQLException {

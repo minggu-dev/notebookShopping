@@ -19,8 +19,8 @@ public class ReviewService {
 		}
 		return re;
 	}
-	public static void delete(int reviewNo) throws SQLException, NotFoundException{
-		int result = reviewDao.delete(reviewNo);
+	public static void delete(int reviewNo) throws SQLException, NotFoundException, CannotModifyException{
+		int result = reviewDao.deleteAndUpdateProductGrade(reviewNo);
 		if(result == 0) {
 			throw new NotFoundException("글번호에 해당하는 리뷰가 없습니다.");
 		}

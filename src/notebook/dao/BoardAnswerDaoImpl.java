@@ -142,4 +142,27 @@ public class BoardAnswerDaoImpl implements BoardAnswerDao {
 		
 		return list;
 	}
+	
+	@Override
+	public BoardAnswer selectByNo(int ansNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM board_answer WHERE ans_no = ?";
+		BoardAnswer answer = null;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, ansNo);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				answer = new BoardAnswer(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4));
+			}
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		
+		return answer;
+	}
 }

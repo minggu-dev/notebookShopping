@@ -33,4 +33,12 @@ public interface BoardAnswerDao {
 	 * 게시물 답변 가져오기
 	 */
 	public List<BoardAnswer> selectByQnaNo(int qnaNo) throws SQLException;
+	
+	/**
+	 * 답변 수정 폼으로 이동할 때 사용
+	 * @param ansNo
+	 * @return
+	 * @throws SQLException
+	 */
+	public BoardAnswer selectByNo(int ansNo) throws SQLException;
 }

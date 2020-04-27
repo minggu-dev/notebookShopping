@@ -10,6 +10,25 @@ public class BoardReview {
 	private int grade;
 	
 	
+	public BoardReview(int reviewNo, String userId, String imgName, String content, String serialNum,
+			int grade) {
+		super();
+		this.reviewNo = reviewNo;
+		this.userId = userId;
+		this.imgName = imgName;
+		this.content = content;
+		this.serialNum = serialNum;
+		this.grade = grade;
+	}
+	
+	public BoardReview(String userId, String imgName, String content, String serialNum, int grade) {
+		super();
+		this.userId = userId;
+		this.imgName = imgName;
+		this.content = content;
+		this.serialNum = serialNum;
+		this.grade = grade;
+	}
 	public BoardReview(int reviewNo, String userId, String imgName, String createDate, String content, String serialNum,
 			int grade) {
 		super();

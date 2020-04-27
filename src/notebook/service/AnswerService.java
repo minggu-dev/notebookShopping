@@ -43,4 +43,12 @@ public class AnswerService {
 			throw new CannotModifyException("수정되지 않았습니다.");
 		}
 	}
+	
+	public static BoardAnswer selectByNo(int ansNo) throws SQLException, NotFoundException{
+		BoardAnswer answer = ans.selectByNo(ansNo);
+		if(answer == null) {
+			throw new NotFoundException("답변을 찾을 수 없습니다.");
+		}
+		return answer;
+	}
 }

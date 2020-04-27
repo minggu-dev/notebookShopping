@@ -44,5 +44,4 @@ public class CartService {
 		List<CartList> list = cartDao.selectById(userId);
 		return list;
 	}
-		
 }

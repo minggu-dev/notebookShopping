@@ -1,23 +1,15 @@
-package notebook.controller.cart;
-
-import java.util.List;
+package notebook.controller.user;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
-import notebook.domain.CartList;
+import notebook.domain.Users;
 import notebook.exception.NotEnoughParameterException;
-//github.com/KimMinhoJA/notebookShopping
-import notebook.service.CartService;
+import notebook.service.UserService;
 
-/**
- * 내 장바구니 보기
- * @author kosta
- *
- */
-public class CartShowMyCartController implements Controller {
+public class UserModifyFormController implements Controller {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -25,12 +17,13 @@ public class CartShowMyCartController implements Controller {
 		if(userId == null || userId.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
-		List<CartList> list = CartService.showMyCart(userId);
-		request.setAttribute("list", list);
+		
+		Users user = UserService.selecById(userId);
+		request.setAttribute("user", user);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("show my cart");
+		mv.setViewName("유저수정 폼으로");
+		
 		return mv;
-	
 	}
 
 }

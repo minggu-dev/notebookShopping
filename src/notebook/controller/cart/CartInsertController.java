@@ -9,7 +9,6 @@ import notebook.domain.CartList;
 import notebook.domain.Product;
 import notebook.exception.NotEnoughParameterException;
 import notebook.service.CartService;
-
 /**
  * 장바구니 추가
  * @author kosta
@@ -35,7 +34,6 @@ public class CartInsertController implements Controller {
 		CartService.insert(cart);
 		
 		ModelAndView mv = new ModelAndView(false, "ajax로..?");
-		
 		return mv;
 	}
 

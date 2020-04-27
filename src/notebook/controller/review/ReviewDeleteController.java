@@ -8,7 +8,7 @@ import notebook.controller.ModelAndView;
 import java.io.File;
 import java.util.List;
 import notebook.domain.BoardReview;
-import notebook.exception.NotFoundException;
+import notebook.exception.CannotModifyException;
 import notebook.service.ReviewService;
 
 public class ReviewDeleteController implements Controller {
@@ -37,7 +37,7 @@ public class ReviewDeleteController implements Controller {
 			}
 			
 			if(!bFind) {
-				throw new NotFoundException("해당 리뷰는 다른 작성자의 리뷰 입니다.");
+				throw new CannotModifyException("해당 리뷰는 다른 작성자의 리뷰 입니다.");
 			}
 			
 		}catch(Exception e) {

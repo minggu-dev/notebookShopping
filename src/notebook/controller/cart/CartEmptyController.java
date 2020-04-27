@@ -21,12 +21,9 @@ public class CartEmptyController implements Controller {
 		String quantity = request.getParameter("quantity");
 		String serialNum = request.getParameter("serialNum");
 		
-		if(Integer.parseInt(quantity)==0) {
+		if(quantity== null) {
 			throw new EmptyStockException("장바구니에 상품이 없어 비울 수 없습니다.");
 		}
-		
-		Product pro = new Product();
-		pro.setSerialNum(serialNum);
 		
 		CartService.cartEmpty(userId);
 		ModelAndView mv = new ModelAndView(true, "cart");

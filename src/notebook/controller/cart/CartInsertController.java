@@ -29,7 +29,7 @@ public class CartInsertController implements Controller {
 		pro.setSerialNum(serialNum);
 		CartList cart = new CartList(userId, pro, quantity);
 		CartService.insert(cart);
-		ModelAndView mv = new ModelAndView(false, "???");
+		ModelAndView mv = new ModelAndView(true, "cart");
 		
 		return mv;
 	}

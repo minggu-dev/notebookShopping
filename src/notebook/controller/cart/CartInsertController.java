@@ -33,7 +33,7 @@ public class CartInsertController implements Controller {
 		CartList cart = new CartList(userId, pro, Integer.parseInt(quantity));
 		CartService.insert(cart);
 		
-		ModelAndView mv = new ModelAndView(false, "ajax·Î..?");
+		ModelAndView mv = new ModelAndView(true, "ajax·Î..?");
 		return mv;
 	}
 

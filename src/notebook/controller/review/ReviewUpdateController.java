@@ -1,5 +1,8 @@
 package notebook.controller.review;
 
+import java.io.File;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 import notebook.domain.BoardReview;
+import notebook.exception.CannotModifyException;
 import notebook.exception.NotEnoughParameterException;
 import notebook.service.ReviewService;
 
@@ -22,16 +26,17 @@ public class ReviewUpdateController implements Controller {
 		
 		if(userId == null || userId.equals("") || serialNum == null || serialNum.equals("")
 				|| grade==null || grade.equals("") ) {
-			
-			
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
 		
 		BoardReview review = new BoardReview(Integer.parseInt(reviewNo), userId, null, content, serialNum, Integer.parseInt(grade) );
-		
 		ReviewService.update(review);
-		ModelAndView mv = new ModelAndView(true, "reviewSelectBySerialNum page");
+		
+		ModelAndView mv = new ModelAndView(true, "리뷰보는곳 이동");
+		
+		
 		return mv;
+		
 	
 	}
 

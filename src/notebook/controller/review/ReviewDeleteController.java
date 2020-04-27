@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 import notebook.exception.NotEnoughParameterException;
+//github.com/KimMinhoJA/notebookShopping
 import notebook.service.ReviewService;
 
 public class ReviewDeleteController implements Controller {

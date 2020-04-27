@@ -21,7 +21,6 @@ public class CartEmptyController implements Controller {
 		if(userId == null || userId.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
-		
 		CartService.cartEmpty(userId);
 		ModelAndView mv = new ModelAndView(true, "장바구니 페이지");
 		return mv;

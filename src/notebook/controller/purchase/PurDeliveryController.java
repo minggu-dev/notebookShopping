@@ -18,7 +18,7 @@ public class PurDeliveryController implements Controller {
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String orderNo = request.getParameter("orderNo");
-		String userId = request.getParameter("userId");
+		String userId = (String)request.getSession().getAttribute("id");
 		String addrDelivery = request.getParameter("deliveryAddr");
 		
 		if(orderNo == null || orderNo.equals("") || addrDelivery == null || addrDelivery.equals("") || userId == null || userId.equals("")) {

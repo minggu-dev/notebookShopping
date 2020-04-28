@@ -3,6 +3,7 @@ package notebook.controller.ans;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
@@ -19,7 +20,7 @@ public class AnsDeleteController implements Controller {
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String ansNo = request.getParameter("ansNo");//삭제할 답변 게시물 번호
 		String qnaNo = request.getParameter("qnaNo");
-		String userId = request.getParameter("userId");
+		String userId = (String)request.getSession().getAttribute("id");
 		if(ansNo == null || ansNo.equals("") || qnaNo == null || qnaNo.equals("") || userId==null || userId.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}

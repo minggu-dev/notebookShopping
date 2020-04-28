@@ -17,7 +17,7 @@ public class ReviewDeleteController implements Controller {
 	
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String userId = request.getParameter("userId");
+		String userId = (String)request.getSession().getAttribute("id");
 		String reviewNo = request.getParameter("reviewNo");
 		String imgName = request.getParameter("imgName");
 		JSONObject jsonObj = new JSONObject();

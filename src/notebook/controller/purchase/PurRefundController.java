@@ -19,12 +19,12 @@ public class PurRefundController implements Controller {
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String orderNo = request.getParameter("orderNo");
-		String userId = request.getParameter("userId");
+		String userId = (String)request.getSession().getAttribute("id");
 		
 		if(orderNo == null || orderNo.equals("") || userId == null || userId.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
-		if("admin".equals(userId)) {
+		if(!"admin".equals(userId)) {
 			throw new NotFoundException("관리자만 가능합니다.");
 		}
 		

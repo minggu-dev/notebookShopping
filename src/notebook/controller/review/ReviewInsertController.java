@@ -23,8 +23,8 @@ public class ReviewInsertController implements Controller {
 		
 		MultipartRequest m = new MultipartRequest(request, saveDir, maxSize, encoding, new DefaultFileRenamePolicy());
 		
-		
-		String userId = m.getParameter("userId");
+
+		String userId = (String)request.getSession().getAttribute("id");
 		String content = m.getParameter("content");
 		String serialNum = m.getParameter("serialNum");
 		String grade = m.getParameter("grade");

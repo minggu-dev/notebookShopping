@@ -19,7 +19,7 @@ public class PurRefundStateController implements Controller {
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String orderNo = request.getParameter("orderNo");
 		String req = request.getParameter("request");
-		String userId = request.getParameter("userId"); 
+		String userId = (String)request.getSession().getAttribute("id");
 		
 		if(orderNo == null|| orderNo.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");

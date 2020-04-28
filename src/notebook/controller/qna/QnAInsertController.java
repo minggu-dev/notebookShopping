@@ -18,7 +18,7 @@ public class QnAInsertController implements Controller {
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//user_id, serialnum, subject, content, password
-		String userId = request.getParameter("userId");
+		String userId = (String)request.getSession().getAttribute("id");
 		String subject = request.getParameter("subject");
 		String serialNum = request.getParameter("serialNum");
 		String content = request.getParameter("content");

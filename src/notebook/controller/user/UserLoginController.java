@@ -33,7 +33,7 @@ public class UserLoginController implements Controller {
 		Users user = UserService.selectById(userId);
 		if(user.getPwd().equals(pwd)) {
 			HttpSession session = request.getSession();
-			session.setAttribute("userId", userId);//세션에 저장
+			session.setAttribute("id", userId);//세션에 저장
 		}else {
 			throw new NotFoundException("회원정보가 일치하지 않습니다. 다시 확인해주세요.");
 		}

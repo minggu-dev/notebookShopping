@@ -18,7 +18,7 @@ public class PurInsertController implements Controller {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String userId = request.getParameter("userId");
+		String userId = (String)request.getSession().getAttribute("id");
 		String totalPrice = request.getParameter("totalPrice");
 		String addrDelivery = request.getParameter("addrDelivery");
 		

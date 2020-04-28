@@ -21,7 +21,7 @@ public class UserModifyController implements Controller {
 		String pwd = request.getParameter("pwd");
 		String phone = request.getParameter("phone");
 		String addr = request.getParameter("addr");
-		String userId = request.getParameter("userId");
+		String userId = (String)request.getSession().getAttribute("id");
 		if(pwd == null || pwd.equals("") || phone == null || phone.equals("") || addr == null || addr.equals("") ||userId == null || userId.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}

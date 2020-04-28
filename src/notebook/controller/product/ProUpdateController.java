@@ -7,6 +7,7 @@ import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 import notebook.domain.Product;
 import notebook.exception.NotEnoughParameterException;
+import notebook.exception.NotFoundException;
 import notebook.service.ProductService;
 
 /**
@@ -27,11 +28,15 @@ public class ProUpdateController implements Controller {
 		String noteSize = request.getParameter("noteSize");
 		String noteWeight = request.getParameter("noteWeight");
 		String stock = request.getParameter("stock");
+		String userId = (String)request.getSession().getAttribute("id");
 		
 		if(serialNum == null || serialNum.equals("") || modelName == null || modelName.equals("") || company == null || company.equals("") || price == null || price.equals("")
 				|| ram == null || ram.equals("") || cpu == null || cpu.equals("") || noteSize == null || noteSize.equals("") || noteWeight == null || noteWeight.equals("")
-				|| stock == null || stock.equals("")) {
+				|| stock == null || stock.equals("") || userId == null || userId.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
+		}
+		if(!"admin".equals(userId)) {
+			throw new NotFoundException("관리자 기능입니다.");
 		}
 		
 		Product product = new Product(serialNum, modelName, company, Integer.parseInt(price), Integer.parseInt(ram), cpu,Integer.parseInt(noteSize), Double.parseDouble(noteWeight)

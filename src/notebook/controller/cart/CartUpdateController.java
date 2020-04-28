@@ -21,7 +21,7 @@ public class CartUpdateController implements Controller {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String userId = request.getParameter("userId");
+		String userId = (String)request.getSession().getAttribute("id");
 		String serialNum = request.getParameter("serialNum");
 		String count = request.getParameter("count");
 		JSONObject jsonObj = new JSONObject();

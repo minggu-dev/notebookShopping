@@ -41,7 +41,7 @@ public class ProShowDetailController implements Controller {
 			out.print(re.getContent());
 		}
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("상품 상세보기 페이지");
+		mv.setViewName("product.jsp");
 		return mv;
 	}
 }

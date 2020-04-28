@@ -22,7 +22,7 @@ public class QnAUpdateController implements Controller {
 				String content = request.getParameter("content");
 				String password = request.getParameter("password");
 				String qnaNo = request.getParameter("qnaNo");
-				String userId = request.getParameter("userId");
+				String userId = (String)request.getSession().getAttribute("id");
 				if(subject == null || subject.equals("") || content == null || content.equals("")||
 					password == null || password.equals("")|| qnaNo == null || qnaNo.equals("") || userId==null || userId.equals("")) {
 					throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");

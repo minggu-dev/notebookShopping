@@ -16,7 +16,7 @@ public class QnADeleteController implements Controller {
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String qnaNo = request.getParameter("qnaNo");
-		String userId = request.getParameter("userId");
+		String userId = (String)request.getSession().getAttribute("id");
 		if(qnaNo == null || qnaNo.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}

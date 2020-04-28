@@ -20,7 +20,7 @@ public class ReviewUpdateController implements Controller {
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String content = request.getParameter("content");
 		String reviewNo = request.getParameter("reviewNo");
-		String userId = request.getParameter("userId");
+		String userId = (String)request.getSession().getAttribute("id");
 		String serialNum = request.getParameter("serialNum");
 		String grade = request.getParameter("grade");
 		

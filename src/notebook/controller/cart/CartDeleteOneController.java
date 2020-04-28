@@ -16,7 +16,7 @@ import notebook.service.CartService;
 public class CartDeleteOneController implements Controller{
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String userId = request.getParameter("userId");
+		String userId = (String)request.getSession().getAttribute("id");
 		String serialNum = request.getParameter("serialNum");
 		if(userId == null || userId.equals("") || serialNum == null || serialNum.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");

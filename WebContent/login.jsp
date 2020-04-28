@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Login V14</title>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Sublime project">
@@ -13,85 +14,139 @@
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-<link rel="stylesheet" type="text/css" href="styles/categories.css">
-<link rel="stylesheet" type="text/css" href="styles/categories_responsive.css">
+<link rel="stylesheet" type="text/css" href="styles/main_styles.css">
+<link rel="stylesheet" type="text/css" href="styles/responsive.css">
+
+<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="css/util.css">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+
 <title>Insert title here</title>
 <style>
 
 </style>
 
-<script>
 
-</script>
 </head>
 <body>
 
-<div class="super_container">
 <!-- Header -->
 <%@include file="header.jsp" %>
 
-<!-- Home -->
-	<div class="home">
-		<div class="home_container">
-			<div class="home_background" style="background-image:url(images/test.jpg)"></div>
-			<div class="home_content_container">
-				<div class="container">
-					<div class="row">
-						<div class="col">
-							<div class="home_content">
-								<div class="home_title">Notebooks<span>.</span></div>
-								<div class="home_text"><p>Choose your one.</p></div>
-							</div>
+<div class="home" style="position: relative; background-color: #ebebeb;" >
+     <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+				<form class="login100-form validate-form flex-sb flex-w">
+					<span class="login100-form-title p-b-32">
+						로그인하는곳
+					</span>
+
+					<span class="txt1 p-b-11">
+						아이디
+						
+					</span>
+					<div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
+						<input class="input100" type="text" name="username" >
+						<span class="focus-input100"></span>
+					</div>
+					
+					<span class="txt1 p-b-11">
+						비밀번호
+					</span>
+					<div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
+						<span class="btn-show-pass">
+							<i class="fa fa-eye"></i>
+						</span>
+						<input class="input100" type="password" name="pass" >
+						<span class="focus-input100"></span>
+					</div>
+					
+					<div class="flex-sb-m w-full p-b-48">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<label class="label-checkbox100" for="ckb1">
+								아이디 기억하기
+							</label>
+						</div>
+
+						<div>
+							<a href="findById.jsp" class="txt3">
+								아이디 찾기
+							</a>
+							&nbsp;&nbsp;&nbsp;
+							<a href="findByPassword.jsp" class="txt3">
+								비밀번호 찾기
+							</a>
+								
 						</div>
 					</div>
-				</div>
+
+					<div class="container-login100-form-btn">
+					<input type="button" name="login" class="login100-form-btn" value="로그인">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;					
+						<input type="button" name="register" class="login100-form-btn" value="회원가입">
+					</div>
+
+				</form>
 			</div>
 		</div>
 	</div>
-<div class="container" style="position: relative;">
-      <div class="row">
-        <div class="col-md-3">
-          <div class="login-box well">
-        <form accept-charset="UTF-8" role="form" method="post" action="">
-            <legend>로그인</legend>
-            <div class="form-group">
-                <label for="username-email">이메일 or 아이디</label>
-                <input name="user_id" value='' id="username-email" placeholder="E-mail or Username" type="text" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="password">비밀번호</label>
-                <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" value="Login" />
-            </div>
-            <span class='text-center'><a href="/bbs/index.php?mid=index&act=dispMemberFindAccount" class="text-sm">비밀번호 찾기</a></span>
-            <hr />
-            <div class="form-group">
-                <a href="" class="btn btn-default btn-block m-t-md"> 회원가입</a>
-            </div>
-        </form>
-          </div>
-        </div>
-      </div>
+
+	<div id="dropDownSelect1"></div>
     </div>
-<!-- Footer -->
-<%@include file="footer.jsp" %>
+	
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendor/select2/select2.min.js"></script>
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+	<script src="js/main.js"></script>
+	 <script src=js/jquery-3.2.1.min.js></script>
+	 
+	 
+    
+ <%@include file="footer.jsp" %>   
+ 
+<script>
+$("input[name=register]").click(function(){
+	location.href = "register.jsp";
+});
+
+$("input[name=login]").click(function(){
+	var username = $('input[name=username]').val();
+	var password = $('input[name=pass]').val();
+	
+	
+	if(username=="admin" && password=="admin"){
+		alert("관리자모드");
+		location.href = "managerIndex.html";
+		
+	}else if(username=="id1" && password=="1111"){
+		alert("로그인성공");
+		location.href = "index.jsp";
+	
+	}else{
+		alert("로그인실패");
+		location.href = "login.jsp";
+	}
+});
 
 
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="styles/bootstrap4/popper.js"></script>
-<script src="styles/bootstrap4/bootstrap.min.js"></script>
-<script src="plugins/greensock/TweenMax.min.js"></script>
-<script src="plugins/greensock/TimelineMax.min.js"></script>
-<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="plugins/greensock/animation.gsap.min.js"></script>
-<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="plugins/parallax-js-master/parallax.min.js"></script>
-<script src="js/custom.js"></script>
-</div>
+</script>
+
+
+
 </body>
 </html>

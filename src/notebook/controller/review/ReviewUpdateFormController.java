@@ -18,7 +18,7 @@ public class ReviewUpdateFormController implements Controller {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String userId = request.getParameter("userId");
+		String userId = (String)request.getSession().getAttribute("id");
 		String reviewNo = request.getParameter("reviewNo");
 		if(userId == null || userId.equals("") || reviewNo == null || reviewNo.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");

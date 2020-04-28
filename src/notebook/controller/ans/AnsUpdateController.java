@@ -20,7 +20,7 @@ public class AnsUpdateController implements Controller {
 		String content = request.getParameter("content");//수정할 내용
 		String ansNo = request.getParameter("ansNo");//수정할 답변게시물 번호
 		String qnaNo = request.getParameter("qnaNo");
-		String userId = request.getParameter("userId");
+		String userId = (String)request.getSession().getAttribute("id");
 		if(content == null || content.equals("") || ansNo == null || ansNo.equals("") || qnaNo == null || qnaNo.equals("") || userId == null || userId.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}

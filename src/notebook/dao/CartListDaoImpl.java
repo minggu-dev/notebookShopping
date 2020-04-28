@@ -108,12 +108,13 @@ public class CartListDaoImpl implements CartListDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT model_name, company, price, img_name, quantity FROM cartlistview where user_id = ? AND serianum = ?";
+		String sql = "SELECT model_name, company, price, img_name, quantity FROM cartlistview where user_id = ? AND serialnum = ?";
 		CartList cart = null;
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setString(1, userId);
+			ps.setString(2, serialNum);
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {

@@ -27,17 +27,81 @@
 .super_container{
 	z-index: 2;
 }
+
+ .animated {
+    -webkit-transition: height 0.2s;
+    -moz-transition: height 0.2s;
+    transition: height 0.2s;
+}
+
+.stars
+{
+    margin: 20px 0;
+    font-size: 24px;
+    color: #d17581;
+}
+
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+}
+
+legend.scheduler-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+}
 </style>
 
-<script>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/greensock/TweenMax.min.js"></script>
+<script src="plugins/greensock/TimelineMax.min.js"></script>
+<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="plugins/greensock/animation.gsap.min.js"></script>
+<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="js/custom.js"></script>
 
+<script>
+$(function(){
+	$('.cart_button').click(function(){
+		if(parseInt($('#stock').val()) < parseInt($('.quantity').val())){
+			alert('재고를 확인해 주세요');
+		}else{
+			$('input[name=quantity]').val($('.quantity').val());
+			$('form[name=cartform]').submit();
+		}
+		return false;
+	});
+	
+	
+	$('span.reviewuser').each(function(){
+		if(!$(this).html() == '<%=session.getAttribute("id")%>'){
+			$('a.reviewdelete').hide();
+			$('a.reviewupdate').hide();
+		}
+	});
+});
 </script>
 </head>
 <body>
 
 <div class="newsletter">
 <!-- Header -->
+
+
+
 <%@include file="header.jsp" %>
+
+
 
 <!-- Home -->
 
@@ -49,7 +113,7 @@
 					<div class="row">
 						<div class="col">
 							<div class="home_content">
-								<div class="home_title">${requestScope.product.descriptionImgName}<span>.</span></div>
+								<div class="home_title">notebook<span>.</span></div>
 								<div class="home_text"><p>Designed for those who defy limits and change the world, the new MacBook Pro is by far the most powerful notebook we’ve ever made. With an immersive 16-inch Retina display, superfast processors, next-generation graphics, the largest battery capacity ever in a MacBook Pro, a new Magic Keyboard, and massive storage, it’s the ultimate pro notebook for the ultimate user.</p></div>
 							</div>
 						</div>
@@ -59,6 +123,8 @@
 		</div>
 	</div>
 
+<br>
+<br>
 	<!-- Product Details -->
 	<div class="product_details">
 		<div class="container">
@@ -104,6 +170,8 @@
 		<div style="border: 1px solid silver;"></div><br>
 		<h3> 제품 상세정보</h3>
 		<div class="product_image"><img src="images/productimg/${requestScope.product.descriptionImgName}" alt=""></div>
+		<br>
+		<div class="product_image"><img src="images/info.png" alt=""></div>
 </div>
 	<br>
 	<br>
@@ -121,34 +189,70 @@
 		</div>
 </div>
 	<br>
-	<br> 
-	
-<div class="container">
-	<div style="border: 1px solid silver;"></div><br>
-		<h3>후기 게시판</h3>
-		<p>후기 작성하시면  다음 구매시에 무료로 배송해드려요 </p>
-			<div >
-				 <label>평점:</label><input type="radio">★★★★★ &nbsp;<input type="radio">★★★★<input type="radio">★★★
-			</div>
-		<form class="form-inline" role="form">
+	<br>
+		<div class="container">
+			<div style="border: 1px solid silver;"></div>
+			<br>
+				<div class="button cart_button" style="display: inline-block;"><a href="review">후기</a></div>
+				<div class="button cart_button" style="display: inline-block;"><a href="qna">Q&A</a></div>
 			<br>
 			<br>
-       <div>
-				<label> </label>
-			</div>
 			<br>
-			<div>
-				<label>내용 </label><textarea class="form-control" rows="4" cols="100" maxlength="300"></textarea>
-				<button class="btn btn-default">쓰기</button>
-			</div>
-			
-			<br> 
+			<section>
+				<c:choose>
+					<c:when test="${empty requestScope.review}">
+						<div style="text-align: center;">등록된 후기가 없습니다.</div>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${requestScope.review}" var="review">
+							<div style="text-align: left; border: 1px solid silver;">
+								<div style="text-align: left">
+									<span style="font-weight: bold;" class="reviewuser">${review.userId}</span> 
+									<a class="reviewupdate" href="">수정</a> 
+									<a class="reviewdelete" href="">삭제</a>
+								</div>
+								
+								<div style="text-align: right;">${review.createDate}</div><br>
+								${review.content}
+								<br><br><br><br>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+				<br>
+				<br>
+				<br>
+				<br>
+				<fieldset class="scheduler-border">
+					<br>
+					<legend class="scheduler-border"><div style="text-align: center">후기 작성하기</div></legend>
+					<div>
+						<p>후기 작성하시면 다음 구매시에 무료로 배송해드려요</p>
+						<form class="form-inline" action="note?command=reviewInsert" method="post" enctype="multipart/form-data">
+							<div>
+								평점:
+								<input name="grade" value ="5" type="radio" checked>★★★★★ &nbsp;&nbsp;<input name="grade" value ="4" type="radio">★★★★&nbsp;&nbsp;
+								<input name="grade" value ="3" type="radio">★★★&nbsp;&nbsp;<input name="grade" value ="2" type="radio">★★&nbsp;&nbsp;
+								<input name="grade" value ="1" type="radio">★
+							</div>
+							<br>
+							<div>
+								<label>내용 </label>
+								<textarea class="form-control" name = "content" rows="4" cols="80" maxlength="500" placeholder="후기를 작성해 주세요(500자 제한)"></textarea>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<button class="btn btn-default">쓰기</button>
+							</div>
+								<input type="hidden" name="serialNum" value="${requestScope.product.serialNum}">
+							<br> 
+							<br>
+						</form>
+					</div>
+				</fieldset>
+			</section>
 			<br>
-			
-		</form>
-		<br>
-		<div style="border: 1px solid silver;"></div><br>
-		<div style="border: 1px solid silver;" align="center">
+			<div style="border: 1px solid silver;"></div>
+			<br>
+			<div style="border: 1px solid silver;" align="center">
+				<h3>QnA 게시판</h3>
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -167,47 +271,21 @@
 					</tbody>
 				</table>
 			</div>
-	</div>
+		</div>
 
-					
 
-	<br><br><br><div style="cursor:pointer; text-align: center" onclick="window.scrollTo(0,0);">TOP</div>
+
+		<br><br><br><div style="cursor:pointer; text-align: center" onclick="window.scrollTo(0,0);">TOP</div>
 
 	</div>
 <!-- Footer -->
 <%@include file="footer.jsp" %>
 
 
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="styles/bootstrap4/popper.js"></script>
-<script src="styles/bootstrap4/bootstrap.min.js"></script>
-<script src="plugins/greensock/TweenMax.min.js"></script>
-<script src="plugins/greensock/TimelineMax.min.js"></script>
-<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="plugins/greensock/animation.gsap.min.js"></script>
-<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="plugins/parallax-js-master/parallax.min.js"></script>
-<script src="js/custom.js"></script>
-
-<form action = "note?command=cartInsert">
-	<input type="hidden" id = "stock" value="${requestScope.product.stock}">
-	<input type="hidden" id = "serialNum" value = "${requestScope.product.serialNum}">
+<form action = "note?command=cartInsert" name="cartform" method="post">
+	<input type="hidden" name="quantity" value="">
+	<input type="hidden" name="serialNum" value = "${requestScope.product.serialNum}">
 </form>
-<script>
-$(function(){
-	$('.cart_button').click(function(){
-		if(parseInt($('#stock').val()) < parseInt($('.quantity').val())){
-			alert('재고를 확인해 주세요');
-		}else{
-			
-		}
-	});
-});
-
-</script>
 
 </body>
 </html>

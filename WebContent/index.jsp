@@ -75,7 +75,7 @@ $(function(){
 				
 				
 				<div class="owl-item home_slider_item">
-					<div class="home_slider_background" style="background-image:url(images/productimg/삼성광고12.PNG)"></div>
+					<div class="home_slider_background" style="background-image:url(images/productimg/삼성광고12.jpg)"></div>
 					<div class="home_slider_content_container">
 						<div class="container">
 							<div class="row">
@@ -144,7 +144,7 @@ $(function(){
 						<c:forEach items="${requestScope.map['best']}" var="pro">
 							<div class="product">
 								<div class="product_image"><img width=250px height=250px src="images/productimg/${pro.imgName}" alt="" ></div>
-							<div class="product_extra product_sale">best</a></div>
+							<div class="product_extra product_sale"><a style="color: white;">best</a></div>
 								<div class="product_content">
 									<div class="product_title"><a href="note?command=proDetail&serialNum=${pro.serialNum}">${pro.modelName}</a></div>
 									<div class="product_price"><fmt:formatNumber value="${pro.price}"/>원</div>

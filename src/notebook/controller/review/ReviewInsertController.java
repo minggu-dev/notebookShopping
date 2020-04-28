@@ -23,7 +23,6 @@ public class ReviewInsertController implements Controller {
 		
 		MultipartRequest m = new MultipartRequest(request, saveDir, maxSize, encoding, new DefaultFileRenamePolicy());
 		
-
 		String userId = (String)request.getSession().getAttribute("id");
 		String content = m.getParameter("content");
 		String serialNum = m.getParameter("serialNum");
@@ -44,7 +43,7 @@ public class ReviewInsertController implements Controller {
 		}
 		
 		ReviewService.insert(review);
-		ModelAndView mv = new ModelAndView(false, "reviewSelectBySerialNum page");
+		ModelAndView mv = new ModelAndView(false, "");
 		return mv;
 	}
 }

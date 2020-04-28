@@ -11,7 +11,15 @@
 </style>
 
 <script>
-
+	$(function(){
+		if(<%=session.getAttribute("id") == null%>){
+			$('#logout').hide();
+			$('#myPage').hide();
+		}else{
+			$('#login').hide();
+			$('#register').hide();
+		}
+	});
 </script>
 </head>
 <body>
@@ -48,6 +56,10 @@
 									</li>
 									<li id="register">
 										<a href="register.jsp">JoinUs</a>
+									</li>
+									
+									<li id="logout">
+										<a href="note?command=userLogout">Logout</a>
 									</li>
 									
 									<li id="myPage">

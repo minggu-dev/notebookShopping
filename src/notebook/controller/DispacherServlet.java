@@ -42,7 +42,7 @@ public class DispacherServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
-			request.getRequestDispatcher("에러페이지").forward(request, response);
+			request.getRequestDispatcher("error.jsp").forward(request, response);
 		}
 	}
 

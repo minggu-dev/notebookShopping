@@ -5,6 +5,8 @@ import java.io.File;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 import notebook.exception.NotEnoughParameterException;
@@ -18,6 +20,9 @@ public class ReviewDeleteController implements Controller {
 		String userId = request.getParameter("userId");
 		String reviewNo = request.getParameter("reviewNo");
 		String imgName = request.getParameter("imgName");
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("status", 2);
+		request.setAttribute("jsonObj", jsonObj);
 		
 		if(userId == null || userId.equals("") || reviewNo == null | reviewNo.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
@@ -30,6 +35,7 @@ public class ReviewDeleteController implements Controller {
 			file.delete();
 		}
 		
+		jsonObj.replace("status", 1);
 		ModelAndView mv = new ModelAndView(true, "후기페이지");
 		
 		return mv;

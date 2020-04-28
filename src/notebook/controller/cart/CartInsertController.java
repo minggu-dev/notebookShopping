@@ -25,6 +25,9 @@ public class CartInsertController implements Controller {
 		String quantity = request.getParameter("quantity");
 		JSONObject jsonObj = new JSONObject();
 		
+		jsonObj.put("status", 2);
+		request.setAttribute("jsonObj", jsonObj);
+		
 		if(serialNum == null || serialNum.equals("") || userId == null || userId.equals("")||
 				quantity == null || quantity.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지않습니다.");
@@ -35,6 +38,7 @@ public class CartInsertController implements Controller {
 		CartList cart = new CartList(userId, pro, Integer.parseInt(quantity));
 		CartService.insert(cart);
 		
+		jsonObj.replace("status", 1);
 		ModelAndView mv = new ModelAndView(true, "ajax로..?");
 		return mv;
 	}

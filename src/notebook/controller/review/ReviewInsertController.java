@@ -46,8 +46,6 @@ public class ReviewInsertController implements Controller {
 		ReviewService.insert(review);
 		ModelAndView mv = new ModelAndView(false, "reviewSelectBySerialNum page");
 		return mv;
-		
-		
 	}
 }
 		

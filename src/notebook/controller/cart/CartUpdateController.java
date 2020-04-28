@@ -25,9 +25,10 @@ public class CartUpdateController implements Controller {
 		String serialNum = request.getParameter("serialNum");
 		String count = request.getParameter("count");
 		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("status",2);
+		request.setAttribute("jsonObj", jsonObj);
 		
 		if(userId == null || userId.equals("") || serialNum == null || serialNum.equals("") || count == null || count.equals("")) {
-			jsonObj.put("status",2);
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
 		CartList cart = new CartList();
@@ -37,8 +38,8 @@ public class CartUpdateController implements Controller {
 		cart.setQuantity(Integer.parseInt(count));
 		cart.setUserId(userId);
 		CartService.updateCart(cart);
+		
 		jsonObj.put("status", 1);
-		request.setAttribute("jsonObj", jsonObj);
 		return null;
 	}
 

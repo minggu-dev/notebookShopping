@@ -21,8 +21,10 @@ public class UserDuplicateController implements Controller {
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String userId = request.getParameter("userId");
 		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("status", 2);
+		request.setAttribute("jsonObj", jsonObj);
+		
 		if(userId == null || userId.equals("")) {
-			jsonObj.put("status", 2);
 			request.setAttribute("jsonObj", jsonObj);
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
@@ -30,13 +32,11 @@ public class UserDuplicateController implements Controller {
 			if(UserService.selectById(userId) != null) {
 				throw new DuplicateException("아이디 중복입니다.");
 			}
-			jsonObj.put("status", 1);
 		}catch (Exception e) {
-			jsonObj.put("status", 2);
 			throw new Exception(e.getMessage());
-		}finally {
-			request.setAttribute("jsonObj", jsonObj);
 		}
+		
+		jsonObj.replace("status", 1);
 		return null;
 	}
 

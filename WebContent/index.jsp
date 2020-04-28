@@ -15,15 +15,15 @@
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
 <link rel="stylesheet" type="text/css" href="styles/responsive.css">
-<style>
-
-</style>
 
 <script>
 
 </script>
 </head>
 <body>
+
+
+
 <%@include file="header.jsp" %>
 
 <!-- Home -->
@@ -34,16 +34,19 @@
 			<!-- Home Slider -->
 			<div class="owl-carousel owl-theme home_slider">
 				
+					
 				<!-- Slider Item -->
 				<div class="owl-item home_slider_item">
-					<div class="home_slider_background" style="background-image:url(images/home_slider_1.jpg)"></div>
+					<a href="login.jsp">
+					<div class="home_slider_background" style="background-image:url(images/엘지메인광고.gif)"></div></a>
 					<div class="home_slider_content_container">
 						<div class="container">
 							<div class="row">
 								<div class="col">
 									<div class="home_slider_content"  data-animation-in="fadeIn" data-animation-out="animate-out fadeOut">
-										<div class="home_slider_title">첫 번째 상품</div>
-										<div class="home_slider_subtitle">첫 번째 상품 설명란</div>
+										<br><br><br><br>
+										<div class="home_slider_title" >첫 번째 상품</div>
+										
 										<div class="button button_light home_button"><a href="#">Shop Now</a></div>
 									</div>
 								</div>
@@ -53,8 +56,10 @@
 				</div>
 
 				<!-- Slider Item -->
+				
+				
 				<div class="owl-item home_slider_item">
-					<div class="home_slider_background" style="background-image:url(images/home_slider_1.jpg)"></div>
+					<div class="home_slider_background" style="background-image:url(images/productimg/삼성광고12.PNG)"></div>
 					<div class="home_slider_content_container">
 						<div class="container">
 							<div class="row">
@@ -72,7 +77,7 @@
 
 				<!-- Slider Item -->
 				<div class="owl-item home_slider_item">
-					<div class="home_slider_background" style="background-image:url(images/home_slider_1.jpg)"></div>
+					<div class="home_slider_background" style="background-image:url(images/삼성메인광고.gif)"></div>
 					<div class="home_slider_content_container">
 						<div class="container">
 							<div class="row">
@@ -115,6 +120,7 @@
 
 	<!-- Products -->
 	<div class="products">
+	
 		<div class="container">
 			<div class="row">
 				<div class="col">
@@ -123,39 +129,83 @@
 
 						<!-- Product -->
 						<div class="product">
-							<div class="product_image"><img src="images/product_1.jpg" alt=""></div>
-							<div class="product_extra product_new"><a href="categories.html">New</a></div>
+							<div class="product_image"><img src="images/productimg/레노버21.jpg" alt=""></div>
+						<div class="product_extra product_sale"><a href="categories.html">best</a></div>
 							<div class="product_content">
-								<div class="product_title"><a href="product.html">Smart Phone</a></div>
+								<div class="product_title"><a href="product.html">LEGION Y540-15IRH i7 Blade</a></div>
 								<div class="product_price">$670</div>
 							</div>
 						</div>
 
 						<!-- Product -->
 						<div class="product">
-							<div class="product_image"><img src="images/product_6.jpg" alt=""></div>
-							<div class="product_extra product_hot"><a href="categories.html">Hot</a></div>
+							<div class="product_image"><img src="images/productimg/hp01.jpg" alt=""></div>
+							<div class="product_extra product_sale"><a href="categories.html">best</a></div>
 							<div class="product_content">
-								<div class="product_title"><a href="product.html">Smart Phone</a></div>
+								<div class="product_title"><a href="product.html">파빌리온 15-cs3045TU</a></div>
 								<div class="product_price">$670</div>
 							</div>
 						</div>
 
 						<!-- Product -->
 						<div class="product">
-							<div class="product_image"><img src="images/product_7.jpg" alt=""></div>
+							<div class="product_image"><img src="images/productimg/애플1.jpg" alt=""></div>
+							<div class="product_extra product_sale"><a href="categories.html">best</a></div>
 							<div class="product_content">
-								<div class="product_title"><a href="product.html">Smart Phone</a></div>
+								<div class="product_title"><a href="product.html">MVVK2KH/A</a></div>
 								<div class="product_price">$670</div>
 							</div>
 						</div>
 
 						<!-- Product -->
 						<div class="product">
-							<div class="product_image"><img src="images/product_8.jpg" alt=""></div>
-							<div class="product_extra product_sale"><a href="categories.html">Hot</a></div>
+							<div class="product_image"><img src="images/productimg/LG1.jpg" alt=""></div>
+							<div class="product_extra product_sale"><a href="categories.html">best</a></div>
 							<div class="product_content">
-								<div class="product_title"><a href="product.html">Smart Phone</a></div>
+								<div class="product_title"><a href="product.html">그램15 15ZD90N-VX50K</a></div>
+								<div class="product_price">$670</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="product_grid">
+
+						<!-- Product -->
+						<div class="product">
+							<div class="product_image"><img src="images/productimg/레노버21.jpg" alt=""></div>
+						<div class="product_extra product_sale"><a href="categories.html">sale</a></div>
+							<div class="product_content">
+								<div class="product_title"><a href="product.html">LEGION Y540-15IRH i7 Blade</a></div>
+								<div class="product_price">$670</div>
+							</div>
+						</div>
+
+						<!-- Product -->
+						<div class="product">
+							<div class="product_image"><img src="images/productimg/hp01.jpg" alt=""></div>
+							<div class="product_extra product_sale"><a href="categories.html">sale</a></div>
+							<div class="product_content">
+								<div class="product_title"><a href="product.html">파빌리온 15-cs3045TU</a></div>
+								<div class="product_price">$670</div>
+							</div>
+						</div>
+
+						<!-- Product -->
+						<div class="product">
+							<div class="product_image"><img src="images/productimg/애플1.jpg" alt=""></div>
+							<div class="product_extra product_sale"><a href="categories.html">sale</a></div>
+							<div class="product_content">
+								<div class="product_title"><a href="product.html">MVVK2KH/A</a></div>
+								<div class="product_price">$670</div>
+							</div>
+						</div>
+
+						<!-- Product -->
+						<div class="product">
+							<div class="product_image"><img src="images/productimg/LG1.jpg" alt=""></div>
+							<div class="product_extra product_sale"><a href="categories.html">sale</a></div>
+							<div class="product_content">
+								<div class="product_title"><a href="product.html">그램15 15ZD90N-VX50K</a></div>
 								<div class="product_price">$670</div>
 							</div>
 						</div>
@@ -164,6 +214,7 @@
 			</div>
 		</div>
 	</div>
+	
 
 <%@include file="footer.jsp" %>
 

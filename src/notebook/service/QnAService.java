@@ -85,8 +85,8 @@ public class QnAService {
 	 * @throws SQLException
 	 * @throws CannotModifyException
 	 */
-	public static void delete(int qnaNo) throws SQLException, CannotModifyException {
-		int result = bd.delete(qnaNo);
+	public static void delete(int qnaNo, String userId) throws SQLException, CannotModifyException {
+		int result = bd.delete(qnaNo, userId);
 		if(result == 0) {
 			throw new CannotModifyException("삭제되지 않았습니다.");
 		}

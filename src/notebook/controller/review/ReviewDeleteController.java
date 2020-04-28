@@ -18,6 +18,7 @@ public class ReviewDeleteController implements Controller {
 		String userId = request.getParameter("userId");
 		String reviewNo = request.getParameter("reviewNo");
 		String imgName = request.getParameter("imgName");
+		
 		if(userId == null || userId.equals("") || reviewNo == null | reviewNo.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}

@@ -3,6 +3,8 @@ package notebook.controller.cart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 import notebook.domain.CartList;
@@ -18,10 +20,10 @@ public class CartInsertController implements Controller {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		String serialNum = request.getParameter("serialNum");
 		String userId = request.getParameter("userId");
 		String quantity = request.getParameter("quantity");
+		JSONObject jsonObj = new JSONObject();
 		
 		if(serialNum == null || serialNum.equals("") || userId == null || userId.equals("")||
 				quantity == null || quantity.equals("")) {

@@ -18,13 +18,14 @@ public class PurDeliveryController implements Controller {
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String orderNo = request.getParameter("orderNo");
+		String userId = request.getParameter("userId");
 		String addrDelivery = request.getParameter("deliveryAddr");
 		
-		if(orderNo == null || orderNo.equals("") || addrDelivery == null || addrDelivery.equals("")) {
+		if(orderNo == null || orderNo.equals("") || addrDelivery == null || addrDelivery.equals("") || userId == null || userId.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
 		
-		PurchaseService.updateAddr(Integer.parseInt(orderNo), addrDelivery);
+		PurchaseService.updateAddr(Integer.parseInt(orderNo), addrDelivery, userId);
 		ModelAndView mv = new ModelAndView(false, "마이페이지로");
 		return mv;
 	}

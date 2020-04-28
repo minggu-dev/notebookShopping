@@ -45,7 +45,7 @@ public interface BoardQnADao {
 	 * @param qnaNo
 	 * @return
 	 */
-	public int delete(int qnaNo) throws SQLException;
+	public int delete(int qnaNo, String userId) throws SQLException;
 	
 	/**
 	 * 조회수 증가

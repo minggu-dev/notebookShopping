@@ -130,4 +130,22 @@ public class CartListDaoImpl implements CartListDao {
 		}
 		return cart;
 	}
+	
+	@Override
+	public int deleteOne(String userId, String serialNum) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "DELETE cart_list where user_id = ? AND serialnum = ?";
+		int result = 0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
+			ps.setString(2, serialNum);
+			result = ps.executeUpdate();
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
 }

@@ -269,16 +269,17 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 	}
 	
 	@Override
-	public int updateAddr(int orderNo, String addrDelivery) throws SQLException {
+	public int updateAddr(int orderNo, String addrDelivery, String userId) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "UPDATE order_info SET addr_delivery = ? WHERE order_no = ?";
+		String sql = "UPDATE order_info SET addr_delivery = ? WHERE order_no = ? AND user_id = ?";
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setString(1, addrDelivery);
 			ps.setInt(2, orderNo);
+			ps.setString(3, userId);
 			result = ps.executeUpdate();
 		}finally {
 			DbUtil.dbClose(con, ps);
@@ -287,10 +288,10 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 	}
 	
 	@Override
-	public int updateRefundRequest(int orderNo, boolean request) throws SQLException {
+	public int updateRefundRequest(int orderNo, boolean request, String userId) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "UPDATE order_info SET refund_state = ? WHERE order_no = ?";
+		String sql = "UPDATE order_info SET refund_state = ? WHERE order_no = ? AND user_id = ?";
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();
@@ -298,6 +299,7 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 			int refundState = request ? 1 : 0;
 			ps.setInt(1, refundState);
 			ps.setInt(2, orderNo);
+			ps.setString(3, userId);
 			result = ps.executeUpdate();
 		}finally {
 			DbUtil.dbClose(con, ps);

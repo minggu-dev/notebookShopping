@@ -19,6 +19,7 @@ public class PurRefundStateController implements Controller {
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String orderNo = request.getParameter("orderNo");
 		String req = request.getParameter("request");
+		String userId = request.getParameter("userId"); 
 		
 		if(orderNo == null|| orderNo.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
@@ -26,7 +27,7 @@ public class PurRefundStateController implements Controller {
 		
 		//true가 환불요청
 		boolean refund = req == null || req.equals("") ? false : true;
-		PurchaseService.refundState(Integer.parseInt(orderNo), refund);
+		PurchaseService.refundState(Integer.parseInt(orderNo), refund, userId);
 		ModelAndView mv = new ModelAndView(false, "구매내역 상세 페이지");
 		
 		return mv;

@@ -42,7 +42,7 @@ public interface OrderInfoDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public int updateRefundRequest(int orderNo, boolean request) throws SQLException;
+	public int updateRefundRequest(int orderNo, boolean request, String userId) throws SQLException;
 	
 	/**
 	 * 배송지 변경
@@ -51,7 +51,7 @@ public interface OrderInfoDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public int updateAddr(int orderNo, String addrDelivery) throws SQLException;
+	public int updateAddr(int orderNo, String addrDelivery, String userId) throws SQLException;
 	
 	/**
 	 * 환불(관리자)

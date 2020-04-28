@@ -19,10 +19,11 @@ public class PurDetailController implements Controller {
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String orderNo = request.getParameter("orderNo");
-		if(orderNo == null ||orderNo.equals("")) {
+		String userId = request.getParameter("userId");
+		if(orderNo == null ||orderNo.equals("") || userId == null || userId.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
-		OrderInfo info = PurchaseService.selectByNo(Integer.parseInt(orderNo));
+		OrderInfo info = PurchaseService.selectByNo(Integer.parseInt(orderNo), userId);
 		request.setAttribute("info", info);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("구매내역 상세보기");

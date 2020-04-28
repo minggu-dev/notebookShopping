@@ -13,7 +13,6 @@ import notebook.service.UserService;
 /**
  * 모든 사용자 보기
  * @author kosta
- *
  */
 public class UserAllController implements Controller {	
 	@Override

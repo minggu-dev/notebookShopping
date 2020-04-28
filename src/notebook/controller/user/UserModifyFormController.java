@@ -18,7 +18,7 @@ public class UserModifyFormController implements Controller {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
 		
-		Users user = UserService.selecById(userId);
+		Users user = UserService.selectById(userId);
 		request.setAttribute("user", user);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("유저수정 폼으로");

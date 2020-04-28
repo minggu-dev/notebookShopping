@@ -113,19 +113,19 @@
 // 	con.handleRequest(request, response);
 %>
 
-<!-- <form action="note?command=proInsert" method="post" enctype="multipart/form-data"> -->
-<!-- 	<input type="text" name="modelName"> -->
-<!-- 	<input type="text" name="company"> -->
-<!-- 	<input type="number" name="price"> -->
-<!-- 	<input type="number" name="ram"> -->
-<!-- 	<input type="text" name="cpu"> -->
-<!-- 	<input type="number" name="noteSize"> -->
-<!-- 	<input type="text" name="noteWeight"> -->
-<!-- 	<input type="text" name="launchDate"> -->
-<!-- 	<input type="file" name="imgName"> -->
-<!-- 	<input type="file" name="descriptionImgName"> -->
-<!-- 	<input type="submit"> -->
-<!-- </form> -->
+<form action="note?command=proInsert" method="post" enctype="multipart/form-data">
+	<input type="text" name="modelName">
+	<input type="text" name="company">
+	<input type="number" name="price">
+	<input type="number" name="ram">
+	<input type="text" name="cpu">
+	<input type="number" name="noteSize">
+	<input type="text" name="noteWeight">
+	<input type="text" name="launchDate">
+	<input type="file" name="imgName">
+	<input type="file" name="descriptionImgName">
+	<input type="submit">
+</form>
 
 </body>
 </html>

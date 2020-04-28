@@ -16,8 +16,8 @@ public class PurchaseService {
 	private static OrderListDao orderListDao = new OrderListDaoImpl();
 	private static OrderInfoDao orderInfoDao = new OrderInfoDaoImpl();
 	
-	public static void updateAddr(int orderNo, String addrDelivery) throws SQLException, CannotModifyException{
-		if(orderInfoDao.updateAddr(orderNo, addrDelivery) == 0) {
+	public static void updateAddr(int orderNo, String addrDelivery, String userId) throws SQLException, CannotModifyException{
+		if(orderInfoDao.updateAddr(orderNo, addrDelivery, userId) == 0) {
 			throw new CannotModifyException("배송지 변경 불가");
 		}
 	}
@@ -28,10 +28,13 @@ public class PurchaseService {
 		return list;
 	}
 	
-	public static OrderInfo selectByNo(int orderNo) throws SQLException, NotFoundException{
+	public static OrderInfo selectByNo(int orderNo, String userId) throws SQLException, NotFoundException{
 		OrderInfo info = orderInfoDao.selectByNo(orderNo);
 		if(info == null) {
 			throw new NotFoundException("주문 내역을 찾을 수 없습니다.");
+		}
+		if(info.getUserId().equals(userId)) {
+			throw new NotFoundException("구매자만 변경할 수 있습니다.");
 		}
 		return info;
 	}
@@ -52,8 +55,8 @@ public class PurchaseService {
 		}
 	}
 	
-	public static void refundState(int orderNo, boolean request) throws SQLException, CannotModifyException{
-		if(orderInfoDao.updateRefundRequest(orderNo, request)==0) {
+	public static void refundState(int orderNo, boolean request, String userId) throws SQLException, CannotModifyException{
+		if(orderInfoDao.updateRefundRequest(orderNo, request, userId)==0) {
 			throw new CannotModifyException("환불 요청을 할 수 없습니다.");
 		}
 	}

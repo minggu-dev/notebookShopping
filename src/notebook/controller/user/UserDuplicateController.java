@@ -27,7 +27,7 @@ public class UserDuplicateController implements Controller {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
 		try {
-			if(UserService.selecById(userId) != null) {
+			if(UserService.selectById(userId) != null) {
 				throw new DuplicateException("아이디 중복입니다.");
 			}
 			jsonObj.put("status", 1);

@@ -110,7 +110,7 @@ public class BoardQnADaoImpl implements BoardQnADao {
 	public int update(BoardQnA board) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "UPDATE board_qna SET subject = ?, content = ?, create_date = sysdate, password = ? WHERE qna_no = ?";
+		String sql = "UPDATE board_qna SET subject = ?, content = ?, create_date = sysdate, password = ? WHERE qna_no = ? AND user_id = ?";
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();
@@ -119,6 +119,7 @@ public class BoardQnADaoImpl implements BoardQnADao {
 			ps.setString(2, board.getContent());
 			ps.setString(3, board.getPassword());
 			ps.setInt(4, board.getQnaNo());
+			ps.setString(5, board.getUserId());
 			result = ps.executeUpdate();
 		}finally {
 			DbUtil.dbClose(con, ps);
@@ -148,15 +149,16 @@ public class BoardQnADaoImpl implements BoardQnADao {
 	}
 
 	@Override
-	public int delete(int qnaNo) throws SQLException {
+	public int delete(int qnaNo, String userId) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "DELETE board_qna WHERE qna_no = ?";
+		String sql = "DELETE board_qna WHERE qna_no = ? AND user_id = ?";
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, qnaNo);
+			ps.setString(2, userId);
 			result = ps.executeUpdate();
 		}finally {
 			DbUtil.dbClose(con, ps);

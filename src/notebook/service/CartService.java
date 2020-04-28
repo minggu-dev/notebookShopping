@@ -44,4 +44,10 @@ public class CartService {
 		List<CartList> list = cartDao.selectById(userId);
 		return list;
 	}
+	
+	public static void deleteOne(String userId, String serialNum) throws SQLException, NotFoundException{
+		if(cartDao.deleteOne(userId, serialNum) == 0) {
+			throw new NotFoundException("해당 장바구니를 찾을 수 없습니다.");
+		}
+	}
 }

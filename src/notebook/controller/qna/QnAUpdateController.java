@@ -22,8 +22,9 @@ public class QnAUpdateController implements Controller {
 				String content = request.getParameter("content");
 				String password = request.getParameter("password");
 				String qnaNo = request.getParameter("qnaNo");
+				String userId = request.getParameter("userId");
 				if(subject == null || subject.equals("") || content == null || content.equals("")||
-					password == null || password.equals("")|| qnaNo == null || qnaNo.equals("")) {
+					password == null || password.equals("")|| qnaNo == null || qnaNo.equals("") || userId==null || userId.equals("")) {
 					throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 				}
 				BoardQnA board = new BoardQnA();
@@ -31,6 +32,7 @@ public class QnAUpdateController implements Controller {
 				board.setContent(content);
 				board.setPassword(password);
 				board.setQnaNo(Integer.parseInt(qnaNo));
+				board.setUserId(userId);
 				
 				QnAService.update(board);//업데이트
 				ModelAndView mv = new ModelAndView();

@@ -43,4 +43,9 @@ public interface CartListDao {
 	 * @throws SQLException
 	 */
 	public CartList selectByIdSerialNum(String userId, String serialNum) throws SQLException;
+	
+	/**
+	 * 장바구니에 하나 삭제
+	 */
+	public int deleteOne(String userId, String serialNum) throws SQLException;
 }

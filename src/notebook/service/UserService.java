@@ -46,7 +46,7 @@ public class UserService {
 		}
 	}
 	
-	public static Users selecById(String userId) throws SQLException, NotFoundException{
+	public static Users selectById(String userId) throws SQLException, NotFoundException{
 		Users user = userDao.selectById(userId);
 		if(user == null) {
 			throw new NotFoundException("회원 정보가 없습니다.");

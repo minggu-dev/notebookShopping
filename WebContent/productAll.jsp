@@ -1,3 +1,4 @@
+<%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -42,11 +43,53 @@
 
 <style>
 .product_image:hover{
-	
 }
-.product_image>img:hover{
+.product_image>img:hover {
+	visibility: visible;
+}
 
+.product_pagination{
+	text-align: center;
 }
+
+#custom-search-form {
+        margin:0;
+        margin-top: 5px;
+        padding: 0;
+    }
+ 
+    #custom-search-form .search-query {
+        padding-right: 3px;
+        padding-right: 4px \9;
+        padding-left: 3px;
+        padding-left: 4px \9;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+ 
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+ 
+    #custom-search-form button {
+        border: 0;
+        background: none;
+        /** belows styles are working good */
+        padding: 2px 5px;
+        margin-top: 2px;
+        position: relative;
+        left: -28px;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+ 
+    .search-query:focus + button {
+        z-index: 3;   
+    }
+
 </style>
 
 <script>
@@ -55,14 +98,41 @@ $(function(){
 	$('.product_image>img').hover(function(){
 		$(this).css("visibility",'hidden');
 	});
+	
+	$('.product_image>img').after(function(){
+		$(this).css("visibility",'visible');
+	});
+
+	$('.page_cnt').each(function(){
+		if($(this).children().html() == <%=request.getAttribute("page")%>){
+			$(this).addClass('active');
+		}
+	});
+	
+	$('.page_cnt>a').click(function(){
+		var hrefstr = $(this).attr("href");
+		<% 
+		Enumeration<String> en = request.getParameterNames();
+		while(en.hasMoreElements()){
+			String name = en.nextElement();
+			if(name.equals("page")){
+				continue;
+			}
+			%>hrefstr += "&" + "<%=name%>=";
+			hrefstr += "<%=request.getParameter(name)%>";
+		<%
+		}
+		%>
+		$(this).attr("href",hrefstr);
+	});
 });
+
 </script>
 
 </head>
 
 <body>
-	<%@include file="header.jsp"%>
-	<!-- Product Content -->
+<jsp:include page="header.jsp"></jsp:include>
 	
 	<!-- Home -->
 
@@ -90,7 +160,6 @@ $(function(){
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					
 					<!-- Product Sorting -->
 					<div class="sorting_bar d-flex flex-md-row flex-column align-items-md-center justify-content-md-start">
 						<div class="results">Showing <span>${fn:length(requestScope.list)}</span> results</div>
@@ -116,37 +185,68 @@ $(function(){
 			</div>
 			<div class="row">
 				<div class="col">
-					
 					<div class="product_grid">
-
 						<!-- Product -->
-						<c:forEach items="${requestScope.list}" var="pro">
-							<div class="product" id="${pro.serialNum}">
-								<div class="product_image"><img width=250px height=250px src="images/productimg/${pro.imgName}" alt=""></div>
-								<div class="product_content">
-									<div class="product_title"><a href="">${pro.modelName}</a></div>
-									<div class="product_price"><fmt:formatNumber value="${pro.price}"/>원</div>
-								</div>
-							</div>
-						</c:forEach>
-
+						<c:choose>
+							<c:when test="${empty requestScope.list}">
+								상품 목록이 없습니다.
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${requestScope.list}" var="pro">
+									<div class="product" id="${pro.serialNum}">
+										<div class="product_image">
+											<img width=250px height=250px
+												src="images/productimg/${pro.imgName}" alt="">
+										</div>
+										<div class="product_content">
+											<div class="product_title">
+												<a href="note?command=proDetail&serialNum=${pro.serialNum}">${pro.modelName}</a>
+											</div>
+											<div class="product_price">
+												<fmt:formatNumber value="${pro.price}" />원
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<div class="product_pagination">
+						<div class="container">
+							<div class="row">
+						        <div class="span12">
+						            <form id="custom-search-form" class="form-search form-horizontal pull-right">
+						                <div class="input-append span12" style="text-align: center;">
+						                    <input type="text" class="search-query" placeholder="Search">
+						                </div>
+						                    <button type="submit" class="btn"><i class="icon-search"></i></button>
+						            </form>
+						        </div>
+							</div>
+						</div>
 						<ul>
-							<li class="active"><a href="#">01.</a></li>
-							<li><a href="#">02.</a></li>
-							<li><a href="#">03.</a></li>
-							<li class="active"><a href="#">04.</a></li>
-							<li><a href="#">05.</a></li>
+							<li class="page_cnt"><a href="note?page=${param.page - 1}" style="font-size: 15px;">이전</a></li>
+							<c:forEach begin="1" end="${requestScope.pageObj.totalPage}" varStatus="state">
+								<li class="page_cnt"><a href="note?page=${state.count}" style="font-size: 20px;">${state.count}</a></li>
+							</c:forEach>
+							<li class="page_cnt"><a href="note?page=${param.page + 1}" style="font-size: 15px;">다음</a></li>
 						</ul>
 					</div>
-				</div>
+					<br>
+					<br>
+					<br>
+					<div style="cursor: pointer; text-align: center"
+						onclick="window.scrollTo(0,0);">TOP
+
+					</div>
+				<br>
+					<br>
+					<br>
+					<br>
+			</div>	
 			</div>
 		</div>
 	</div>
-	
-
-
-	<%@include file="footer.jsp"%>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

@@ -20,8 +20,33 @@ public class ProSelectByCompanyController implements Controller{
 		}
 		List<Product> list = ProductService.selectByCompany(company);
 		request.setAttribute("list", list);
+		
+
+		PagingObject pageObj = new PagingObject();
+		pageObj.setAllRecord(list.size());
+		pageObj.setTotalPage(list.size() / 12 + (list.size() % 12 == 0 ? 0 : 1));
+		
+		String page = request.getParameter("page");
+		if(page == null || page.equals("")) {
+			page = "1";
+		}
+		int pageInt = Integer.parseInt(page);
+		if(pageInt >= pageObj.getTotalPage()) {
+			pageInt = pageObj.getTotalPage();
+		}else if(pageInt < 1) {
+			pageInt = 1;
+		}
+		
+		if(pageInt * pageObj.getPageRecord() == list.size()) {
+			list = list.subList((pageInt - 1) * pageObj.getPageRecord(), pageInt * pageObj.getPageRecord());
+		}else {
+			list = list.subList((pageInt - 1) * pageObj.getPageRecord(), list.size());
+		}
+		request.setAttribute("list", list);
+		request.setAttribute("pageObj", pageObj);
+		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("회사별로 상품 보기");
+		mv.setViewName("productAll.jsp");
 		return mv;
 	}
 }

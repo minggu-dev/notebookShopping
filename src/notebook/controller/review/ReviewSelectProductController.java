@@ -23,9 +23,8 @@ public class ReviewSelectProductController implements Controller {
 		List<BoardReview> list = ReviewService.select(serialNum);
 		request.setAttribute("list", list);
 		
-		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("상품상세보기 때 가라");
+		mv.setViewName("review.jsp");
 		return mv;
 		
 

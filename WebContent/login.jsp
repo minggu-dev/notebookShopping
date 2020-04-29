@@ -65,7 +65,7 @@
 <body>
 
 	<!-- Header -->
-	<%@include file="header.jsp"%>
+	<jsp:include page="header.jsp"></jsp:include>
 
 	<!-- Home -->
 	<div class="home">
@@ -124,8 +124,7 @@
 
 
 
-
-	<%@include file="footer.jsp"%>
+<jsp:include page="footer.jsp"></jsp:include>
 
 	<script>
 	$(function() {

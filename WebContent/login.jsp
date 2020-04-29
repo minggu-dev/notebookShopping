@@ -43,6 +43,11 @@
 
 <title>Insert title here</title>
 <style>
+
+.home{
+	position: relative; 
+	background-color: #ebebeb;
+}
 </style>
 
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -62,8 +67,8 @@
 	<!-- Header -->
 	<%@include file="header.jsp"%>
 
-	<div class="home"
-		style="position: relative; background-color: #ebebeb;">
+	<!-- Home -->
+	<div class="home">
 		<div class="limiter">
 			<div class="container-login100">
 				<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
@@ -123,7 +128,6 @@
 	<%@include file="footer.jsp"%>
 
 	<script>
-
 	$(function() {
 		$("input[name=register]").click(function() {
 			location.href = "register.jsp";
@@ -132,12 +136,6 @@
 		$("input[name=login]").click(function() {
 			var username = $('input[name=userId]').val();
 			var password = $('input[name=pwd]').val();
-
-			if (username == "admin" && password == "admin") {
-				alert("관리자모드");
-				location.href = "managerIndex.html";
-
-			}
 		});
 	});
 </script>

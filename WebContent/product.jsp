@@ -76,8 +76,18 @@ $(function(){
 		if(parseInt($('#stock').val()) < parseInt($('.quantity').val())){
 			alert('재고를 확인해 주세요');
 		}else{
-			$('input[name=quantity]').val($('.quantity').val());
-			$('form[name=cartform]').submit();
+			if(<%=session.getAttribute("id") == null%>){
+				if(sessionStorage.getItem('cart:' + $('form > input[name=serialNum]').val()) == null){
+					sessionStorage.setItem('cart:' + $('form > input[name=serialNum]').val(),$('.quantity').val());
+				}else{
+					var quantity = sessionStorage.getItem('cart:' + $('form > input[name=serialNum]').val());
+					sessionStorage.setItem('cart:' + $('form > input[name=serialNum]').val(),parseInt($('.quantity').val()) + parseInt(quantity));
+				}
+				location.href="cart.jsp";
+			}else{
+				$('input[name=quantity]').val($('.quantity').val());
+				$('form[name=cartform]').submit();
+			}
 		}
 		return false;
 	});

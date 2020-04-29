@@ -33,7 +33,24 @@
 
 <script>
 $(function(){
+	for(var i = 0; i < sessionStorage.length; i++){
+		if(sessionStorage.key(i).substr(0,5) == 'cart:' && <%=session.getAttribute("id") != null%>){
+			var key = sessionStorage.key(i);
+			var serialNum = key.substr(5);
+			$.ajax({
+				url : "note",
+				data : "command=cartInsert&serialNum=" + serialNum +"&quantity=" + sessionStorage.getItem(key),
+				method : "post",
+				success : function(){
+					
+				}
+			});
+		}
+	}
 	
+	if(<%=session.getAttribute("id") != null%>){
+		sessionStorage.clear();
+	}
 });
 
 </script>

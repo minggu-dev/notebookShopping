@@ -30,7 +30,7 @@
 				<div class="row">
 					<div class="col">
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
-							<div class="logo"><a href="note">노트북 쇼핑</a></div>
+							<div class="logo"><a href="#">노트북 쇼핑</a></div>
 							<nav class="main_nav">
 								<ul>
 									<li>
@@ -39,17 +39,17 @@
 									<li class="hassubs">
 										<a href="#">Categories</a>
 										<ul>
-											<li><a href="samsung.html">SAMSUNG</a></li>
-											<li><a href="lg.html">LG</a></li>
-											<li><a href="hp.html">HP</a></li>
-											<li><a href="lenova.html">LENOVA</a></li>
-											<li><a href="apple.html">APPLE</a></li>
-											<li><a href="hansung.html">HANSUNG</a></li>
-											<li><a href="All.html">All</a></li>
+											<li><a href="note?command=proCompany&company=삼성전자">SAMSUNG</a></li>
+											<li><a href="note?command=proCompany&company=LG">LG</a></li>
+											<li><a href="note?command=proCompany&company=hp">HP</a></li>
+											<li><a href="note?command=proCompany&company=레노버">LENOVA</a></li>
+											<li><a href="note?command=proCompany&company=애플">APPLE</a></li>
+											<li><a href="note?command=proCompany&company=한성">HANSUNG</a></li>
+											<li><a href="note?command=proSortAll">All</a></li>
 										</ul>
 									</li>
 									<li>
-										<a href="q&aList.jsp">Q&A</a>
+										<a href="note?command=qnaAll">Q&A</a>
 									</li>
 									<li id="login">
 										<a href="login.jsp">Login</a>
@@ -69,7 +69,7 @@
 							</nav>
 							<div class="header_extra ml-auto">
 								<div class="shopping_cart">
-									<a href="cart_new.jsp">
+									<a href="note?command=cartMyCart">
 										<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 												 viewBox="0 0 489 489" style="enable-background:new 0 0 489 489;" xml:space="preserve">
 											<g>
@@ -83,7 +83,6 @@
 										<div>Cart <span>(0)</span></div>
 									</a>
 								</div>
-								
 							</div>
 						</div>
 					</div>

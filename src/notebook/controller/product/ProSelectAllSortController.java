@@ -24,7 +24,7 @@ public class ProSelectAllSortController implements Controller {
 		List<Product> list = ProductService.selectAllSortProduct(target);
 		request.setAttribute("list", list);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("상품 전체보기");
+		mv.setViewName("productAll.jsp");
 		return mv;
 	}
 

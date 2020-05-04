@@ -46,7 +46,7 @@ public class ProductDaoImpl implements ProductDao {
 			ps.close();
 			
 			//상품 후기들 가져오기
-			sql = "select * from board_review where serialnum=?";
+			sql = "select * from board_review where serialnum=? ORDER BY review_no";
 			
 			ps = con.prepareStatement(sql);
 			ps.setString(1, serialNum);

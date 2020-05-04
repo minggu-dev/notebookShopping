@@ -37,7 +37,7 @@ public class ProSelectByCompanyController implements Controller{
 			pageInt = 1;
 		}
 		
-		if(pageInt * pageObj.getPageRecord() == list.size()) {
+		if(pageInt * pageObj.getPageRecord() <= list.size()) {
 			list = list.subList((pageInt - 1) * pageObj.getPageRecord(), pageInt * pageObj.getPageRecord());
 		}else {
 			list = list.subList((pageInt - 1) * pageObj.getPageRecord(), list.size());

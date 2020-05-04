@@ -3,9 +3,6 @@
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 import notebook.domain.BoardReview;
@@ -17,16 +14,10 @@ public class ReviewInsertController implements Controller {
 	
 	
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String saveDir = request.getServletContext().getRealPath("/save");
-		int maxSize = 1024*1024*100;
-		String encoding = "UTF-8";
-		
-		MultipartRequest m = new MultipartRequest(request, saveDir, maxSize, encoding, new DefaultFileRenamePolicy());
-		
 		String userId = (String)request.getSession().getAttribute("id");
-		String content = m.getParameter("content");
-		String serialNum = m.getParameter("serialNum");
-		String grade = m.getParameter("grade");
+		String content = request.getParameter("content");
+		String serialNum = request.getParameter("serialNum");
+		String grade = request.getParameter("grade");
 		
 		if(userId == null || userId.equals("") || serialNum == null || serialNum.equals("")
 				|| grade==null || grade.equals("") ) {
@@ -37,13 +28,9 @@ public class ReviewInsertController implements Controller {
 
 		BoardReview review = new BoardReview(userId, null, content, serialNum, Integer.parseInt(grade) );
 		
-		if(m.getFile("imgName") != null) {
-			String imgName = m.getFilesystemName("imgName");
-			review.setImgName(imgName);
-		}
 		
 		ReviewService.insert(review);
-		ModelAndView mv = new ModelAndView(false, "");
+		ModelAndView mv = new ModelAndView(true, "note?command=proDetail&serialNum="+serialNum);
 		return mv;
 	}
 }

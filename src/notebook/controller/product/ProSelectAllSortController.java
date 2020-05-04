@@ -25,7 +25,7 @@ public class ProSelectAllSortController implements Controller {
 		PagingObject pageObj = new PagingObject();
 		pageObj.setAllRecord(list.size());
 		pageObj.setTotalPage(list.size() / 12 + (list.size() % 12 == 0 ? 0 : 1));
-		
+
 		String page = request.getParameter("page");
 		if(page == null || page.equals("")) {
 			page = "1";
@@ -37,11 +37,13 @@ public class ProSelectAllSortController implements Controller {
 		}else if(pageInt < 1) {
 			pageInt = 1;
 		}
-		
-		list = list.subList((pageInt - 1) * pageObj.getPageRecord(), pageInt * pageObj.getPageRecord());
+		if(list.size() >= pageInt * pageObj.getPageRecord()) {
+			list = list.subList((pageInt - 1) * pageObj.getPageRecord(), pageInt * pageObj.getPageRecord());
+		}else {
+			list = list.subList((pageInt - 1) * pageObj.getPageRecord(), list.size());
+		}
 		request.setAttribute("list", list);
 		request.setAttribute("pageObj", pageObj);
-		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("productAll.jsp");
 		return mv;

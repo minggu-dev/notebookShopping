@@ -20,13 +20,14 @@ public class ReviewDeleteController implements Controller {
 		String userId = (String)request.getSession().getAttribute("id");
 		String reviewNo = request.getParameter("reviewNo");
 		String imgName = request.getParameter("imgName");
+		String serialNum = request.getParameter("serialNum");
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("status", 2);
 		request.setAttribute("jsonObj", jsonObj);
 		
-		if(userId == null || userId.equals("") || reviewNo == null | reviewNo.equals("")) {
+		if(userId == null || userId.equals("") || reviewNo == null || reviewNo.equals("") || serialNum == null || serialNum.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
+		
 		ReviewService.delete(Integer.parseInt(reviewNo), userId);
 		
 		if(imgName != null && !imgName.equals("")) {
@@ -35,8 +36,7 @@ public class ReviewDeleteController implements Controller {
 			file.delete();
 		}
 		
-		jsonObj.replace("status", 1);
-		ModelAndView mv = new ModelAndView(true, "후기페이지");
+		ModelAndView mv = new ModelAndView(true, "note?command=proDetail&serialNum="+serialNum);
 		
 		return mv;
 	}

@@ -162,7 +162,6 @@
 			</div>
 
 			<!-- Home Slider Dots -->
-
 			<div class="home_slider_dots_container">
 				<div class="container">
 					<div class="row">

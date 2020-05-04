@@ -18,7 +18,7 @@ public class BoardReviewDaoImpl implements BoardReviewDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select * from board_review where serialnum=?";
+		String sql = "select * from board_review where serialnum=? order by review_no";
 		List<BoardReview> list = new ArrayList<BoardReview>();
 		try {
 			con = DbUtil.getConnection();
@@ -134,7 +134,7 @@ public class BoardReviewDaoImpl implements BoardReviewDao {
 			//상품 평점 다시 계산
 			sql = "UPDATE product SET grade = ? WHERE serialnum = ?";
 			ps = con.prepareStatement(sql);
-			ps.setDouble(1, (sum - myGrade + review.getGrade()) / reviewcnt);
+			ps.setDouble(1, (double)(sum - myGrade + review.getGrade()) / reviewcnt);
 			ps.setString(2, review.getSerialNum());
 			
 			if(ps.executeUpdate() == 0) {
@@ -215,7 +215,7 @@ public class BoardReviewDaoImpl implements BoardReviewDao {
 			if(reviewcnt > 1) {
 				sql = "UPDATE product SET grade = ? WHERE serialnum = ?";
 				ps = con.prepareStatement(sql);
-				ps.setDouble(1, (sum - mygrade) / (reviewcnt - 1));
+				ps.setDouble(1, (double)(sum - mygrade) / (reviewcnt - 1));
 				ps.setString(2, serialNum);
 				result = ps.executeUpdate();
 				if(result == 0) {
@@ -274,7 +274,7 @@ public class BoardReviewDaoImpl implements BoardReviewDao {
 			//update product grade
 			sql = "UPDATE product SET grade = ? WHERE serialnum = ?";
 			ps = con.prepareStatement(sql);
-			double refreshgrade = (review.getGrade() + sum)/(reviewcnt+1);
+			double refreshgrade = (double)(review.getGrade() + sum)/(reviewcnt+1);
 			ps.setDouble(1, refreshgrade);
 			ps.setString(2, review.getSerialNum());
 			result = ps.executeUpdate();

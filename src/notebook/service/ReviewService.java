@@ -38,9 +38,6 @@ public class ReviewService {
 	
 	public static void update(BoardReview review) throws SQLException, NotFoundException, CannotModifyException{
 		int result =reviewDao.update(review);
-		if(result == 0) {
-			throw new SQLException("수정되지 않았습니다.");
-		}
 	}
 	
 	public static BoardReview selectByNo(int reviewNo) throws SQLException, NotFoundException{

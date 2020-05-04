@@ -95,14 +95,6 @@
 <script>
 
 $(function(){
-	$('.product_image>img').hover(function(){
-		$(this).css("visibility",'hidden');
-	});
-	
-	$('.product_image>img').after(function(){
-		$(this).css("visibility",'visible');
-	});
-
 	$('.page_cnt').each(function(){
 		if($(this).children().html() == <%=request.getAttribute("page")%>){
 			$(this).addClass('active');
@@ -195,8 +187,10 @@ $(function(){
 								<c:forEach items="${requestScope.list}" var="pro">
 									<div class="product" id="${pro.serialNum}">
 										<div class="product_image">
-											<img width=250px height=250px
+											<a href="note?command=proDetail&serialNum=${pro.serialNum}">
+												<img width=250px height=250px
 												src="images/productimg/${pro.imgName}" alt="">
+											</a>
 										</div>
 										<div class="product_content">
 											<div class="product_title">
@@ -225,11 +219,11 @@ $(function(){
 							</div>
 						</div>
 						<ul>
-							<li class="page_cnt"><a href="note?page=${param.page - 1}" style="font-size: 15px;">이전</a></li>
+							<li class="page_cnt"><a href="note?page=${param.page - 1}" style="font-size: 15px;">이전</a>＊＊</li>
 							<c:forEach begin="1" end="${requestScope.pageObj.totalPage}" varStatus="state">
 								<li class="page_cnt"><a href="note?page=${state.count}" style="font-size: 20px;">${state.count}</a></li>
 							</c:forEach>
-							<li class="page_cnt"><a href="note?page=${param.page + 1}" style="font-size: 15px;">다음</a></li>
+							<li class="page_cnt">＊＊<a href="note?page=${param.page + 1}" style="font-size: 15px;">다음</a></li>
 						</ul>
 					</div>
 					<br>

@@ -49,7 +49,7 @@
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
 			<br><br><br><br><br><br>
-				<form action="#" class="login100-form validate-form flex-sb flex-w">
+				<form action="note?command=userJoin" method="post" class="login100-form validate-form flex-sb flex-w">
 
 					<span class="login100-form-title p-b-32">
 						회원 가입 하는곳
@@ -77,14 +77,14 @@
 					<div class="wrap-input100 validate-input m-b-36" id="divId">
                     <label for="inputId" class="col-lg-3 control-label">아이디</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control onlyAlphabetAndNumber" id="id" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
+                        <input type="text" class="form-control onlyAlphabetAndNumber" id="id"  name="userId" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
                     <input type="button" value="중복확인" name="idcheck">
                     </div>
                 </div>
                 <div class="wrap-input100 validate-input m-b-36" id="divPassword">
                     <label for="inputPassword" class="col-lg-4 control-label">패스워드</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="password" name="excludeHangul" data-rule-required="true" placeholder="패스워드" maxlength="30">
+                        <input type="password" class="form-control" id="password" name="pwd" data-rule-required="true" placeholder="패스워드" maxlength="30">
                     </div>
                 </div>
                 <div class="wrap-input100 validate-input m-b-36" id="divPasswordCheck">
@@ -97,7 +97,7 @@
                 <div class="wrap-input100 validate-input m-b-36" id="divName">
                     <label for="inputName" class="col-lg-2 control-label">이름</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control onlyHangul" id="name" data-rule-required="true" placeholder="한글만 입력 가능합니다." maxlength="15">
+                        <input type="text" class="form-control onlyHangul" id="name" name="name" data-rule-required="true" placeholder="한글만 입력 가능합니다." maxlength="15">
                     </div>
                 </div>
                 
@@ -106,29 +106,31 @@
                 <div class="wrap-input100 validate-input m-b-36" id="divEmail">
                     <label for="inputEmail" class="col-lg-2 control-label">주소</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="email" data-rule-required="true" placeholder="이메일" maxlength="40">
+                        <input type="text" class="form-control" id="email"  name="addr" data-rule-required="true" placeholder="이메일" maxlength="40">
                     </div>
                 </div>
                 <div class="wrap-input100 validate-input m-b-36" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-7 control-label">휴대폰 번호</label>
                     <div class="col-lg-10">
-                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11">
+                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" name="phone" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11">
                     </div>
                 </div>
                 <div class="wrap-input100 validate-input m-b-36">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">질문</label>
                     <div class="col-lg-10">
-                        <select class="form-control" id="gender">
-                            <option value="질문1">당신의 첫사랑은?</option>
-                            <option value="질문2">당신의 애창곡은?</option>
-                        </select>
+                   
+                        <select id="questions" name="queNo"> 
+                         <c:forEach items="${list}" var="questions" >
+							 <option value="${questions.queNo}">${questions.question}</option>
+					`	</c:forEach>
+						</select>
                     </div>
                 </div>
                 
                 <div class="wrap-input100 validate-input m-b-36" id="divNickname">
                     <label for="inputNickname" class="col-lg-2 control-label">답변</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="nickname" data-rule-required="true" placeholder="별명" maxlength="15">
+                        <input type="text" class="form-control" id="nickname" name="answer" data-rule-required="true" placeholder="별명" maxlength="15">
                     </div>
                 </div>
 
@@ -472,4 +474,5 @@
     
 </div>
 </body>
+<jsp:include page="footer.jsp"></jsp:include>
 </html>

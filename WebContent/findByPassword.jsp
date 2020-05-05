@@ -43,12 +43,13 @@
 <div class="super_container">
 <!-- Header -->
 <%@include file="header.jsp" %>
+<%String id = request.getParameter("userId"); %>
 
 <div class="container" style="position: relative;">
      <div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-				<form action="findByPassword2.jsp" class="login100-form validate-form flex-sb flex-w">
+				<form action="note?command=userPwdQuestion" class="login100-form validate-form flex-sb flex-w" method="post">
 					<span class="login100-form-title p-b-32">
 						비밀번호 찾는곳
 					</span>

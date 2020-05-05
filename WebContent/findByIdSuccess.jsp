@@ -43,19 +43,20 @@
 <div class="super_container">
 <!-- Header -->
 <%@include file="header.jsp" %>
+<%String userId = (String)request.getAttribute("userId"); %>
 
 <div class="container" style="position: relative; z-index:2;">
      <div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-				<form action="findByPassword.jsp" class="login100-form validate-form flex-sb flex-w">
+				<form action="findByPassword.jsp" class="login100-form validate-form flex-sb flex-w" method="post">
 					<span class="login100-form-title p-b-32">
-						찾은 아이디
+						찾은 아이디 
 					</span>
 
 				
 					<div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
-						<input class="input100" type="text" name="fingById" value="찾은아이디" readonly/>
+						<input class="input100" type="text" name="fingById" value="찾은아이디<%=userId %>" readonly/>
 						<span class="focus-input100"></span>
 					</div>
 					
@@ -64,7 +65,16 @@
 						<button class="login100-form-btn">
 							비밀번호찾기
 						</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="button" name="login" class="login100-form-btn" value="로그인">							
+						
 					</div>
+					
+<!-- 					<div class="container-login100-form-btn"> -->
+<!-- 						<a href="login.jsp"> -->
+<!-- 							로그인 -->
+<!-- 						</a> -->
+<!-- 					</div> -->
 
 				</form>
 			</div>
@@ -90,7 +100,16 @@
 <!-- Footer -->
 <%@include file="footer.jsp" %>
 
+<script>
 
+$("input[name=login]").click(function(){
+	location.href = "login.jsp";
+});
+
+
+
+
+</script>
 
 </div>
 </body>

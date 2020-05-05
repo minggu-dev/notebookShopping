@@ -226,8 +226,7 @@ function formSubmit(){
 					<div class="col-lg-6">
 						<div class="details_image">
 							<div class="details_image_large">
-								<img src="images/productimg/${requestScope.product.imgName}" width="400px" height="400px"
-									alt="">
+								<img src="images/productimg/${requestScope.product.imgName}" width="400px" height="400px" alt="">
 								<div class="product_extra product_new">
 									<a></a>
 								</div>

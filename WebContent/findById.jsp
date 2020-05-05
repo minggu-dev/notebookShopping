@@ -48,7 +48,7 @@
      <div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-				<form action="findById2.jsp" class="login100-form validate-form flex-sb flex-w">
+				<form action="note?command=userIdQuestion" class="login100-form validate-form flex-sb flex-w" method="post">
 					<span class="login100-form-title p-b-32">
 						아이디 찾는곳
 					</span>
@@ -64,9 +64,9 @@
 					<span class="txt1 p-b-11">
 						핸드폰 번호
 					</span>
+					<input type="hidden" value="${phone}">
 					<div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
-						
-						<input class="input100" type="text" name="phone" >
+						<input class="input100" type="text" name="phone" value="${phone}">
 						<span class="focus-input100"></span>
 					</div>
 					

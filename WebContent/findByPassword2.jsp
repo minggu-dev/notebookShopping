@@ -44,11 +44,14 @@
 <!-- Header -->
 <%@include file="header.jsp" %>
 
+
+<%String phone = request.getParameter("phone"); %>
+
 <div class="container" style="position: relative; z-index:2;">
      <div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-				<form action="findByPasswordSuccess.jsp" class="login100-form validate-form flex-sb flex-w">
+				<form action="note?command=userPwdFind" class="login100-form validate-form flex-sb flex-w" method="post">
 					<span class="login100-form-title p-b-32">
 						비밀번호 찾기 질문
 					</span>
@@ -58,10 +61,7 @@
 					</span>
 					<div class="wrap-input100 validate-input m-b-36" data-validate = "questions is required">
 						<select id="questions" name="questions"> 
-						  <option value="질문1">당신의 첫사랑은?</option>
-						  <option value="질문2">초등학교때 담임선생님 성함은?</option>
-						  <option value="질문3">당신의 출신 초등학교 이름은?</option>
-						  <option value="질문4">나의 노래방 애창곡은?</option>
+						  <option>${question}</option>
 						</select>
 					</div>
 					
@@ -72,6 +72,7 @@
 						<input class="input100" type="text" name="answer" >
 		
 					</div>
+					<input type="hidden" value="<%=phone%>" name="phone" >	
 					
 
 					<div class="container-login100-form-btn">

@@ -16,6 +16,7 @@
 <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
 <link rel="stylesheet" type="text/css" href="styles/responsive.css">
 <link rel="stylesheet" href="assets/css/main.css" />
+<script src="js/jquery-3.2.1.min.js"></script>
 <style>
 
 </style>
@@ -34,17 +35,12 @@
 						<span class="image"><img src="images/orderInfo.gif" alt="" /></span>
 						<div class="content">
 							<h2>주문내역</h2>
-							<p>
-							<table>
-							<tr><th>주문번호</th><th>구매일</th><th>배송상태</th></tr>
-							<tr><td><c:out value="${orderNum}" default="1" /></td>
-							<td><c:out value="${buyDate}" default="20/4/25" /></td>
-							<td><c:out value="${state}" default="배송중" /></td></tr>
-							</table>
-							</p>
+							<h3>
+							구매 내역을 확인하세요
+							</h3>
 							<ul class="actions">
 								<li>
-									<a href="orderInfo.jsp" >More</a>
+									<a href="note?command=purUser&userId=${id}" >구매내역보기</a>
 								</li>
 							</ul>
 						</div>
@@ -53,17 +49,14 @@
 						<span class="image"><img src="images/personInfo.png" alt="" /></span>
 						<div class="content">
 							<h2>내정보보기</h2>
-							<p>
-							<table>
-							<tr><td>아이디</td><td><c:out value="${id}" default="아이디1" /></td></tr> 
-							<tr><td>이름</td><td><c:out value="${name}" default="이름1" /><td></tr>
-							<tr><td>폰번호 </td><td><c:out value="${phone}" default="전화번호" /></td></tr>
-							</table>
-							</p>
+						
+							<p><h3>
+							${id}님의 회원정보 확인하기
+							</h3></p>
 						
 							<ul class="actions">
 								<li>
-									<a href="myInfo.jsp" >More</a>
+									<a href="note?command=userDetail&userId=${id}" >내정보 확인하기</a>
 								</li>
 							</ul>
 						</div>
@@ -75,7 +68,7 @@
 
 <%@include file="footer.jsp" %>
 
-<script src="js/jquery-3.2.1.min.js"></script>
+
 <script src="styles/bootstrap4/popper.js"></script>
 <script src="styles/bootstrap4/bootstrap.min.js"></script>
 <script src="plugins/greensock/TweenMax.min.js"></script>

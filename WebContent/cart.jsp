@@ -1,5 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@page import="notebook.domain.Users"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,295 +16,226 @@
 <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="styles/cart.css">
 <link rel="stylesheet" type="text/css" href="styles/cart_responsive.css">
+
+
+<!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/themify-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/ie7.css" type="text/css">
+    <link rel="stylesheet" href="css/themify-icons.css" type="text/css">
+    
+
+
 </head>
+
+ <style>
+ body {
+  background: none;
+  font-size: 62.5%;
+}
+
+.container {
+  padding: 2em;
+}
+
+/* GENERAL BUTTON STYLING */
+button,
+button::after {
+  -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+button {
+  background: none;
+  border: 3px solid #e9e9e9;
+  border-radius: 5px;
+  color: orange;
+  
+  font-size: 5;
+  font-weight: bold;
+  margin: 1em auto;
+  padding: 1em 1em;
+  position: relative;
+  text-transform: uppercase;
+}
+
+button::before,
+button::after {
+  background: orange;
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+button:hover {
+  color: white;
+}
+
+/* BUTTON 1 */
+.btn-delete::after {
+  height: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.btn-delete:hover:after {
+  height: 100%;
+}
+</style> 
 <body>
+<!-- <div class="super_container"> -->
+<jsp:include page="header.jsp"/>
 
-<div class="super_container">
 
-	<!-- Header -->
-
-	<header class="header">
-		<div class="header_container">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<div class="header_content d-flex flex-row align-items-center justify-content-start">
-							<div class="logo"><a href="#">Sublime.</a></div>
-							<nav class="main_nav">
-								<ul>
-									<li class="hassubs active">
-										<a href="index.html">Home</a>
-										<ul>
-											<li><a href="categories.html">Categories</a></li>
-											<li><a href="product.html">Product</a></li>
-											<li><a href="cart.html">Cart</a></li>
-											<li><a href="checkout.html">Check out</a></li>
-											<li><a href="contact.html">Contact</a></li>
-										</ul>
-									</li>
-									<li class="hassubs">
-										<a href="categories.html">Categories</a>
-										<ul>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-										</ul>
-									</li>
-									<li><a href="#">Accessories</a></li>
-									<li><a href="#">Offers</a></li>
-									<li><a href="contact.html">Contact</a></li>
-								</ul>
-							</nav>
-							<div class="header_extra ml-auto">
-								<div class="shopping_cart">
-									<a href="cart.html">
-										<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-												 viewBox="0 0 489 489" style="enable-background:new 0 0 489 489;" xml:space="preserve">
-											<g>
-												<path d="M440.1,422.7l-28-315.3c-0.6-7-6.5-12.3-13.4-12.3h-57.6C340.3,42.5,297.3,0,244.5,0s-95.8,42.5-96.6,95.1H90.3
-													c-7,0-12.8,5.3-13.4,12.3l-28,315.3c0,0.4-0.1,0.8-0.1,1.2c0,35.9,32.9,65.1,73.4,65.1h244.6c40.5,0,73.4-29.2,73.4-65.1
-													C440.2,423.5,440.2,423.1,440.1,422.7z M244.5,27c37.9,0,68.8,30.4,69.6,68.1H174.9C175.7,57.4,206.6,27,244.5,27z M366.8,462
-													H122.2c-25.4,0-46-16.8-46.4-37.5l26.8-302.3h45.2v41c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5v-41h139.3v41
-													c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5v-41h45.2l26.9,302.3C412.8,445.2,392.1,462,366.8,462z"/>
-											</g>
-										</svg>
-										<div>Cart <span>(0)</span></div>
-									</a>
-								</div>
-								<div class="search">
-									<div class="search_icon">
-										<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-										viewBox="0 0 475.084 475.084" style="enable-background:new 0 0 475.084 475.084;"
-										 xml:space="preserve">
-										<g>
-											<path d="M464.524,412.846l-97.929-97.925c23.6-34.068,35.406-72.047,35.406-113.917c0-27.218-5.284-53.249-15.852-78.087
-												c-10.561-24.842-24.838-46.254-42.825-64.241c-17.987-17.987-39.396-32.264-64.233-42.826
-												C254.246,5.285,228.217,0.003,200.999,0.003c-27.216,0-53.247,5.282-78.085,15.847C98.072,26.412,76.66,40.689,58.673,58.676
-												c-17.989,17.987-32.264,39.403-42.827,64.241C5.282,147.758,0,173.786,0,201.004c0,27.216,5.282,53.238,15.846,78.083
-												c10.562,24.838,24.838,46.247,42.827,64.234c17.987,17.993,39.403,32.264,64.241,42.832c24.841,10.563,50.869,15.844,78.085,15.844
-												c41.879,0,79.852-11.807,113.922-35.405l97.929,97.641c6.852,7.231,15.406,10.849,25.693,10.849
-												c9.897,0,18.467-3.617,25.694-10.849c7.23-7.23,10.848-15.796,10.848-25.693C475.088,428.458,471.567,419.889,464.524,412.846z
-												 M291.363,291.358c-25.029,25.033-55.148,37.549-90.364,37.549c-35.21,0-65.329-12.519-90.36-37.549
-												c-25.031-25.029-37.546-55.144-37.546-90.36c0-35.21,12.518-65.334,37.546-90.36c25.026-25.032,55.15-37.546,90.36-37.546
-												c35.212,0,65.331,12.519,90.364,37.546c25.033,25.026,37.548,55.15,37.548,90.36C328.911,236.214,316.392,266.329,291.363,291.358z
-												"/>
-										</g>
-									</svg>
-									</div>
-								</div>
-								<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- Search Panel -->
-		<div class="search_panel trans_300">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
-							<form action="#">
-								<input type="text" class="search_input" placeholder="Search" required="required">
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Social -->
-		<div class="header_social">
-			<ul>
-				<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-			</ul>
-		</div>
-	</header>
-
-	<!-- Menu -->
-
-	<div class="menu menu_mm trans_300">
-		<div class="menu_container menu_mm">
-			<div class="page_menu_content">
-							
-				<div class="page_menu_search menu_mm">
-					<form action="#">
-						<input type="search" required="required" class="page_menu_search_input menu_mm" placeholder="Search for products...">
-					</form>
-				</div>
-				<ul class="page_menu_nav menu_mm">
-					<li class="page_menu_item has-children menu_mm">
-						<a href="index.html">Home<i class="fa fa-angle-down"></i></a>
-						<ul class="page_menu_selection menu_mm">
-							<li class="page_menu_item menu_mm"><a href="categories.html">Categories<i class="fa fa-angle-down"></i></a></li>
-							<li class="page_menu_item menu_mm"><a href="product.html">Product<i class="fa fa-angle-down"></i></a></li>
-							<li class="page_menu_item menu_mm"><a href="cart.html">Cart<i class="fa fa-angle-down"></i></a></li>
-							<li class="page_menu_item menu_mm"><a href="checkout.html">Checkout<i class="fa fa-angle-down"></i></a></li>
-							<li class="page_menu_item menu_mm"><a href="contact.html">Contact<i class="fa fa-angle-down"></i></a></li>
-						</ul>
-					</li>
-					<li class="page_menu_item has-children menu_mm">
-						<a href="categories.html">Categories<i class="fa fa-angle-down"></i></a>
-						<ul class="page_menu_selection menu_mm">
-							<li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-							<li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-							<li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-							<li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-						</ul>
-					</li>
-					<li class="page_menu_item menu_mm"><a href="index.html">Accessories<i class="fa fa-angle-down"></i></a></li>
-					<li class="page_menu_item menu_mm"><a href="#">Offers<i class="fa fa-angle-down"></i></a></li>
-					<li class="page_menu_item menu_mm"><a href="contact.html">Contact<i class="fa fa-angle-down"></i></a></li>
-				</ul>
-			</div>
-		</div>
-
-		<div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-
-		<div class="menu_social">
-			<ul>
-				<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-			</ul>
-		</div>
-	</div>
-	
-	<!-- Home -->
-
-	<div class="home">
-		<div class="home_container">
-			<div class="home_background" style="background-image:url(images/cart.jpg)"></div>
-			<div class="home_content_container">
-				<div class="container">
-					<div class="row">
-						<div class="col">
-							<div class="home_content">
-								<div class="breadcrumbs">
-									<ul>
-										<li><a href="index.html">Home</a></li>
-										<li><a href="categories.html">Categories</a></li>
-										<li>Shopping Cart</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
+	<h1>dddddddddddd</h1>
 	<!-- Cart Info -->
-
-	<div class="cart_info">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<!-- Column Titles -->
-					<div class="cart_info_columns clearfix">
-						<div class="cart_info_col cart_info_col_product">Product</div>
-						<div class="cart_info_col cart_info_col_price">Price</div>
-						<div class="cart_info_col cart_info_col_quantity">Quantity</div>
-						<div class="cart_info_col cart_info_col_total">Total</div>
-					</div>
-				</div>
-			</div>
-			<div class="row cart_items_row">
-				<div class="col">
-
-					<!-- Cart Item -->
-					<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
-						<!-- Name -->
-						<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
-							<div class="cart_item_image">
-								<div><img src="images/cart_1.jpg" alt=""></div>
-							</div>
-							<div class="cart_item_name_container">
-								<div class="cart_item_name"><a href="#">Smart Phone Deluxe Edition</a></div>
-								<div class="cart_item_edit"><a href="#">Edit Product</a></div>
-							</div>
-						</div>
-						<!-- Price -->
-						<div class="cart_item_price">$790.90</div>
-						<!-- Quantity -->
-						<div class="cart_item_quantity">
-							<div class="product_quantity_container">
-								<div class="product_quantity clearfix">
-									<span>Qty</span>
-									<input id="quantity_input" type="text" pattern="[0-9]*" value="1">
-									<div class="quantity_buttons">
-										<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
-										<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- Total -->
-						<div class="cart_item_total">$790.90</div>
-					</div>
-
-				</div>
-			</div>
-			<div class="row row_cart_buttons">
+	<!-- Shopping Cart Section Begin -->
+    <section class="shopping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cart-table">
+                    <!-- 카트 리스트 뿌리기  -->
+                        <table>
+                            <thead>	
+                                <tr>
+                                    <th>Image</th>
+                                    <th class="p-name">Product Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                           <tbody name="cart_info"> 
+                           
+                           <c:choose>
+                           <c:when test="${empty requestScope.list}">
+                           <tr>
+       						 <td colspan="5">
+           					 <p align="center"><b><span style="font-size:20pt;">등록된 상품이 없습니다.</span></b></p>
+        					</td>
+   							 </tr>
+                           </c:when>
+                           <c:otherwise>
+                             <c:forEach items="${requestScope.list }" var="result">
+                                <tr name="cart">								<%-- ${l.product.imgName } --%>
+                                    <td class="cart-pic first-row"><img src="images/productimg/${result.product.imgName }" alt="모른다."></td>
+                                    <td class="cart-title first-row">
+                                        <h5>${result.product.modelName }<input type="hidden" name="serialNum" value="${result.product.serialNum }"></h5>
+                                    </td>
+                                    <td class="p-price first-row" name="sell_price">${result.product.price}</td>
+                                    
+                                    <td class="qua-col first-row">
+                                        <div class="quantity">  <div class="pro-qty" name="count">
+                                                 <input type="text" value="${result.quantity }" name="amount">
+                                            </div>
+                                        </div> 
+                                    </td>
+                                    <td class="total-price first-row"><div name="total"><fmt:formatNumber>${result.quantity* result.product.price}</fmt:formatNumber>원	</div></td>
+                                   
+                                   <td >
+                                		<div class="container">							<!-- 삭제할 변수명${l.serialNum} -->
+  										<button class="btn-delete" name="btn_delete"><a href="note?command=cartDelete&userId=${result.userId }&serialNum=${result.product.serialNum}">X</button>
+  										</div>
+                                		 
+                                   </td> 
+                                </tr>
+                             </c:forEach>
+                             </c:otherwise>
+                             </c:choose>
+                            </tbody>
+                            
+                        </table>
+                        
+                    </div>
+                    <div class="row row_cart_buttons">
 				<div class="col">
 					<div class="cart_buttons d-flex flex-lg-row flex-column align-items-start justify-content-start">
-						<div class="button continue_shopping_button"><a href="#">Continue shopping</a></div>
+						<div class="button continue_shopping_button"><a href="note">쇼핑 계속하기</a></div>
 						<div class="cart_buttons_right ml-lg-auto">
-							<div class="button clear_cart_button"><a href="#">Clear cart</a></div>
-							<div class="button update_cart_button"><a href="#">Update cart</a></div>
+																		
+							<div class="button clear_cart_button" id="clear_cart"><a href="note?command=cartEmpty&userId=${l.userId }">장바구니 비우기</a></div>
+							<div class="button update_cart_button" id="update_cart"><%-- <a href="note?command=cartUpdate&userId=${l.userId }&serialNum=${l.product.serialNum}&count=${l.count}"> --%><a>장바구니 갱신</a><!-- </a> --></div>
 						</div>
 					</div>
 				</div>
 			</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Shopping Cart Section End -->
+
+  
+    <!-- Pner Logo Section End -->
+    
+    
 			<div class="row row_extra">
-				<div class="col-lg-4">
-					
+				<div class="offset-lg-2 col-lg-4">
+				
 					<!-- Delivery -->
 					<div class="delivery">
-						<div class="section_title">Shipping method</div>
+				
+					
+						<div class="section_title">배송지 선택</div>
+						
 						<div class="section_subtitle">Select the one you want</div>
+						<form>
+						
+						
 						<div class="delivery_options">
-							<label class="delivery_option clearfix">Next day delivery
-								<input type="radio" name="radio">
+							<label class="delivery_option clearfix">기본배송지
+							
+								<input type="radio" name="addr" id="addr" value="">
+							
+								
 								<span class="checkmark"></span>
-								<span class="delivery_price">$4.99</span>
 							</label>
-							<label class="delivery_option clearfix">Standard delivery
-								<input type="radio" name="radio">
-								<span class="checkmark"></span>
-								<span class="delivery_price">$1.99</span>
-							</label>
-							<label class="delivery_option clearfix">Personal pickup
-								<input type="radio" checked="checked" name="radio">
-								<span class="checkmark"></span>
-								<span class="delivery_price">Free</span>
-							</label>
+							
+								<div>
+									 <ul>
+									 <li>
+									 <p class="heading"> <input type="radio" name="addr">신규배송지</p>
+									  <div class="new_addr" name="new_addr" style="font-size: 20px">				  
+								
+													<!-- 주소지 -->
+													
+													<input type="text" name="newAddr" size="30" placeholder="받을 주소를 입력해주세요" focus>
+											
+													
+										
+									 </div>
+									 </li>
+									 </ul>
+									 
+									 
+								</div>
+								
+							
+							
+							
 						</div>
+						</form>
 					</div>
+					
+					
 
-					<!-- Coupon Code -->
-					<div class="coupon">
-						<div class="section_title">Coupon code</div>
-						<div class="section_subtitle">Enter your coupon code</div>
-						<div class="coupon_form_container">
-							<form action="#" id="coupon_form" class="coupon_form">
-								<input type="text" class="coupon_input" required="required">
-								<button class="button coupon_button"><span>Apply</span></button>
-							</form>
-						</div>
-					</div>
+					
 				</div>
 
-				<div class="col-lg-6 offset-lg-2">
+			<div class="col-lg-4 offset-lg-0">
 					<div class="cart_total">
 						<div class="section_title">Cart total</div>
 						<div class="section_subtitle">Final info</div>
@@ -308,52 +243,63 @@
 							<ul>
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_total_title">Subtotal</div>
-									<div class="cart_total_value ml-auto">$790.90</div>
+									<div class="cart_total_value ml-auto" name="sub_total"></div>
 								</li>
 								<li class="d-flex flex-row align-items-center justify-content-start">
-									<div class="cart_total_title">Shipping</div>
-									<div class="cart_total_value ml-auto">Free</div>
+									<div class="cart_total_title">수량</div>
+									<div class="cart_total_value ml-auto" name="quantity"></div>
 								</li>
 								<li class="d-flex flex-row align-items-center justify-content-start">
-									<div class="cart_total_title">Total</div>
-									<div class="cart_total_value ml-auto">$790.90</div>
+									<div class="cart_total_title">Total</div><input type="hidden" name="hidden_total">
+									<div class="cart_total_value ml-auto" name="all_total"></div>
 								</li>
 							</ul>
 						</div>
-						<div class="button checkout_button"><a href="#">Proceed to checkout</a></div>
+						<div class="button checkout_button" name="purchase"><a href="">구매</a></div>
 					</div>
-				</div>
+				</div>			
 			</div>
-		</div>		
-	</div>
+		<!-- </div>	 -->	
+	<!-- </div>  -->
 
 	<!-- Footer -->
-	
-	<div class="footer_overlay"></div>
-	<footer class="footer">
-		<div class="footer_background" style="background-image:url(images/footer.jpg)"></div>
+	<!-- <div class="footer_overlay"></div>
+	<footer class="footer"">
+		<div class="footer_background" style="background-image:url(images/footer.jpg); position:absolute; bottom: 0px;"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
 					<div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
 						<div class="footer_logo"><a href="#">Sublime.</a></div>
-						<div class="copyright ml-auto mr-auto"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						<div class="copyright ml-auto mr-auto">Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
-						<div class="footer_social ml-lg-auto">
-							<ul>
-								<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-							</ul>
-						</div>
+Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</footer>
-</div>
+	</footer> -->
+		<!-- <div class="footer_overlay""></div>
+	<footer class="footer" style="background-image:url(images/footer.jpg);background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center; height:120px; position: fixed; bottom: 0px;">
+		
+		<div class="container" >
+			<div class="row">
+				<div class="col">
+					<div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
+						<div class="footer_logo"><a href="index.html" style="font-size: 20px; position: left;">홈</a></div>
+						<div class="copyright ml-auto mr-auto">Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> <span style="font-size: 20px">경기도 성남시 판교 유스페이스 B동 </span><i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">어디로 갈까</a>
+Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.ddddd</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>  -->
+		
+	   
 
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="styles/bootstrap4/popper.js"></script>
@@ -366,5 +312,183 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="plugins/easing/easing.js"></script>
 <script src="plugins/parallax-js-master/parallax.min.js"></script>
 <script src="js/cart.js"></script>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+
+
+
+ <!-- Js Plugins -->
+    <script src="js/js/jquery-3.3.1.min.js"></script>
+    <script src="js/js/bootstrap.min.js"></script>
+    <script src="js/js/jquery-ui.min.js"></script>
+    <script src="js/js/jquery.countdown.min.js"></script>
+    <script src="js/js/jquery.nice-select.min.js"></script>
+    <script src="js/js/jquery.zoom.min.js"></script>
+    <script src="js/js/jquery.dd.min.js"></script>
+    <script src="js/js/jquery.slicknav.js"></script>
+    <script src="js/js/owl.carousel.min.js"></script>
+    <script src="js/js/main.js"></script>
+	<script src="js/js/ie7.js"></script>
+
+
+
+<script language='javascript'>
+
+
+//개별 상품삭제하기 버튼
+/* function Delete(delProduct) {
+  //alert('테스트');
+	
+     location.href = "Delete?productName=" + 상품이름;   //get방식으로 삭제할아이디를 넘김 */
+
+     
+
+
+ $(document).ready(function() {
+  $(".content").hide(); //content 클래스를 가진 div를 표시/숨김(토글)
+  $('input[name=newAddr]').hide();
+ 
+	
+  var amount;
+
+  var total;
+  var sub_total;
+ 
+  
+  var amt = Number();
+  var qt = Number(0);
+  var money = Number();
+  var sum = Number(0);
+  
+  $('tr[name=cart]').each(function(i, element) {
+		amt = $('input[name=amount]').eq(i).val(); //수량
+		money = $('td[name=sell_price]').eq(i).text();
+		qt += parseInt(amt);
+		sum += amt * money;
+	});
+	//$('td[name=sell_price]').text(money.toLocaleString()+'원');
+  $('div[name=quantity]').text(qt);//수량
+  $('div[name=sub_total]').text(sum.toLocaleString()+'원');
+	$('div[name=all_total]').text(sum.toLocaleString()+'원');
+	
+	$('input[name=hidden_total]').val(sum);
+  	
+	$('div[name=count]').on('click', function() {
+		var qty = Number(0);
+		var all_total = Number();
+		  var sell_price = Number();
+		$('tr[name=cart]').each(function(i, element) {
+			amount = $('input[name=amount]').eq(i).val(); //수량
+			sell_price = $('td[name=sell_price]').eq(i).text();
+			//sell_price = $('fmt:formatNumber[type=number]').eq(i).val();
+			//alert(sell_price);
+			total = amount * sell_price;
+			all_total += amount * sell_price;
+			qty += parseInt(amount);
+			$('td>div[name=total]').eq(i).text(total.toLocaleString()+'원');  
+		});
+		$('div[name=sub_total]').text(all_total.toLocaleString()+'원');
+		$('div[name=quantity]').text(qty);
+		$('div[name=all_total]').text(all_total.toLocaleString()+'원');
+		$('input[name=hidden_total]').val(all_total);
+	});
+	var all_total;
+
+	
+	/* $('#update_cart').on('click', function(){
+		var quantity = Number(0);
+		$('tr[name=cart]').each(function(i, element) {
+			var update_amount = $('input[name=amount]').eq(i).val(); //수량
+			total += amount * sell_price;
+			quantity += parseInt(update_amount);
+		});
+		$('div[name=sub_total]').text(total.toLocaleString()+'원');
+		$('div[name=quantity]').text(quantity);
+		$('div[name=all_total]').text(total.toLocaleString()+'원');
+		
+	}); */
+	
+	
+	/* var serialNum = $('input[name=serialNum]').val();
+	var count = $('amount')
+	alert(list.userId); */
+	 $('#update_cart').click(function() {
+		 $('tr[name=cart]').each(function(i, element) {
+			var serialNum = $('input[name=serialNum]').eq(i).val();
+			var count = $('input[name=amount]').eq(i).val();
+			
+			$.ajax({
+				type: "POST",
+				url:"note",
+				data: "command=cartUpdate&serialNum=" + serialNum +"&count=" + count,
+				dataType:"json",
+				success: function(jsonObj) {
+					if(jsonObj.status == 1){
+						alert("갱신 되었습니다.");
+						}
+					
+				}
+				
+			
+			});
+			
+		 });
+	
+		
+	}); 
+	
+	//기본 배송지
+	 $('#addr').on('click', function() {
+		//var id = $('input[name=userId]').val();
+		var an = $('#addr').val();
+		alert(an);
+		//alert(id);
+		/* $.ajax({
+			type: "POST",
+			url:"ajax",
+			data:"id="+ id,
+			success: function(arr){
+				$('#addr').val(arr);
+				
+			}
+			
+		}) */
+				
+		
+	}); 
+	
+	
+	
+	//구매하기
+	$('div[name=purchase]').on('click', function() {
+		//alert('dd');
+		var addrDelivery;
+		var totalPrice = $('input[name=hidden_total]').val();
+		
+	    addrDelivery = $('input[name=newAddr]').val();//새로운 주소 
+		
+		$.ajax({
+			type: "POST",
+			url:"note",
+			data: "command=purInsert&totalPrice=" + totalPrice +"&addrDelivery=" + addrDelivery,
+			success: function() {
+				location.href = "orderInfo.jsp";
+			}
+		});
+	});
+	
+  $(".heading").click(function()
+  {
+	  //$(this).next(".content").slideToggle(100);
+	  $('input[name=newAddr]').slideToggle(100);
+  });
+   
+  
+  
+});
+
+</script>
+
 </body>
+
+
 </html>

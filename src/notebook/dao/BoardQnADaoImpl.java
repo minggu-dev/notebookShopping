@@ -110,16 +110,15 @@ public class BoardQnADaoImpl implements BoardQnADao {
 	public int update(BoardQnA board) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "UPDATE board_qna SET subject = ?, content = ?, create_date = sysdate, password = ? WHERE qna_no = ? AND user_id = ?";
+		String sql = "UPDATE board_qna SET subject = ?, content = ?, create_date = sysdate WHERE qna_no = ? AND user_id = ?";
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setString(1, board.getSubject());
 			ps.setString(2, board.getContent());
-			ps.setString(3, board.getPassword());
-			ps.setInt(4, board.getQnaNo());
-			ps.setString(5, board.getUserId());
+			ps.setInt(3, board.getQnaNo());
+			ps.setString(4, board.getUserId());
 			result = ps.executeUpdate();
 		}finally {
 			DbUtil.dbClose(con, ps);

@@ -16,6 +16,7 @@
 <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
 <link rel="stylesheet" type="text/css" href="styles/responsive.css">
 <link rel="stylesheet" href="assets/css/main.css" />
+<script src="js/jquery-3.2.1.min.js"></script>
 <style>
 
 </style>
@@ -32,19 +33,24 @@
 					<article class="feature left">
 						<span class="image"><img src="images/pic01.jpg" alt="" /></span>
 						<div class="content">
+							
 							<h2>내 정보(수정)</h2>
+							<form method="post" action="note?command=userUpdate">							
+							<c:set var="myinfo" value="${user}" />
 							<table>
-								<tr><td>아이디</td><td><input type="text" disabled="disabled" value="아이디1"></td></tr>
-								<tr><td>비밀번호</td><td><input type="password" value="비번1"></td></tr>
-								<tr><td>이름</td><td><input type="text" disabled="disabled" value="이름1"></td></tr>
-								<tr><td>주소</td><td><input type="text"  value="주소1"></td></tr>
-								<tr><td>전화번호</td><td><input type="text"  value="전화번호1"></td></tr>
-								<tr><td>질문</td><td><input type="text" disabled="disabled" value="질문1"></td></tr>
-								<tr><td>답변</td><td><input type="text" disabled="disabled" value="답변1"></td></tr>
+								<tr><td>아이디</td><td><input type="text" disabled="disabled" value="${myinfo.userId }"></td></tr>
+								<tr><td>비밀번호(수정 가능)</td><td><input name="pwd" type="password" value="${myinfo.pwd }"></td></tr>
+								<tr><td>이름</td><td><input type="text" disabled="disabled" value="${myinfo.name }"></td></tr>
+								<tr><td>주소(수정 가능)</td><td><input name="addr" type="text"  value="${myinfo.addr }"></td></tr>
+								<tr><td>전화번호(수정 가능)</td><td><input name="phone" type="text"  value="${myinfo.phone }"></td></tr>
+								<tr><td>질문</td><td><input type="text" disabled="disabled" value="${myinfo.question.queNo }"></td></tr>
+								<tr><td>답변</td><td><input type="text" disabled="disabled" value="${myinfo.answer }"></td></tr>
 								<tr><td>회원상태</td><td>활성화</td></tr>
-								<tr><td><button type="summit" name="update">수정완료</button></td>
-								<td><button type="button" name="back">뒤로가기</button></td></tr>
+								<tr><td><button name="update">수정완료</button></td>
+								<td><button type="button" name="back">처음으로</button></td></tr>
 							</table>
+						   </form>
+						   
 					
 						</div>
 					</article>
@@ -57,7 +63,7 @@
 
 <%@include file="footer.jsp" %>
 
-<script src="js/jquery-3.2.1.min.js"></script>
+
 <script src="styles/bootstrap4/popper.js"></script>
 <script src="styles/bootstrap4/bootstrap.min.js"></script>
 <script src="plugins/greensock/TweenMax.min.js"></script>
@@ -70,14 +76,12 @@
 <script src="plugins/easing/easing.js"></script>
 <script src="plugins/parallax-js-master/parallax.min.js"></script>
 <script src="js/custom.js"></script>
- <script src=js/jquery-3.2.1.min.js></script>
+
  <script>
- 	$("button[name=update]").click(function(){
- 		location = "#";
- 	});
+ 	
  	
  	$("button[name=back]").click(function(){
- 		location = "myInfo.jsp";
+ 		location = "myPage.jsp";
  	});
  	
  </script>

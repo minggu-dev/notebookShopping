@@ -34,17 +34,22 @@
 						<div class="content">
 							<h2>내 정보</h2>
 							<table>
-								<tr><td>아이디</td><td><input type="text" disabled="disabled" value="아이디1"></td></tr>
-								<tr><td>이름</td><td><input type="text" disabled="disabled" value="이름1"></td></tr>
-								<tr><td>주소</td><td><input type="text" disabled="disabled" value="주소1"></td></tr>
-								<tr><td>전화번호</td><td><input type="text" disabled="disabled" value="전화번호1"></td></tr>
-								<tr><td>질문</td><td><input type="text" disabled="disabled" value="질문1"></td></tr>
-								<tr><td>답변</td><td><input type="text" disabled="disabled" value="답변1"></td></tr>
+							
+							<c:set var="myinfo" value="${user}" />
+
+						
+							
+								<tr><td>아이디</td><td><input type="text" disabled="disabled" value="${myinfo.userId }"></td></tr>
+								<tr><td>이름</td><td><input type="text" disabled="disabled" value="${myinfo.name }"></td></tr>
+								<tr><td>주소</td><td><input type="text" disabled="disabled" value="${myinfo.addr }"></td></tr>
+								<tr><td>전화번호</td><td><input type="text" disabled="disabled" value="${myinfo.phone }"></td></tr>
+								<tr><td>질문</td><td><input type="text" disabled="disabled" value="${myinfo.question.queNo }"></td></tr>
+								<tr><td>답변</td><td><input type="text" disabled="disabled" value="${myinfo.answer }"></td></tr>
 								<tr><td>회원상태</td><td>활성화</td></tr>
 								<tr><td><button type="button" name="update">정보수정</button></td>
 								<td><button type="button" name="delete">탈퇴</button></td></tr>
 							</table>
-					
+							
 						</div>
 					</article>
 					
@@ -66,25 +71,22 @@
 <script src="plugins/parallax-js-master/parallax.min.js"></script>
 <script src="js/custom.js"></script>
  <script src=js/jquery-3.2.1.min.js></script>
+ 
  <script>
  	$("button[name=update]").click(function(){
-        var userName = prompt("비밀번호를 입력하세요", "비밀번호입력란");
-
- 		if(userName=="1111"){
- 			location = "infoUpdate.jsp";
- 		}else{
- 			alert("비밀번호가 틀렸습니다.");
- 		}
+ 		
+        var pwd = prompt("비밀번호를 입력하세요", "비밀번호입력란");
+     	//비밀번호입력이 없음
+ 			location = "note?command=userUpdateForm";
+ 		
  	});
  	
  	$("button[name=delete]").click(function(){
  		confirm("정말 탈퇴하시겠습니까 ?");
- 		var userName = prompt("비밀번호를 입력하세요", "비밀번호입력란");
- 		if(userName=="1111"){
- 			location = "#";
- 		}else{
- 			alert("비밀번호가 틀렸습니다.");
- 		}
+ 		var pwd = prompt("비밀번호를 입력하세요", "비밀번호입력란");
+ 		
+ 		location = "note?command=userWithdraw&password="+pwd;
+ 		
  	});
  	
  </script>

@@ -17,7 +17,13 @@ public class BoardQnA {
 	public BoardQnA() {
 		super();
 	}
-
+	public BoardQnA(int qnaNo, String userId, String password) {
+		super();
+		this.qnaNo = qnaNo;
+		this.userId = userId;
+		this.password = password;
+	}
+	
 	public BoardQnA(int qnaNo, String userId, String subject, String content, String createDate, String password,
 			int viewCnt, int answerState, Product product, List<BoardAnswer> answers) {
 		super();

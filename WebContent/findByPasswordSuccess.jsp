@@ -43,6 +43,8 @@
 <div class="super_container">
 <!-- Header -->
 <%@include file="header.jsp" %>
+<%String pwd = (String)request.getAttribute("pwd"); %>
+
 
 <div class="container" style="position: relative;">
      <div class="limiter">
@@ -55,7 +57,7 @@
 
 				
 					<div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
-						<input class="input100" type="text" name="fingByPassword" value="찾은비밀번호" readonly/>
+						<input class="input100" type="text" name="fingByPassword" value="찾은비밀번호  <%=pwd %>" readonly/>
 						<span class="focus-input100"></span>
 					</div>
 					

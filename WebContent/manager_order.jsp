@@ -43,9 +43,9 @@
                     <!-- Main menu -->
                     <li><a href="index.jsp"><i class="glyphicon glyphicon-home"></i> 홈으로</a></li>
                     <li class="current"><a href="productAll.jsp"><i class="glyphicon glyphicon-list"></i> 상품정보</a></li>
-                    <li class="current"><a href="personInfoAll.jsp"><i class="glyphicon glyphicon-list"></i> 회원정보</a></li>
+                    <li class="current"><a href="note?command=userAll"><i class="glyphicon glyphicon-list"></i> 회원정보</a></li>
                     <li class="current"><a href="tables.html"><i class="glyphicon glyphicon-list"></i> Q&A</a></li>
-                    <li class="current"><a href="manager_order.jsp"><i class="glyphicon glyphicon-list"></i> 주문정보</a></li>
+                    <li class="current"><a href="note?command=purAll"><i class="glyphicon glyphicon-list"></i> 주문정보</a></li>
                          
                 </ul>
              </div>
@@ -70,33 +70,25 @@
 								<th>환불상태</th>
 								<th>주소</th>
 								<th>총금액</th>
+								<th>수정하기</th>
 							</tr>
 						</thead>
 						<tbody>
 						
-						<c:forEach var="order" items="${orderList}" varStatus="status">
+						<c:forEach var="order" items="${list}" varStatus="status">
 							<tr class="odd gradeX">
-								<td><c:out value="${orderList.orderNo}" /></td>
-								<td><c:out value="${orderList.userId}"  /></td>
-								<td><c:out value="${orderList.purchaseDate}" /></td>
-								<td><c:out value="${orderList.deliveryState}"  /></td>
-								<td class="center"><c:out value="${orderList.refundState}" /></td>
-								<td><c:out value="${orderList.addrDelivery}" /></td>
-								<td class="center"><c:out value="${orderList.totalPrice}"  /></td>
+								<td><c:out value="${order.orderNo}" /></td>
+								<td><c:out value="${order.userId}"  /></td>
+								<td><c:out value="${order.purchaseDate}" /></td>
+								<td><input type="text" value="${order.deliveryState}"></td>
+								<td class="center"><c:out value="${order.refundState}" /></td>
+								<td><c:out value="${order.addrDelivery}" /></td>
+								<td class="center"><c:out value="${order.totalPrice}"  /></td>
+								<td><button id="update">수정</button></td>
 											
 							</tr>
 						</c:forEach>
 						
-						<tr class="odd gradeX">
-								<td><a href="personInfoUpdate.jsp"><c:out value="${state.count}" />23123</a></td>
-								<td><c:out value="${infoList.userId}"  />213123</td>
-								<td><c:out value="${infoList.password}" />123123</td>
-								<td><c:out value="${infoList.username}"  />123123</td>
-								<td class="center"><c:out value="${infoList.addr}" />123123</td>
-								<td class="center"><c:out value="${infoList.phone}"  />123123</td>
-								<td><c:out value="${infoList.questions}" />123123</td>
-			
-							</tr>
 		
 						</tbody>
 					</table>
@@ -134,5 +126,14 @@
 
     <script src="js/custom.js"></script>
     <script src="js/tables.js"></script>
+    <script>
+    $("#update").click(function(){
+    	var orderNo = $(this).next().text();
+    	var deliveryState = $(this).next().next().next().next().text();
+    	
+    	location="note?command=purDeliveryState&orderNo="+orderNo+"&deliveryState="+deliveryState;
+    });
+    
+    </script>
   </body>
 </html>

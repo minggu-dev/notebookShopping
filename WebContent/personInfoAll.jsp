@@ -28,7 +28,7 @@
 	           <div class="col-md-5">
 	              <!-- Logo -->
 	              <div class="logo">
-	                 <h1><a href="managerIndex.html">Bootstrap Admin Theme</a></h1>
+	                 <h1><a href="managerIndex.html">회원 전체 정보</a></h1>
 	              </div>
 	           </div>
 	        </div>
@@ -43,9 +43,9 @@
                     <!-- Main menu -->
                     <li><a href="index.jsp"><i class="glyphicon glyphicon-home"></i> 홈으로</a></li>
                     <li class="current"><a href="productAll.jsp"><i class="glyphicon glyphicon-list"></i> 상품정보</a></li>
-                    <li class="current"><a href="personInfoAll.jsp"><i class="glyphicon glyphicon-list"></i> 회원정보</a></li>
+                    <li class="current"><a href="note?command=userAll"><i class="glyphicon glyphicon-list"></i> 회원정보</a></li>
                     <li class="current"><a href="tables.html"><i class="glyphicon glyphicon-list"></i> Q&A</a></li>
-                    <li class="current"><a href="manager_order.jsp"><i class="glyphicon glyphicon-list"></i> 주문정보</a></li>
+                    <li class="current"><a href="note?command=purAll"><i class="glyphicon glyphicon-list"></i> 주문정보</a></li>
                          
                 </ul>
              </div>
@@ -72,35 +72,26 @@
 								<th>질문내용</th>
 								<th>질문답변</th>
 								<th>활동상태</th>
+								<th>수정하기</th>
 							</tr>
 						</thead>
 						<tbody>
 						
-						<c:forEach var="personInfo" items="${infoList}" varStatus="status">
+						<c:forEach var="personInfo" items="${list}" varStatus="status">
 							<tr class="odd gradeX">
-								<td><c:out value="${state.count}" /></td>
-								<td><c:out value="${infoList.userId}"  /></td>
-								<td><c:out value="${infoList.password}" /></td>
-								<td><c:out value="${infoList.username}"  /></td>
-								<td class="center"><c:out value="${infoList.addr}" /></td>
-								<td class="center"><c:out value="${infoList.phone}"  /></td>
-								<td><c:out value="${infoList.questions}" /></td>
-								<td><c:out value="${infoList.answer}" /></td>
-								<td><c:out value="${infoList.state}"  /></td>			
+								<td><c:out value="${status.count}" /></td>
+								<td><c:out value="${personInfo.userId}"  /></td>
+								<td><c:out value="${personInfo.pwd}" /></td>
+								<td><c:out value="${personInfo.name}"  /></td>
+								<td class="center"><c:out value="${personInfo.addr}" /></td>
+								<td class="center"><c:out value="${personInfo.phone}"  /></td>
+								<td>${personInfo.question}</td>
+								<td><c:out value="${personInfo.answer}" /></td>
+								<td><input type="text" value="${personInfo.state}"  /></td>
+								<td><button>수정</button></td>			
 							</tr>
 						</c:forEach>
 						
-						<tr class="odd gradeX">
-								<td><c:out value="${state.count}" />23123</td>
-								<td><a href="personInfoUpdate.jsp"><c:out value="${infoList.userId}"  />213123</a></td>
-								<td><c:out value="${infoList.password}" />123123</td>
-								<td><c:out value="${infoList.username}"  />123123</td>
-								<td class="center"><c:out value="${infoList.addr}" />123123</td>
-								<td class="center"><c:out value="${infoList.phone}"  />123123</td>
-								<td><c:out value="${infoList.questions}" />123123</td>
-								<td><c:out value="${infoList.answer}" />123123</td>
-								<td><c:out value="${infoList.state}"  />1</td>			
-							</tr>
 		
 						</tbody>
 					</table>

@@ -43,12 +43,6 @@ font-size: 15px;
 }
 
 }
-
-img{
-width:50%;
-height:50%;
-}
-
    </style>
 
 
@@ -56,7 +50,7 @@ height:50%;
 <body>
 <%@include file="myHeader.jsp" %>
 <div class="super_container">
-
+<c:set var="orderList" value="${info}" />
    
    <!-- Menu -->
 
@@ -68,43 +62,39 @@ height:50%;
 
   			<div class="content-box-large">
   				<div class="panel-heading">
-					<div class="panel-title">주문상세보기</div>
+					<div class="panel-title">배송지 변경</div>
 				</div>
   				<div class="panel-body">
-  				<form action="서블릿">
+  				<form method="post" action="note?command=purChangeAddr">
   					<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
 						<thead>
 							<tr>
-								<th>주문번호</th>
-								<th>상품이미지</th>
-								<th>회사</th>
-								<th>갯수</th>
-								<th>가격</th>
+								<th>주문상품</th>
+								<th>구매일</th>
+								<th>배송상태</th>
+								<th>환불요청</th>
+								<th>배송지(수정)</th>
+								<th>총금액</th>
 							</tr>
 						</thead>
 						<tbody>
 						
 						
-							
-						<c:set var="sum" value="0"/>
-						<c:forEach items="${info.orderList}" var="order">
 							<tr class="odd gradeX">
-								<td><input type="text" value="${order.orderNo}" disabled></td>
-								<td><img src="images/productimg/${order.product.imgName}"><span>${order.product.modelName }</span></td>
-								<td><input type="text" value="${order.product.company }" disabled></td>
-								<td><input type="text" value="${order.quantity}" disabled></td>
-								<td class="center"><input type="text" value="${order.product.price*order.quantity}" disabled></td>
-								<c:set var= "sum" value="${sum + order.product.price*order.quantity}"/>
+							
+								<td><input type="text" value="${orderList.userId}" disabled="disabled"></td>
+								<td><input type="text" value="${orderList.purchaseDate}" disabled="disabled"></td>
+								<td><input type="text" value="${orderList.deliveryState}" disabled="disabled"></td>
+								<td><input type="text" value="${orderList.refundState}" disabled="disabled"></td>
+								<td><input name="deliveryAddr" type="text" value="${orderList.addrDelivery}" ></td>
+								<td><input type="text" value="${orderList.totalPrice}" disabled="disabled"></td>
 
-							</tr>
-						</c:forEach>	
+							</tr>		
 						</tbody>
-						<tr>
-						<td>총가격 </td><td><c:out value="${sum}"/>원</td>
-						</tr>
 					</table>
-					<input id="back" type="button" value="뒤로가기" style="float: right;">
-					</form>
+					<input type="submit" value="배송지변경" name="addrUpdate" style="float: right;">
+								<input name="orderNo" type="hidden" value="${orderList.orderNo}">
+				</form>
   				</div>
   			</div>
 
@@ -118,7 +108,7 @@ height:50%;
    
    </div>
 <%@include file="footer.jsp" %>
-<script src="js/jquery-3.2.1.min.js"></script>
+
 <script src="styles/bootstrap4/popper.js"></script>
 <script src="styles/bootstrap4/bootstrap.min.js"></script>
 <script src="plugins/greensock/TweenMax.min.js"></script>
@@ -129,10 +119,13 @@ height:50%;
 <script src="plugins/easing/easing.js"></script>
 <script src="plugins/parallax-js-master/parallax.min.js"></script>
 <script src="js/cart.js"></script>
+
 <script>
-$("#back").click(function(){
-	location = "note?command=purUser&userId=id2";
-});
+// $("input[name=addrUpdate]").click(function(){
+// 	var orderNo = $("#orderNo").val();
+// 	var deliveryAddr=("#deliveryAddr").val();
+// 	location.href="note?command=purChangeAddr&orderNo="+orderNo+"&deliveryAddr="+deliveryAddr;
+// });
 </script>
 
 </body>

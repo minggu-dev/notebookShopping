@@ -47,7 +47,7 @@ public class UserDaoImpl implements UserDao {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				list.add(new Users(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), null, rs.getInt(7)));
+				list.add(new Users(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), null, rs.getInt(8)));
 			}
 		}finally {
 			DbUtil.dbClose(con, ps, rs);

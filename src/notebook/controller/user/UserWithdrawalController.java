@@ -15,17 +15,25 @@ import notebook.service.UserService;
  */
 public class UserWithdrawalController implements Controller {
 
-	@Override
-	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String userId = (String)request.getSession().getAttribute("id");
-		String password = request.getParameter("password");
-		ModelAndView mv = new ModelAndView(true, "note");
-		
-		if(userId == null || userId.equals("") || password == null || password.equals("")) {
-			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
-		}
-		
-		UserService.withdrawMember(userId, password);
-		return mv;
-	}
+   @Override
+   public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+      String adminId = (String)request.getSession().getAttribute("id");
+      String userId=request.getParameter("id");
+      String password = request.getParameter("password");
+      
+      ModelAndView mv;
+      if((adminId).equals("admin")) {
+          mv = new ModelAndView(true, "note?command=userAll");
+      }else {
+          mv = new ModelAndView(true, "note");
+      }
+      System.out.println(userId);
+      System.out.println(password);
+      if(userId == null || userId.equals("") || password == null || password.equals("")) {
+         throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
+      }
+      
+      UserService.withdrawMember(userId, password);
+      return mv;
+   }
 }

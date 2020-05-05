@@ -32,7 +32,7 @@ public class UserModifyController implements Controller {
 		user.setPwd(pwd);
 		
 		UserService.updateStatus(user);
-		ModelAndView mv = new ModelAndView(true, "마이페이지");
+		ModelAndView mv = new ModelAndView(true, "myPage.jsp");
 		return mv;
 	}
 

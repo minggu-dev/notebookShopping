@@ -21,7 +21,7 @@ public class UserModifyFormController implements Controller {
 		Users user = UserService.selectById(userId);
 		request.setAttribute("user", user);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("유저수정 폼으로");
+		mv.setViewName("infoUpdate.jsp");
 		
 		return mv;
 	}

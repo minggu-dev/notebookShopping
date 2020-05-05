@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
     
 <!DOCTYPE html>
 <html>
@@ -14,52 +15,10 @@
 <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="styles/cart.css">
 <link rel="stylesheet" type="text/css" href="styles/cart_responsive.css">
+<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src=js/jquery-3.2.1.min.js></script>
-  
-<body>
-
-<div class="super_container">
-
-  <jsp:include page="header.jsp" />
-  
-   
-   <!-- Home -->
-
-	<div class="home">
-		<div class="home_container" >
-			<div class="home_background" style="background-image:url(images/cart.jpg)"></div>
-			<div class="home_content_container">
-				<div class="container">
-					<div class="row">
-						<div class="col">
-							<div class="home_content">
-								<div class="breadcrumbs">
-									<ul>
-										<li><a href="index.html">Home</a></li>
-										<li>Q&A</li>
-										
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-<!-- ------------------------------------------------------------------- -->
-<!-- 여기서부터 -->
-<!-- ------------------------------------------------------------------- -->
-<!-- 여기서부터 -->
-<!-- ------------------------------------------------------------------- -->
-<!-- 여기서부터 -->
-
-  
   <!-- Bootstrap -->
-  <link href="css/css/bootstrap.min.css" rel="stylesheet">
   <style>
     #container {
       width: 70%;
@@ -116,19 +75,51 @@
       100% {color:red; font-weight: bold;} */
     }
   </style>
+  
+ 
 </head>
 <body>
+
+<div class="super_container">
+
+  <jsp:include page="header.jsp" />
+  
+   
+   <!-- Home -->
+
+	<div class="home">
+		<div class="home_container" >
+			<div class="home_background" style="background-image:url(images/cart.jpg)"></div>
+			<div class="home_content_container">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="note">
+								<div class="breadcrumbs">
+									<ul>
+										<li><a href="index.html">Home</a></li>
+										<li>Q&A</li>
+										
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<!-- ------------------------------------------------------------------- -->
+<!-- 여기서부터 -->
+<!-- ------------------------------------------------------------------- -->
+<!-- 여기서부터 -->
+<!-- ------------------------------------------------------------------- -->
+<!-- 여기서부터 -->
+
+	<div class="cart_info">
   <div id="container">
-    <div align="right">
-      <!-- Login 검증 -->
-      <!-- jstl의 if문은 else가 없어서 따로 검증해야함. -->
-      <c:if test="${id != null}">
-        <%-- < %@include file="loginOk.jsp" %> --%>
-      </c:if>
-      <c:if test="${id == null}">
-        <%-- <%@include file="login.jsp" %> --%>
-      </c:if>
-    </div>
    
     <div id="list">
       <b>게시판 (전체 글 ${totalCount})</b>
@@ -146,21 +137,6 @@
     </div>
      
      
-     
-     
-     
-     <!-- 
-     //글조회
-function fn_view(code){
-    
-    var form = document.getElementById("boardForm");
-    var url = "<c:url value='/board/viewContent.do'/>";
-    url = url + "?code=" + code;
-    
-    form.action = url;    
-    form.submit(); 
-}
-      -->
       
       
     <div>
@@ -171,8 +147,7 @@ function fn_view(code){
             <th width="10%">번호</th>
             <th width="25%">제목</th>
             <th width="10%">작성자</th>
-            <th width="15%">작성일</th>   
-            <th width="15%">상품번호</th>         
+            <th width="15%">작성일</th>          
             <th width="20%">조회</th>
           </tr>
         </thead>
@@ -180,56 +155,20 @@ function fn_view(code){
      	
         
           <c:forEach var="qna" items="${list}" varStatus="status">
-              <form id="detail${status.count}" action="note?command=qnaDetail" method="post">
             <tr>
-              <input type="hidden" id="pwd${status.count }" name="password" value="${qna.password }"> 
-              <input type="hidden" id="qnaNo" name="qnaNo" value="${qna.qnaNo}"> 
-              <td >${qna.answerState}</td>
-              <td  value="${qna.qnaNo}">${qna.qnaNo}</td>
-              <td id="subject"><a href="#" onclick="checkPwd(${status.count});">${qna.subject}</a></td>
-              <td >${qna.userId}</td>             
+              <td>${qna.answerState == 1 ? '미답변' : '답변완료'}</td>
+              <td>${fn:length(list) - status.count + 1}</td>
+              <td><a href="#" onclick="checkPwd(${qna.qnaNo});">${qna.subject}</a></td>
+              <td>${qna.userId}</td>             
               <td>${qna.createDate}</td>
-              <td >${qna.product.serialNum}</td>
-              <td >${qna.viewCnt}</td> 
-               
-               </tr>
-
-            <tr>
-
-<%--            <input type="hidden" name="qnaNo" value="${qna.qnaNo}"> --%>
-<%--             <input type="hidden" name="password" value="${qna.password }"> --%>
-<%--             <input type="hidden" name="createDate" value="${qna.createDate }"> --%>
-<%--             <input type="hidden" name="userId" value="${qna.userId }"> --%>
-            <input type="hidden" name="serialNum" id="serialNum" value="${qna.product.serialNum }">
-            
-<%--             <input type="hidden" name="subject" value="${qna.subject }"> --%>
-<%--             <input type="hidden" name="content" value="${qna.content }"> --%>
-        
-			 </form> 
-                
+              <td>${qna.viewCnt}</td> 
+ 			 </tr>
+           <input type="hidden" id="pwd${qna.qnaNo}" name="password" value="${qna.password }"> 
           </c:forEach>
         
           
         </tbody>
       </table>
-      
-<!-- <nav aria-label="..." style="text-align: center;"> -->
-<!--  		 <ul class="pagination"> -->
-<!--              <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li> -->
-<!-- 	         <li class="page-item active"><a class="page-link" href="#">1</a></li> -->
-<!-- 	         <li class="page-item"><a class="page-link" href="#">2</a></li> -->
-<!-- 	         <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-<!-- 	         <li class="page-item"><a class="page-link" href="#">4</a></li> -->
-<!-- 	         <li class="page-item"><a class="page-link" href="#">5</a></li> -->
-<!-- 	         <li class="page-item"><a class="page-link" href="#">6</a></li> -->
-<!-- 	         <li class="page-item"><a class="page-link" href="#">7</a></li> -->
-<!-- 	         <li class="page-item"><a class="page-link" href="#">8</a></li> -->
-<!-- 	         <li class="page-item"><a class="page-link" href="#">9</a></li> -->
-<!-- 	         <li class="page-item"><a class="page-link" href="#">10</a></li> -->
-<!-- 	         <li class="page-item"><a class="page-link" href="#">Next</a></li> 		  -->
-<!--    		 </ul> -->
-<!-- 	</nav> -->
- 	
   
    
     </div>
@@ -241,8 +180,11 @@ function fn_view(code){
  <br>
  <!--  -->
  <% String myId =(String)session.getAttribute("userId"); %>
- 
- 
+  <form id="detail${status.count}" action="note?command=qnaDetail" method="post">
+  	<input type="hidden" name="flag" value="1">
+	<input type="hidden" name="qnaNo" value="${qna.qnaNo}"> 
+ </form> 
+ </div>
  <!-- Footer -->
 	
 <jsp:include page="footer.jsp"/>
@@ -252,47 +194,25 @@ function fn_view(code){
     <script>
           
 
- 			function checkPwd(count){
- 			var pass = $("#pwd"+count).val();
- 			alert(pass);
- 				
- 				var pwd = prompt("비밀번호를 입력하세요.","비밀번호 ");
- 				if(pwd != pass ){
- 					alert("비밀번호가 잘못되었습니다.");
- 					return;
- 				}else{
- 					document.getElementById('detail'+count).submit();
- 				}
- 			}
+
+ 	function checkPwd(count){
+		var pass = $("#pwd" + count).val();
+		$('input[name=qnaNo]').val(count);
+		if(typeof pass != 'undefined' && pass != ""){
+			var pwd = prompt("비밀번호를 입력하세요.","비밀번호 ");
+			if(pwd != pass ){
+				alert("비밀번호가 잘못되었습니다.");
+				return false;
+			}
+		}
+		$('#detail').submit();
+		return false;
+	}
  	 
-          </script>
+ </script>
 
 <script>
 
-
-
-// function do(){
-// 	//var x = document.forms["detail"];
-// 	//alert("value"+ x.elements["#pwd"].value);
-// 	$("form[id=detail]").submit();	
-// }
-
-	
-	
-<%-- 	var myId = <%=myId%>; --%>
-// 	console.log(myId);
-// 	alert(myId);
-// 	$("#subject").click(function(){
-// 		alert(myId);
-// 	})
-// })
-
-// $(document).ready(function(){
-// 	  $("a").click(function(){
-// 	    alert("Value: " + document.getElementById("qnaNo").value );
-// 	  });
-// 	});
-	
 	 $(document).ready(function(){
 
 			function checkPwd(){
@@ -306,19 +226,6 @@ function fn_view(code){
 					document.getElementById('detail${status.count}').submit();
 				}
 			}
-	 }
-
-	
-		$("td[id=subject]").click(function(){
-		var password = $('input[type=hidden][name=password]').val();
-		alert(password);
-		var pwd = prompt("비밀번호를 입력하세요.","비밀번호 ");
-		if(pwd === password ){
-			document.getElementById('detail${status.count}').submit();
-		}
-		else{
-			alert("비밀번호가 잘못되었습니다.");
-		}
 	});
 		
 		

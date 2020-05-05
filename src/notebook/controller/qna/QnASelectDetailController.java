@@ -21,12 +21,13 @@ public class QnASelectDetailController implements Controller {
 			throw new NotFoundException("해당 게시물의 정보가 존재하지 않습니다.");
 		}
 		String flag = request.getParameter("flag");
-		boolean state = flag == null ? false : true;
+		boolean state = (flag == null || flag.equals("")) ? false : true;
 		
 		BoardQnA board = QnAService.selectByNo(Integer.parseInt(qnaNo), state);
 		
 		request.setAttribute("board", board);
-		ModelAndView mv = new ModelAndView(false, "게시물 상세보기");//게시물 상세보기 폼
+		
+		ModelAndView mv = new ModelAndView(false, "qnaRead.jsp?");//게시물 상세보기 폼
 		return mv;
 	}
 

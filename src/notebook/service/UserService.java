@@ -54,8 +54,11 @@ public class UserService {
 		return user;
 	}
 	
-	public static Users selectByPhone(String phone) throws SQLException{
+	public static Users selectByPhone(String phone) throws SQLException, NotFoundException{
 		Users user = userDao.selectByPhone(phone);
+		if(user == null) {
+			throw new NotFoundException("찾고자 하는 회원 정보가 없습니다.");
+		}
 		return user;
 	}
 	

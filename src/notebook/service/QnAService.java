@@ -24,13 +24,11 @@ public class QnAService {
 	 * @throws NotFoundException
 	 */
 	public static BoardQnA selectByNo(int qnaNo, boolean flag) throws SQLException, NotFoundException{
-		
 		if(flag) {
 			if(bd.increamentView(qnaNo) == 0) {
 				throw new SQLException("조회수 증가에 오류가 발생했습니다.");
 			}
 		}
-		
 		BoardQnA boardQna = bd.selectByNo(qnaNo);
 		if(boardQna == null) {
 			throw new NotFoundException("해당하는 게시물 정보를 불러 올 수 없습니다.");

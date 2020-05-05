@@ -26,7 +26,6 @@ public class QnASelectProductController implements Controller {
 		
 		List<BoardQnA> list = QnAService.selectBySerialNum(serialNum);
 		request.setAttribute("list", list);
-		
 		ModelAndView mv = new ModelAndView(false, "qna.jsp");
 		return mv;
 	}

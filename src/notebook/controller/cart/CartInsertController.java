@@ -35,7 +35,7 @@ public class CartInsertController implements Controller {
 		
 		CartService.insert(cart);
 		
-		ModelAndView mv = new ModelAndView(true, "cart.jsp");
+		ModelAndView mv = new ModelAndView(true, "note?command=cartMyCart");
 		
 		return mv;
 	}

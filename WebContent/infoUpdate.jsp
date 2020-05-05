@@ -26,8 +26,7 @@
 </script>
 </head>
 <body>
-<%@include file="myHeader.jsp" %>
-
+<jsp:include page="header.jsp"/>
 			<section id="one" class="wrapper style1">
 				<div class="inner">
 					<article class="feature left">

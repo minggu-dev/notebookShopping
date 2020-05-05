@@ -28,7 +28,7 @@ public class PurSelectUserController implements Controller {
 		List<OrderInfo> list = PurchaseService.selectById(userId);
 		request.setAttribute("list", list);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("유저 구매내역 보기");
+		mv.setViewName("orderInfo.jsp");
 		response.getWriter().print(list);
 		return mv;
 	}

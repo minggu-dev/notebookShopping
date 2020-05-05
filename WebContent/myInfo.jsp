@@ -39,7 +39,7 @@
 
 						
 							
-								<tr><td>아이디</td><td><input type="text" disabled="disabled" value="${myinfo.userId }"></td></tr>
+								<tr><td>아이디</td><td><input id="id" type="text" disabled="disabled" value="${myinfo.userId }"></td></tr>
 								<tr><td>이름</td><td><input type="text" disabled="disabled" value="${myinfo.name }"></td></tr>
 								<tr><td>주소</td><td><input type="text" disabled="disabled" value="${myinfo.addr }"></td></tr>
 								<tr><td>전화번호</td><td><input type="text" disabled="disabled" value="${myinfo.phone }"></td></tr>
@@ -84,8 +84,8 @@
  	$("button[name=delete]").click(function(){
  		confirm("정말 탈퇴하시겠습니까 ?");
  		var pwd = prompt("비밀번호를 입력하세요", "비밀번호입력란");
- 		
- 		location = "note?command=userWithdraw&password="+pwd;
+ 		var id = $("#id").val();
+ 		location = "note?command=userWithdraw&password="+pwd+"&id="+id;
  		
  	});
  	

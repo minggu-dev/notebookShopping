@@ -24,7 +24,7 @@ public class QnADeleteController implements Controller {
 		QnAService.delete(Integer.parseInt(qnaNo), userId);
 		ModelAndView mv = new ModelAndView();
 		mv.setRedirect(true);//true 이면 Redirect로 간다.
-		mv.setViewName("qna게시판?");//이동할 url
+		mv.setViewName("note?command=qnaAll");//이동할 url
 		return mv;
 	}
 

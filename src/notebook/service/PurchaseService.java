@@ -33,7 +33,7 @@ public class PurchaseService {
 		if(info == null) {
 			throw new NotFoundException("주문 내역을 찾을 수 없습니다.");
 		}
-		if(info.getUserId().equals(userId)) {
+		if(!info.getUserId().equals(userId)) {
 			throw new NotFoundException("구매자만 변경할 수 있습니다.");
 		}
 		return info;

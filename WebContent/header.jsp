@@ -55,7 +55,7 @@
 										<a href="login.jsp">Login</a>
 									</li>
 									<li id="register">
-										<a href="register.jsp">JoinUs</a>
+										<a href="note?command=questionAll">JoinUs</a>
 									</li>
 									
 									<li id="logout">

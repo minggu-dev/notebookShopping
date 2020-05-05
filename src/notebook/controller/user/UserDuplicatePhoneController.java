@@ -21,21 +21,20 @@ public class UserDuplicatePhoneController implements Controller{
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String phone = request.getParameter("phone");
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("status", 2);
 		request.setAttribute("jsonObj", jsonObj);
 		
 		if(phone == null || phone.equals("")) {
-			request.setAttribute("jsonObj", jsonObj);
+			jsonObj.put("status", 2);
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다");
 		}
+		
 		try {
-			if(UserService.selectByPhone(phone) != null) {
-				throw new DuplicateException("이미 등록된 전화번호 입니다.");
-			}
+			UserService.selectByPhone(phone);
+			jsonObj.put("status", 1);
 		}catch (Exception e) {
-			throw new Exception(e.getMessage());
+			jsonObj.put("status", 0);
 		}
-		jsonObj.replace("status", 1);
+		
 		return null;
 	}
 }

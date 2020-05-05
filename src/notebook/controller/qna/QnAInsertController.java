@@ -22,10 +22,9 @@ public class QnAInsertController implements Controller {
 		String subject = request.getParameter("subject");
 		String serialNum = request.getParameter("serialNum");
 		String content = request.getParameter("content");
-		String password = request.getParameter("password");
+		String password = request.getParameter("password");	
 		
-		if(userId == null || userId.equals("") || subject == null || subject.equals("") ||serialNum == null || serialNum.equals("") || 
-				content == null || content.equals("") || password == null || password.equals("")) {
+		if(userId == null || userId.equals("") || subject == null || subject.equals("") ||content == null || content.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
 		
@@ -36,7 +35,11 @@ public class QnAInsertController implements Controller {
 			
 		ModelAndView mv = new ModelAndView();//false이면 forward true 이면 redirect
 		mv.setRedirect(true);
-		mv.setViewName("게시물 전체보기");
+		if(serialNum == null || serialNum.equals("")) {
+			mv.setViewName("note?command=qnaAll");
+		}else {
+			mv.setViewName("note?command=qnaProduct&serialNum="+serialNum);
+		}
 		return mv;
 	}
 

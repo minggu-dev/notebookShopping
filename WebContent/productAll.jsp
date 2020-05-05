@@ -12,18 +12,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Sublime project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css"
-	href="styles/bootstrap4/bootstrap.min.css">
-<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-<link rel="stylesheet" type="text/css"
-	href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-<link rel="stylesheet" type="text/css"
-	href="plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="plugins/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="styles/categories.css">
 <link rel="stylesheet" type="text/css" href="styles/categories_responsive.css">
+<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
 
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="styles/bootstrap4/popper.js"></script>
@@ -42,12 +38,6 @@
 <title>All</title>
 
 <style>
-.product_image:hover{
-}
-.product_image>img:hover {
-	visibility: visible;
-}
-
 .product_pagination{
 	text-align: center;
 }
@@ -93,7 +83,6 @@
 </style>
 
 <script>
-
 $(function(){
 	$('.page_cnt').each(function(){
 		if($(this).children().html() == <%=request.getAttribute("page")%>){
@@ -127,7 +116,6 @@ $(function(){
 <jsp:include page="header.jsp"></jsp:include>
 	
 	<!-- Home -->
-
 	<div class="home">
 		<div class="home_container">
 			<div class="home_background" style="background-image:url(images/test.jpg)"></div>

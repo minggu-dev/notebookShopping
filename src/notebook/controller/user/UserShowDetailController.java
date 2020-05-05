@@ -27,7 +27,7 @@ public class UserShowDetailController implements Controller {
 		request.setAttribute("user", user);
 		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("마이페이지");
+		mv.setViewName("myInfo.jsp");
 		return mv;
 	}
 }

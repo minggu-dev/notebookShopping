@@ -32,7 +32,7 @@ public class UserJoinController implements Controller {
 				|| queNo.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
-		ModelAndView mv = new ModelAndView(true, "note");
+		ModelAndView mv = new ModelAndView(true, "login.jsp");
 		Questions question = new Questions();
 		question.setQueNo(Integer.parseInt(queNo));
 		Users user = new Users(userId, pwd, name, addr, phone, answer, question);

@@ -54,7 +54,7 @@ public class BoardQnADaoImpl implements BoardQnADao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM board_qna where serialNum = ?";
+		String sql = "SELECT * FROM board_qna where serialNum = ? order by qna_no desc";
 		List<BoardQnA> list = new ArrayList<BoardQnA>();
 		try {
 			con = DbUtil.getConnection();
@@ -70,7 +70,9 @@ public class BoardQnADaoImpl implements BoardQnADao {
 				String password = rs.getString("password");
 				int viewCnt = rs.getInt("view_cnt");
 				int answerState = rs.getInt("answer_state");
-				list.add(new BoardQnA(qnaNo, userId, subject, null, createDate, password, viewCnt, answerState, null));
+				Product pro = new Product();
+				pro.setSerialNum(serialNum);
+				list.add(new BoardQnA(qnaNo, userId, subject, null, createDate, password, viewCnt, answerState, pro));
 			}
 		}finally {
 			DbUtil.dbClose(con, ps, rs);
@@ -83,7 +85,7 @@ public class BoardQnADaoImpl implements BoardQnADao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM board_qna";
+		String sql = "SELECT * FROM board_qna order by qna_no desc";
 		List<BoardQnA> list = new ArrayList<BoardQnA>();
 		try {
 			con = DbUtil.getConnection();
@@ -169,7 +171,8 @@ public class BoardQnADaoImpl implements BoardQnADao {
 	public int increamentView(int qnaNo) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "UPDATE board_qna SET review_cnt = review_cnt + 1 WEHRE qna_no = ?";
+		String sql = "UPDATE board_qna SET view_cnt = view_cnt + 1 WHERE qna_no = ?";
+
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();

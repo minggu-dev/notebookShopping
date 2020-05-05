@@ -30,6 +30,19 @@
 <link rel="stylesheet" href="css/style.css">
  
     
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/greensock/TweenMax.min.js"></script>
+<script src="plugins/greensock/TimelineMax.min.js"></script>
+<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="plugins/greensock/animation.gsap.min.js"></script>
+<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="js/custom.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 
@@ -49,8 +62,8 @@
 							<div class="home_content">
 								<div class="breadcrumbs">
 									<ul>
-										<li><a href="index.jsp">Home</a></li>
-										<li><a href="qnaList.jsp">Q&A</a></li>
+										<li><a href="note">Home</a></li>
+										<li><a href="note?command=qnaAll">Q&A</a></li>
 										<li>내 게시물</li>
 									</ul>
 								</div>
@@ -62,8 +75,6 @@
 		</div>
 	</div>
 
-<br>
-<br>
 <br>
 <br>
 
@@ -82,6 +93,7 @@
 
 
 
+	<div class="cart_info">
     <div align="center">
 <%--         <input type="hidden" name="userId" value="${list.userId}"> --%>
 <%--         <input type="hidden" name="qnaNo" value="${list.qnaNo}"> --%>
@@ -136,6 +148,7 @@
       	   </form>
             
            <form action="note?command=qnaDelete" method="post" onSubmit="return confirm('정말 삭제하시겠습니까?');">
+           <input type="hidden" name="qnaNo" value="${b.qnaNo}">
 			<input type="submit"  class="btn btn-default" value="삭제하기" id ="qnaDelete" name="qnaDelete">
       	   </form>
         </div>
@@ -143,20 +156,8 @@
         </tr>
         
       </table>
- 
- 
-  <script>
- jQuery(document).ready(function() {
-
-
-
-	if(<%=session.getAttribute("userId")%> == null) { 
-	  alert("게시판을 이용하시려면 로그인하셔야 합니다."); 
-	 location.href="login.jsp" 
-	}
-
-});
- </script>
+ <br><br><br><br><br>
+ </div>
       
 <!--       <script> -->
 

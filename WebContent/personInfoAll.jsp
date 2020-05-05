@@ -20,6 +20,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+     <script src=js/jquery-3.2.1.min.js></script>
   </head>
   <body>
   	<div class="header">
@@ -69,10 +70,10 @@
 								<th>이름</th>
 								<th>주소</th>
 								<th>전화번호</th>
-								<th>질문내용</th>
-								<th>질문답변</th>
+								<th>질문</th>
+								<th>답변</th>
 								<th>활동상태</th>
-								<th>수정하기</th>
+								<th>회원비활성화</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -81,14 +82,14 @@
 							<tr class="odd gradeX">
 								<td><c:out value="${status.count}" /></td>
 								<td><c:out value="${personInfo.userId}"  /></td>
-								<td><c:out value="${personInfo.pwd}" /></td>
+								<td><c:out value="${personInfo.pwd}"  /></td>
 								<td><c:out value="${personInfo.name}"  /></td>
 								<td class="center"><c:out value="${personInfo.addr}" /></td>
 								<td class="center"><c:out value="${personInfo.phone}"  /></td>
 								<td>${personInfo.question}</td>
-								<td><c:out value="${personInfo.answer}" /></td>
-								<td><input type="text" value="${personInfo.state}"  /></td>
-								<td><button>수정</button></td>			
+								<td>${personInfo.answer}</td>
+								<td>${personInfo.state}</td>
+								<td><button name="state" value="${personInfo.userId}" id="${personInfo.pwd}">비활성화</button></td>			
 							</tr>
 						</c:forEach>
 						
@@ -114,7 +115,7 @@
          </div>
       </footer>
 
-      <link href="vendors/datatables/dataTables.bootstrap.css" rel="stylesheet" media="screen">
+  
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
@@ -129,5 +130,13 @@
 
     <script src="js/custom.js"></script>
     <script src="js/tables.js"></script>
+    <script>
+    	$("button[name=state]").click(function(){
+    		alert(1);
+    		var id = $(this).val();
+    		var password= $(this).attr("id");
+    		location="note?command=userWithdraw&id="+id+"&password="+password;
+    	});
+    </script>
   </body>
 </html>

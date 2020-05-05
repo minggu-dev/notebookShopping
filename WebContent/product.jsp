@@ -12,19 +12,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Sublime project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css"
-	href="styles/bootstrap4/bootstrap.min.css">
-<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-<link rel="stylesheet" type="text/css"
-	href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-<link rel="stylesheet" type="text/css"
-	href="plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="plugins/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="styles/categories.css">
-<link rel="stylesheet" type="text/css"
-	href="styles/categories_responsive.css">
+<link rel="stylesheet" type="text/css" href="styles/categories_responsive.css">
 <link rel="stylesheet" type="text/css" href="styles/cart.css">
 <link rel="stylesheet" type="text/css" href="styles/cart_responsive.css">
 <title>dd</title>
@@ -91,7 +85,7 @@ $(function(){
 					var quantity = sessionStorage.getItem('cart:' + $('form > input[name=serialNum]').val());
 					sessionStorage.setItem('cart:' + $('form > input[name=serialNum]').val(),parseInt($('.quantity').val()) + parseInt(quantity));
 				}
-				location.href="cart.jsp";
+				location.href="note?command=cartMyCart";
 			}else{
 				$('input[name=quantity]').val($('.quantity').val());
 				$('form[name=cartform]').submit();
@@ -285,9 +279,6 @@ function formSubmit(){
 					alt="">
 			</div>
 			<br>
-			<div class="product_image">
-				<img src="images/info.png" alt="">
-			</div>
 		</div>
 		<br> <br> <br>
 

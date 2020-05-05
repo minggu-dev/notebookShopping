@@ -35,16 +35,14 @@ public class AjaxServlet extends HttpServlet {
 		}else {
 			controller = map.get(key);
 		}
-		PrintWriter out = response.getWriter();
-
-		JSONObject jsonObj = new JSONObject();
 	
 		try {
 			controller.handleRequest(request, response);
 		} catch (Exception e) {
 			
 		}finally {
-			jsonObj = (JSONObject)request.getAttribute("jsonObj");
+			PrintWriter out = response.getWriter();
+			JSONObject jsonObj = (JSONObject)request.getAttribute("jsonObj");
 			out.print(jsonObj);
 		}
 	}

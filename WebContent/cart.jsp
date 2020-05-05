@@ -13,14 +13,12 @@
 <meta name="description" content="Sublime project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
-<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="plugins/font-awesome-4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="styles/cart.css">
 <link rel="stylesheet" type="text/css" href="styles/cart_responsive.css">
 
 
 <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/themify-icons.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
@@ -31,6 +29,28 @@
     <link rel="stylesheet" href="css/ie7.css" type="text/css">
     <link rel="stylesheet" href="css/themify-icons.css" type="text/css">
     
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/greensock/TweenMax.min.js"></script>
+<script src="plugins/greensock/TimelineMax.min.js"></script>
+<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="plugins/greensock/animation.gsap.min.js"></script>
+<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="js/cart.js"></script>
+
+ <!-- Js Plugins -->
+    <script src="js/js/jquery-ui.min.js"></script>
+    <script src="js/js/jquery.countdown.min.js"></script>
+    <script src="js/js/jquery.nice-select.min.js"></script>
+    <script src="js/js/jquery.zoom.min.js"></script>
+    <script src="js/js/jquery.dd.min.js"></script>
+    <script src="js/js/jquery.slicknav.js"></script>
+    <script src="js/js/owl.carousel.min.js"></script>
+    <script src="js/js/main.js"></script>
+	<script src="js/js/ie7.js"></script>
 
 
 </head>
@@ -100,6 +120,7 @@ button:hover {
 	<h1>dddddddddddd</h1>
 	<!-- Cart Info -->
 	<!-- Shopping Cart Section Begin -->
+	<div class="cart_info">
     <section class="shopping-cart spad">
         <div class="container">
             <div class="row">
@@ -219,13 +240,7 @@ button:hover {
 									 </div>
 									 </li>
 									 </ul>
-									 
-									 
-								</div>
-								
-							
-							
-							
+							</div>
 						</div>
 						</form>
 					</div>
@@ -259,77 +274,7 @@ button:hover {
 					</div>
 				</div>			
 			</div>
-		<!-- </div>	 -->	
-	<!-- </div>  -->
-
-	<!-- Footer -->
-	<!-- <div class="footer_overlay"></div>
-	<footer class="footer"">
-		<div class="footer_background" style="background-image:url(images/footer.jpg); position:absolute; bottom: 0px;"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
-						<div class="footer_logo"><a href="#">Sublime.</a></div>
-						<div class="copyright ml-auto mr-auto">Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</div>
-					</div>
-				</div>
-			</div>
 		</div>
-	</footer> -->
-		<!-- <div class="footer_overlay""></div>
-	<footer class="footer" style="background-image:url(images/footer.jpg);background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center center; height:120px; position: fixed; bottom: 0px;">
-		
-		<div class="container" >
-			<div class="row">
-				<div class="col">
-					<div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
-						<div class="footer_logo"><a href="index.html" style="font-size: 20px; position: left;">홈</a></div>
-						<div class="copyright ml-auto mr-auto">Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> <span style="font-size: 20px">경기도 성남시 판교 유스페이스 B동 </span><i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">어디로 갈까</a>
-Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.ddddd</div>
-						
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>  -->
-		
-	   
-
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="styles/bootstrap4/popper.js"></script>
-<script src="styles/bootstrap4/bootstrap.min.js"></script>
-<script src="plugins/greensock/TweenMax.min.js"></script>
-<script src="plugins/greensock/TimelineMax.min.js"></script>
-<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="plugins/greensock/animation.gsap.min.js"></script>
-<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="plugins/parallax-js-master/parallax.min.js"></script>
-<script src="js/cart.js"></script>
-<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-
-
-
- <!-- Js Plugins -->
-    <script src="js/js/jquery-3.3.1.min.js"></script>
-    <script src="js/js/bootstrap.min.js"></script>
-    <script src="js/js/jquery-ui.min.js"></script>
-    <script src="js/js/jquery.countdown.min.js"></script>
-    <script src="js/js/jquery.nice-select.min.js"></script>
-    <script src="js/js/jquery.zoom.min.js"></script>
-    <script src="js/js/jquery.dd.min.js"></script>
-    <script src="js/js/jquery.slicknav.js"></script>
-    <script src="js/js/owl.carousel.min.js"></script>
-    <script src="js/js/main.js"></script>
-	<script src="js/js/ie7.js"></script>
-
-
 
 <script language='javascript'>
 
@@ -339,9 +284,6 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.ddd
   //alert('테스트');
 	
      location.href = "Delete?productName=" + 상품이름;   //get방식으로 삭제할아이디를 넘김 */
-
-     
-
 
  $(document).ready(function() {
   $(".content").hide(); //content 클래스를 가진 div를 표시/숨김(토글)
@@ -353,7 +295,6 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.ddd
   var total;
   var sub_total;
  
-  
   var amt = Number();
   var qt = Number(0);
   var money = Number();
@@ -448,12 +389,8 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.ddd
 			data:"id="+ id,
 			success: function(arr){
 				$('#addr').val(arr);
-				
 			}
-			
 		}) */
-				
-		
 	}); 
 	
 	
@@ -481,13 +418,10 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.ddd
 	  //$(this).next(".content").slideToggle(100);
 	  $('input[name=newAddr]').slideToggle(100);
   });
-   
-  
-  
 });
 
 </script>
-
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 
 

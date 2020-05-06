@@ -173,4 +173,10 @@
 		<input type="hidden" name="qnaNo" value="">
 		<input type="hidden" name="flag" value="1">
 	</form> 
+	
+	<script>
+		if(<%=session.getAttribute("id") == null%>){
+			$('#qnaWrite').hide();
+		}
+	</script>
 </html>

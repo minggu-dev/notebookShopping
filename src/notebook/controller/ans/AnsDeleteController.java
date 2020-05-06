@@ -24,7 +24,7 @@ public class AnsDeleteController implements Controller {
 		if(ansNo == null || ansNo.equals("") || qnaNo == null || qnaNo.equals("") || userId==null || userId.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
-		if(userId.equals("admin")) {
+		if(!userId.equals("admin")) {
 			throw new NotFoundException("관리자만 가능합니다.");
 		}
 		AnswerService.delete(Integer.parseInt(ansNo), Integer.parseInt(qnaNo));
@@ -33,7 +33,7 @@ public class AnsDeleteController implements Controller {
 		mv.setRedirect(true);
 		
 		//qnaNo가지고 가야한다
-		mv.setViewName("게시물 상세보기");
+		mv.setViewName("note?command=qnaDetail&qnaNo="+qnaNo);
 		return mv;
 	}
 

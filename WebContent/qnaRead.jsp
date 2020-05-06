@@ -51,6 +51,23 @@ $(function(){
 		$('#qnaUpdate').hide();
 		$('#qnaDelete').hide();
 	}
+	
+		 $.ajax({
+			 url:"ajax",
+			 data:"command=ansSelect&qnaNo=" + $('input[name=qnaNo]').val(),
+			 dataType: "json",
+			 success : function(jsonObj){
+				 $.each(jsonObj,function(index,item){
+					var trhtml = "";
+					trhtml += '<tr height="100"><th style="width:10%" name="minho"></th><td colspan="5" name="content">' + item.content + '</td>';
+				    trhtml += '</tr>';
+				    $('table[name=minotest]').append(trhtml);
+				 });
+			 },error : function(e){
+				 alert(e);
+			 }
+		 })
+		 
 })
 
 </script>
@@ -163,6 +180,16 @@ $(function(){
       	   </form>
         </div>
         </td>
+        </tr>
+        
+      </table>
+      <br>
+      <br>
+      <br>
+      <!-- 댓글달기 댓글보기  -->
+      <table class="table table-striped table-bordered contentForm" id="contentForm" name="minotest">
+    	<tr class="topAns">
+       	 <th colspan="6" valign="top">댓글내용</th>
         </tr>
         
       </table>

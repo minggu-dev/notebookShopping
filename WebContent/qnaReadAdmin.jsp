@@ -128,20 +128,20 @@
     
         
         <tr height="100" valign="top">
-        <th style="width:10%">댓글입력</th>
-        
-        <form action="note?command=ansInsert" method="post">
-         <c:set var = "b" value="${board}"/>
-   			<input type="hidden" value="${b.qnaNo}" name="qnaNo">
-        <td colspan="4"><textarea rows="5" id="commentContent" placeholder="댓글을 입력하세요." name="content" style="width:100%; height:100%; resize: none;"></textarea></td>
-        
-        
-        <td style="width:10%" align="right" valign="bottom">
-            <!— 로그인 검증 —>
-            
-            <input type="submit" style="width:100%; " class="btn btn-default" value="답글달기">
-       </td>
-       </form>  
+		        <th style="width:10%">댓글입력</th>
+		        
+		        <form action="note?command=ansInsert" method="post">
+		         <c:set var = "b" value="${board}"/>
+		   			<input type="hidden" value="${b.qnaNo}" name="qnaNo">
+		        <td colspan="4"><textarea rows="5" id="commentContent" placeholder="댓글을 입력하세요." name="content" style="width:100%; height:100%; resize: none;"></textarea></td>
+		        
+		        
+		        <td style="width:10%" align="right" valign="bottom">
+		            <!— 로그인 검증 —>
+		            
+		            <input type="submit" style="width:100%; " class="btn btn-default" value="답글달기">
+		       </td>
+		       </form>  
        </tr>
         
         
@@ -165,18 +165,20 @@
  <br>
  <br>
  <br>
- 
+ <form action="note?command=ansDelete" method="post" name="ansDeleteForm">
+ 	<input type="hidden" name="qnaNo" value="${board.qnaNo}">
+ 	<input type="hidden" name="ansNo" value="">
+ </form>
  
   <script>
  jQuery(document).ready(function() {
 
 
 
-	if(<%=!"admin".equals(session.getAttribute("id"))%>) { 
-	  alert("관리자에게만 읽기 권한이 있습니다."); 
+if(<%=!"admin".equals(session.getAttribute("id"))%>) { 
+	  alert("관리자에게만 권한이 있습니다."); 
 	 location.href="note?command=qnaAll"; 
 	}
-
 });
  
  $(function(){
@@ -187,20 +189,23 @@
 		 success : function(jsonObj){
 			 $.each(jsonObj,function(index,item){
 				var trhtml = "";
-				trhtml += '<tr height="100"><th rowspan="2" style="width:10%" name="minho"></th><td rowspan="2" colspan="4" name="content">' + item.content + '</td>';
-			    trhtml += '<td style="width:10%" align="right" height="50%"><input type="button"class="btn btn-default" value="수정하기"></td></tr>';
-			    trhtml += '<tr><td align="right" style="background-color: rgba(0, 0, 0, 0.05);">';
-			    trhtml += '<input type="button" class="btn btn-default" value="삭제하기"></td></tr>';
+				trhtml += '<tr height="100"><th style="width:10%" name="minho"></th><td colspan="4" name="content">' + item.content + '</td>';
+			    trhtml += '<td align="right" style="background-color: rgba(0, 0, 0, 0.05);">';
+			    trhtml += '<input type="button" name="reviewDelete" class="btn btn-default" value="삭제하기"><input type="hidden" name="ansNo" value="' + item.ansNo + '"></td></tr>';
 			    $('#contentForm').append(trhtml);
 			 });
+			(function(){
+					$('.home').height(jsonObj.length * 102 + 1100);
+			})();
 		 },error : function(e){
 			 alert(e);
 		 }
 	 })
 	 
-	(function(){
-			$('.home').height(${fn:length(info.orderList) * 125} + 1400);
-	})();
+	 $('#contentForm').on('click','input[name=reviewDelete]', function(){
+		$('form[name=ansDeleteForm]>input[name=ansNo]').val($(this).siblings('input[name=ansNo]').val());
+		$('form[name=ansDeleteForm]').submit();
+	 });
  });
  </script>
  

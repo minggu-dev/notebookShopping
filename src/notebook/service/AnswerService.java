@@ -14,9 +14,6 @@ public class AnswerService {
 	
 	public static void delete(int ansNo, int qnaNo) throws SQLException, NotFoundException, CannotModifyException{
 		int result = ans.delete(ansNo, qnaNo);
-		if(result == 0 ) {
-			throw new SQLException("삭제되지 않았습니다.");
-		}
 	}
 	
 	/**

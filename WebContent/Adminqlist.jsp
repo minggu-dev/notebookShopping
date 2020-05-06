@@ -48,11 +48,11 @@
                 <ul class="nav">
                 
                     <!-- Main menu -->
-                    <li><a href="index.jsp"><i class="glyphicon glyphicon-home"></i> 홈으로</a></li>
-                    <li class="current"><a href="productAll.jsp"><i class="glyphicon glyphicon-list"></i> 상품정보</a></li>
-                    <li class="current"><a href="personInfoAll.jsp"><i class="glyphicon glyphicon-list"></i> 회원정보</a></li>
+                    <li><a href="note"><i class="glyphicon glyphicon-home"></i> 홈으로</a></li>
+                    <li class="current"><a href="note?command=proAll"><i class="glyphicon glyphicon-list"></i> 상품정보</a></li>
+                    <li class="current"><a href="note?command=userAll"><i class="glyphicon glyphicon-list"></i> 회원정보</a></li>
                     <li class="current"><a href="note?command=qnaAll"><i class="glyphicon glyphicon-list"></i> Q&A</a></li>
-                    <li class="current"><a href="manager_order.jsp"><i class="glyphicon glyphicon-list"></i> 주문정보</a></li>
+                    <li class="current"><a href="note?command=purAll"><i class="glyphicon glyphicon-list"></i> 주문정보</a></li>
                          
                 </ul>
              </div>
@@ -87,13 +87,13 @@
 		            <tr class="odd gradeX" >
 		              <form id="ddd${status.count}" action="note?command=qnaDetail" method="post">
 		              <input type="hidden" id="qnaNo" name="qnaNo" value="${qna.qnaNo}"> 
-		              <td >${qna.answerState == 0 ? '답변대기' : '답변완료'}</td>
-		              <td  value="${qna.qnaNo}">${qna.qnaNo}</td>
+		              <td>${qna.answerState == 0 ? '답변대기' : '답변완료'}</td>
+		              <td value="${qna.qnaNo}">${qna.qnaNo}</td>
 		              <td id="subject"><a href="#" onclick="read(${status.count});">${qna.subject}</a></td>
-		              <td >${qna.userId}</td>             
+		              <td>${qna.userId}</td>             
 		              <td>${qna.createDate}</td>
-		              <td >${qna.product.serialNum}</td>		               
-		             <input type="hidden" name="serialNum" id="serialNum" value="${qna.product.serialNum }">
+		              <td>${qna.product.serialNum}</td>		               
+		             <input type="hidden" name="serialNum" id="serialNum" value="${qna.product.serialNum}">
 		            <input type="hidden" name="flag" value="${qna.viewCnt }">
 		            
 		
@@ -145,5 +145,14 @@
     <script src="vendors/datatables/dataTables.bootstrap.js"></script>
     <script src="js/custom.js"></script>
     <script src="js/tables.js"></script>
+    
+    <script>
+	(function(){
+		if(<%=!"admin".equals((String)session.getAttribute("id"))%>){
+			alert("관리자 전용 페이지 입니다.");
+			history.back();
+		}
+	})();
+	</script>
   </body>
 </html> 

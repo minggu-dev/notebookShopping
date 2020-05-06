@@ -50,7 +50,7 @@ public class BoardAnswerDaoImpl implements BoardAnswerDao {
 				throw new NotFoundException("답변을 찾을 수 없습니다.");
 			}
 			ps.close();
-			
+
 			//질문 답변 갯수 가져오기
 			sql = "SELECT * FROM board_answer WHERE qna_no = ?";
 			ps = con.prepareStatement(sql);
@@ -61,15 +61,11 @@ public class BoardAnswerDaoImpl implements BoardAnswerDao {
 			while(rs.next()) {
 				cnt++;
 			}
-			if(cnt == 0) {
-				con.rollback();
-				throw new NotFoundException("답변을 찾을 수 없습니다.");
-			}
 			ps.close();
 			
 			//답변이 없어질경우 답변상태 0으로 바꾸기
-			if(cnt == 1) {
-				 sql = "UPDATE board_answer SET answer_state = 0 WHERE qna_no = ?";
+			if(cnt == 0) {
+				 sql = "UPDATE board_qna SET answer_state = 0 WHERE qna_no = ?";
 				 ps = con.prepareStatement(sql);
 				 ps.setInt(1, qnaNo);
 				 if(ps.executeUpdate() == 0) {

@@ -137,5 +137,14 @@
 
     <script src="js/custom.js"></script>
     <script src="js/tables.js"></script>
+    
+    <script>
+	(function(){
+		if(<%=!"admin".equals((String)session.getAttribute("id"))%>){
+			alert("관리자 전용 페이지 입니다.");
+			history.back();
+		}
+	})();
+	</script>
   </body>
 </html>

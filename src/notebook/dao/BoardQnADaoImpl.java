@@ -100,7 +100,10 @@ public class BoardQnADaoImpl implements BoardQnADao {
 				String password = rs.getString("password");
 				int viewCnt = rs.getInt("view_cnt");
 				int answerState = rs.getInt("answer_state");
-				list.add(new BoardQnA(qnaNo, userId, subject, null, createDate, password, viewCnt, answerState, null));
+				Product p = new Product();
+				String serialNum = rs.getString("serialNum");
+				p.setSerialNum(serialNum);
+				list.add(new BoardQnA(qnaNo, userId, subject, null, createDate, password, viewCnt, answerState, p));
 			}
 		}finally {
 			DbUtil.dbClose(con, ps, rs);

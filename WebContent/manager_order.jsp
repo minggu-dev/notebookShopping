@@ -20,6 +20,9 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+    
+    
+    <script src=js/jquery-3.2.1.min.js></script>
   </head>
   <body>
   	<div class="header">
@@ -28,7 +31,7 @@
 	           <div class="col-md-5">
 	              <!-- Logo -->
 	              <div class="logo">
-	                 <h1><a href="">구매내역</a></h1>
+	                 <h1><a href="managerIndex.html">Bootstrap Admin Theme</a></h1>
 	              </div>
 	           </div>
 	        </div>
@@ -41,7 +44,7 @@
 		  	<div class="sidebar content-box" style="display: block;">
                 <ul class="nav">
                     <!-- Main menu -->
-                    <li><a href="note"><i class="glyphicon glyphicon-home"></i> 홈으로</a></li>
+                    <li><a href="index.jsp"><i class="glyphicon glyphicon-home"></i> 홈으로</a></li>
                     <li class="current"><a href="note?command=proAll"><i class="glyphicon glyphicon-list"></i> 상품정보</a></li>
                     <li class="current"><a href="note?command=userAll"><i class="glyphicon glyphicon-list"></i> 회원정보</a></li>
                     <li class="current"><a href="note?command=qnaAll"><i class="glyphicon glyphicon-list"></i> Q&A</a></li>
@@ -57,7 +60,7 @@
 
   			<div class="content-box-large">
   				<div class="panel-heading">
-					<div class="panel-title">Bootstrap dataTables</div>
+					<div class="panel-title">주문 전체정보</div>
 				</div>
   				<div class="panel-body">
   					<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
@@ -70,7 +73,8 @@
 								<th>환불상태</th>
 								<th>주소</th>
 								<th>총금액</th>
-								<th>수정하기</th>
+								<th>배송처리</th>
+								<th>환불처리</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -80,23 +84,47 @@
 								<td><c:out value="${order.orderNo}" /></td>
 								<td><c:out value="${order.userId}"  /></td>
 								<td><c:out value="${order.purchaseDate}" /></td>
-								<td><input type="text" value="${order.deliveryState}"></td>
-								<td class="center"><c:out value="${order.refundState}" /></td>
+								<c:choose>
+									<c:when test="${order.deliveryState==1}">
+										<td><select name="delivery" id="delivery">
+										<option></option>
+										<option value="1" selected="selected">배송전</option>
+										<option value="2">배송중</option>
+										<option value="3">배송완료</option>
+										</select></td>
+									</c:when>
+									<c:when test="${order.deliveryState==2}">
+										<td><select name="delivery">
+										<option></option>
+										<option value="1" >배송전</option>
+										<option value="2" selected="selected">배송중</option>
+										<option value="3">배송완료</option>
+										</select></td>
+									</c:when>
+									<c:otherwise>
+										<td><select name="delivery">
+										<option></option>
+										<option value="1" >배송전</option>
+										<option value="2" >배송중</option>
+										<option value="3" selected="selected">배송완료</option>
+										</select></td>
+									</c:otherwise>
+								</c:choose>
+								
+								<td>
+									<input name="refund_state" type="text" style="border: none; background-color: #FFFFFF" disabled value="${order.refundState==0 ? "" : '환불요청'}">
+								</td>
+
 								<td><c:out value="${order.addrDelivery}" /></td>
 								<td class="center"><c:out value="${order.totalPrice}"  /></td>
-								<td><button id="update">수정</button></td>
-											
+								<td><button name="delivery" value="${order.orderNo}" >배송수정</button></td>
+								<td><button name=refund value="${order.orderNo}">환불수정</button></td>			
 							</tr>
 						</c:forEach>
-						
-		
 						</tbody>
 					</table>
   				</div>
   			</div>
-
-
-
 		  </div>
 		</div>
     </div>
@@ -126,14 +154,47 @@
 
     <script src="js/custom.js"></script>
     <script src="js/tables.js"></script>
+    
+    
     <script>
-    $("#update").click(function(){
-    	var orderNo = $(this).next().text();
-    	var deliveryState = $(this).next().next().next().next().text();
-    	
+    $("button[name=delivery]").click(function(){
+//   	    var deliveryState;
+//     	$('.odd').each(function(i, element) {
+//     		deliveryState = $('#delivery').eq(i).val();
+// 		});
+//     	alert(deliveryState);
+  	    
+    	var orderNo = $(this).val();
+    	var deliveryState =$(this).parents('tr').find('select[name=delivery]').val();
+  	    
     	location="note?command=purDeliveryState&orderNo="+orderNo+"&deliveryState="+deliveryState;
     });
     
+    $("button[name=refund]").click(function(){
+    	var orderNo = $(this).val();
+ 
+    	location="note?command=purRefund&orderNo="+orderNo;
+    });
+    
+    $(function(){
+		var $refundState = $('input[name=refund_state]');
+		$refundState.each(function(){
+			if($(this).val() == '환불요청'){
+				$(this).parents('tr').find('button[name=refund]').show();
+			}
+		});
+    });
+    
     </script>
+    
+     <script>
+	(function(){
+		if(<%=!"admin".equals((String)session.getAttribute("id"))%>){
+			alert("관리자 전용 페이지 입니다.");
+			history.back();
+		}
+		$("button[name=refund]").hide();
+	})();
+	</script>
   </body>
 </html>

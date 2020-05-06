@@ -138,5 +138,14 @@
     		location="note?command=userWithdraw&id="+id+"&password="+password;
     	});
     </script>
+    
+    <script>
+	(function(){
+		if(<%=!"admin".equals((String)session.getAttribute("id"))%>){
+			alert("관리자 전용 페이지 입니다.");
+			history.back();
+		}
+	})();
+	</script>
   </body>
 </html>

@@ -210,5 +210,12 @@
 	}
  	 
  </script>
+ 
+ 
+	<script>
+		if(<%=session.getAttribute("id") == null%>){
+			$('#qnaWrite').hide();
+		}
+	</script>
 </body>
 </html>

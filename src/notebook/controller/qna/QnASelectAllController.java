@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
@@ -19,16 +20,18 @@ public class QnASelectAllController implements Controller {
 	 */
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-			List<BoardQnA> list = QnAService.selectAll();
-			
-			request.setAttribute("list", list);
-			
-			ModelAndView mv = new ModelAndView();
-			mv.setViewName("Adminqlist.jsp");
-			return mv;
+		HttpSession session = request.getSession();
+		List<BoardQnA> list = QnAService.selectAll();
 		
+		request.setAttribute("list", list);
+		
+		ModelAndView mv = new ModelAndView();
+		
+		if("admin".equals((String)session.getAttribute("id"))) {
+			mv.setViewName("Adminqlist.jsp");
+		}else {
+			mv.setViewName("qnaList.jsp");
+		}
+		return mv;
 	}
-	
-	
-
 }

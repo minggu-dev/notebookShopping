@@ -29,7 +29,7 @@ public class PurRefundController implements Controller {
 		}
 		
 		PurchaseService.refundOrder(Integer.parseInt(orderNo));
-		ModelAndView mv = new ModelAndView(false, "마이페이지");
+		ModelAndView mv = new ModelAndView(false, "note?command=purAll");
 		return mv;
 	}
 

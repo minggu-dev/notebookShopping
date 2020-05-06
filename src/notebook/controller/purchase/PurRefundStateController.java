@@ -28,7 +28,7 @@ public class PurRefundStateController implements Controller {
 		//true가 환불요청
 		boolean refund = req == null || req.equals("") ? false : true;
 		PurchaseService.refundState(Integer.parseInt(orderNo), refund, userId);
-		ModelAndView mv = new ModelAndView(false, "구매내역 상세 페이지");
+		ModelAndView mv = new ModelAndView(false, "note?command=purUser");
 		
 		return mv;
 	}

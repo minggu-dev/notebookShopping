@@ -19,6 +19,12 @@
 			$('#login').hide();
 			$('#register').hide();
 		}
+		
+		if("admin" == '<%=(String)session.getAttribute("id")%>'){
+			$('#adminPage').show();
+		}else{
+			$('#adminPage').hide();
+		}
 	});
 </script>
 </head>
@@ -65,6 +71,10 @@
 									<li id="myPage">
 										<a href="myPage.jsp">MyPage</a>
 									</li>
+									
+									<li id="adminPage">
+										<a href="managerIndex.jsp">AdminPage</a>
+									</li>
 								</ul>
 							</nav>
 							<div class="header_extra ml-auto">
@@ -80,7 +90,7 @@
 													c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5v-41h45.2l26.9,302.3C412.8,445.2,392.1,462,366.8,462z"/>
 											</g>
 										</svg>
-										<div>Cart <span>(0)</span></div>
+										<div>Cart</div>
 									</a>
 								</div>
 							</div>

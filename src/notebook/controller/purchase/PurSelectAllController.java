@@ -22,7 +22,7 @@ public class PurSelectAllController implements Controller {
 		List<OrderInfo> list = PurchaseService.selectAll();
 		request.setAttribute("list", list);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("관리자페이지");
+		mv.setViewName("manager_order.jsp");
 		return mv;
 	}
 

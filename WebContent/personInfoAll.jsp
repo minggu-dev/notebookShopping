@@ -21,6 +21,19 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
      <script src=js/jquery-3.2.1.min.js></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="vendors/datatables/js/jquery.dataTables.min.js"></script>
+
+    <script src="vendors/datatables/dataTables.bootstrap.js"></script>
+
+    <script src="js/custom.js"></script>
+    <script src="js/tables.js"></script>
   </head>
   <body>
   	<div class="header">
@@ -42,10 +55,10 @@
 		  	<div class="sidebar content-box" style="display: block;">
                 <ul class="nav">
                     <!-- Main menu -->
-                    <li><a href="index.jsp"><i class="glyphicon glyphicon-home"></i> 홈으로</a></li>
-                    <li class="current"><a href="productAll.jsp"><i class="glyphicon glyphicon-list"></i> 상품정보</a></li>
+                    <li><a href="note"><i class="glyphicon glyphicon-home"></i> 홈으로</a></li>
+                    <li class="current"><a href="note?command=proAll"><i class="glyphicon glyphicon-list"></i> 상품정보</a></li>
                     <li class="current"><a href="note?command=userAll"><i class="glyphicon glyphicon-list"></i> 회원정보</a></li>
-                    <li class="current"><a href="tables.html"><i class="glyphicon glyphicon-list"></i> Q&A</a></li>
+                    <li class="current"><a href="note?command=qnaAll"><i class="glyphicon glyphicon-list"></i> Q&A</a></li>
                     <li class="current"><a href="note?command=purAll"><i class="glyphicon glyphicon-list"></i> 주문정보</a></li>
                          
                 </ul>
@@ -117,19 +130,6 @@
 
   
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <!-- jQuery UI -->
-    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-
-    <script src="vendors/datatables/js/jquery.dataTables.min.js"></script>
-
-    <script src="vendors/datatables/dataTables.bootstrap.js"></script>
-
-    <script src="js/custom.js"></script>
-    <script src="js/tables.js"></script>
     <script>
     	$("button[name=state]").click(function(){
     		alert(1);

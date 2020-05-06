@@ -41,7 +41,7 @@ public class UserLoginController implements Controller {
 		ModelAndView mv = new ModelAndView(true, "note");
 		
 		if(userId.equals("admin")) {
-			mv.setViewName("관리자 페이지");
+			mv.setViewName("managerIndex.jsp");
 		}
 		
 		return mv;

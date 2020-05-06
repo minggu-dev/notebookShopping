@@ -53,4 +53,14 @@ public interface BoardQnADao {
 	 * @return
 	 */
 	public int increamentView(int qnaNo) throws SQLException;
+	
+	
+	/**
+	 * 관리자 게시물 삭제
+	 * @param qnaNo
+	 * @return
+	 * @throws SQLException
+	 */
+	public int admindelete(int qnaNo) throws SQLException;
+
 }

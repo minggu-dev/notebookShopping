@@ -1,7 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>°ü¸®ÀÚ ÆäÀÌÁö</title>
+<head>
+<meta charset="UTF-8">
+<title>ê´€ë¦¬ìž íŽ˜ì´ì§€</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- jQuery UI -->
     <link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet" media="screen">
@@ -25,7 +29,7 @@
 	           <div class="col-md-5">
 	              <!-- Logo -->
 	              <div class="logo">
-	                 <h1><a href="index.html">Bootstrap Admin Theme</a></h1>
+	                 <h1><a href="">Bootstrap Admin Theme</a></h1>
 	              </div>
 	           </div>
 	        </div>
@@ -38,11 +42,11 @@
 		  	<div class="sidebar content-box" style="display: block;">
                 <ul class="nav">
                     <!-- Main menu -->
-                    <li><a href="index.jsp"><i class="glyphicon glyphicon-home"></i> È¨À¸·Î</a></li>
-                    <li class="current"><a href="productAll.jsp"><i class="glyphicon glyphicon-list"></i> »óÇ°Á¤º¸</a></li>
-                    <li class="current"><a href="tables.html"><i class="glyphicon glyphicon-list"></i> È¸¿øÁ¤º¸</a></li>
-                    <li class="current"><a href="tables.html"><i class="glyphicon glyphicon-list"></i> Q&A</a></li>
-                    <li class="current"><a href="tables.html"><i class="glyphicon glyphicon-list"></i> ÁÖ¹®Á¤º¸</a></li>
+                    <li><a href="note"><i class="glyphicon glyphicon-home"></i> í™ˆìœ¼ë¡œ</a></li>
+                    <li class="current"><a href="note?command=proAll"><i class="glyphicon glyphicon-list"></i> ìƒí’ˆì •ë³´</a></li>
+                    <li class="current"><a href="note?command=userAll"><i class="glyphicon glyphicon-list"></i> íšŒì›ì •ë³´</a></li>
+                    <li class="current"><a href="note?command=qnaAll"><i class="glyphicon glyphicon-list"></i> Q&A</a></li>
+                    <li class="current"><a href="note?command=purAll"><i class="glyphicon glyphicon-list"></i> ì£¼ë¬¸ì •ë³´</a></li>
 
                    
                 </ul>
@@ -50,11 +54,11 @@
 		  </div>
 		  
 		  
-		  <!-- Å×ÀÌºí½ÃÀÛ -->
+		  <!-- í…Œì´ë¸”ì‹œìž‘ -->
 		  <div class="col-md-10">
 
   			<div class="content-box-large">
-  				<h1>°ü¸®ÀÚ ¸ÞÀÎÈ¨ÆäÀÌÁö</h1>
+  				<h1>ê´€ë¦¬ìž ë©”ì¸í™ˆíŽ˜ì´ì§€</h1>
   			</div>
 
 		  </div>
@@ -86,5 +90,14 @@
 
     <script src="js/custom.js"></script>
     <script src="js/tables.js"></script>
+	
+	<script>
+	(function(){
+		if(<%=!"admin".equals((String)session.getAttribute("id"))%>){
+			alert("ê´€ë¦¬ìž ì „ìš© íŽ˜ì´ì§€ ìž…ë‹ˆë‹¤.");
+			history.back();
+		}
+	})();
+	</script>
   </body>
 </html>

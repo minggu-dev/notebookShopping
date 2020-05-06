@@ -24,7 +24,7 @@ public class QnASelectAllController implements Controller {
 			request.setAttribute("list", list);
 			
 			ModelAndView mv = new ModelAndView();
-			mv.setViewName("qnaList.jsp");
+			mv.setViewName("Adminqlist.jsp");
 			return mv;
 		
 	}

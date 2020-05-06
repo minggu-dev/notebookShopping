@@ -166,6 +166,6 @@ public class Product {
 		this.imgName = imgName;
 	}
 	
-	
+	 
 	
 }

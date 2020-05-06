@@ -44,6 +44,16 @@
 <script src="plugins/parallax-js-master/parallax.min.js"></script>
 <script src="js/custom.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+
+$(function(){
+	if('<%=session.getAttribute("id")%>' != '${board.userId}'){
+		$('#qnaUpdate').hide();
+		$('#qnaDelete').hide();
+	}
+})
+
+</script>
 </head>
 
 <body>
@@ -114,9 +124,10 @@
         </tr>
      <tr>
           <th>글쓴이</th>
-          <td colspan="3">${b.userId}</td>
-<!--           <th>상품번호</th> -->
-<%--           <td>${b.product.serialNum}</td> --%>
+          <td colspan="1">${b.userId}</td>
+          
+          <th>상품명</th>
+		<td>[${b.product.company}] ${b.product.modelName}</td>
         </tr>
         <tr>
           <th >제목</th>
@@ -139,7 +150,6 @@
       	   <form action="qnaUpdate.jsp" method="post" >
       	<input type="hidden" name="userId" value="${b.userId }">
         <input type="hidden" name="qnaNo" value="${b.qnaNo }">
-<%--         <input type="hidden" name="serialNum" value="${b.product.serialNum }"> --%>
         <input type="hidden" name="subject" value="${b.subject }">
         <input type="hidden" name="content" value="${b.content }">
         <input type="hidden" name="password" value="${b.password }">
@@ -158,110 +168,6 @@
       </table>
  <br><br><br><br><br>
  </div>
-      
-<!--       <script> -->
-
-
-    	  
-      
-
-      
-<!-- //     jQuery(document).ready(function() { -->
-<%-- //         if(${id == null}){ --%>
-<!-- //             alert("게시판을 이용하시려면 로그인하셔야 합니다."); -->
-<!-- //             location.href="/bbs/login.bbs"; -->
-<!-- //         } -->
-<!-- //     }); -->
-    
-    
-    
-<!-- //     // Perform an asynchronous HTTP (Ajax) request. -->
-<!-- //     // 비동기 통신 Ajax를 Setting한다. -->
-<!-- //     $.ajaxSetup({ -->
-<!-- //         type:"POST", -->
-<!-- //         async:true, -->
-<!-- //         dataType:"json", -->
-<!-- //         error:function(xhr) { -->
-<!-- //             console.log("error html = " + xhr.statusText); -->
-<!-- //         } -->
-<!-- //     }); -->
-    
-<!-- //     $(function() { -->
-<!-- //         $("#commentWrite").on("click", function() { -->
-<!-- //             $.ajax({ -->
-<!-- //                 url:"/bbs/commentWrite.bbs", -->
-<!-- //                 // data:{}에서는 EL을 ""로 감싸야 한다. 이외에는 그냥 사용한다. -->
-<!-- //                 data:{ -->
-<!-- //                     commentContent:$("#commentContent").val(), -->
-<%-- //                     articleNumber:"${article.articleNumber}" --%>
-<!-- //                 }, -->
-<!-- //                 beforeSend:function() { -->
-<!-- //                     console.log("시작 전..."); -->
-<!-- //                 }, -->
-<!-- //                 complete:function() { -->
-<!-- //                     console.log("완료 후..."); -->
-<!-- //                 }, -->
-<!-- //                 success:function(data) {            // 서버에 대한 정상응답이 오면 실행, callback -->
-<!-- //                     if(data.result == 1) {            // 쿼리 정상 완료, executeUpdate 결과 -->
-<!-- //                         console.log("comment가 정상적으로 입력되었습니다."); -->
-<!-- //                         $("#commentContent").val(""); -->
-<!-- //                         showHtml(data.comments, 1); -->
-<!-- //                     } -->
-<!-- //                 } -->
-<!-- //             }) -->
-<!-- //         }); -->
-<!-- //     }); -->
- 
-<!-- //     function showHtml(data, commPageNum) { -->
-<!-- //         let html = "<table class='table table-striped table-bordered' style='margin-top: 10px;'><tbody>"; -->
-<!-- //         $.each(data, function(index, item) { -->
-<!-- //             html += "<tr align='center'>"; -->
-<!-- //             html += "<td>" + (index+1) + "</td>"; -->
-<!-- //             html += "<td>" + item.id + "</td>"; -->
-<!-- //             html += "<td align='left'>" + item.commentContent + "</td>"; -->
-<!-- //             let presentDay = item.commentDate.substring(0, 10); -->
-<!-- //             html += "<td>" + presentDay + "</td>"; -->
-<!-- //             html += "</tr>"; -->
-<!-- //         }); -->
-<!-- //         html += "</tbody></table>"; -->
-<!-- //         commPageNum = parseInt(commPageNum);        // 정수로 변경 -->
-<!-- //         // commentCount는 동기화되어 값을 받아오기 때문에, 댓글 insert에 즉각적으로 처리되지 못한다. -->
-<%-- //         if("${article.commentCount}" > commPageNum * 10) { --%>
-<!-- //             nextPageNum = commPageNum + 1; -->
-<!-- //             html +="<input type='button' class='btn btn-default' onclick='getComment(nextPageNum, event)' value='다음 comment 보기'>"; -->
-<!-- //         } -->
-        
-<!-- //         $("#showComment").html(html); -->
-<!-- //         $("#commentContent").val(""); -->
-<!-- //         $("#commentContent").focus(); -->
-<!-- //     } -->
-    
-<!-- //     function getComment(commPageNum, event) { -->
-<!-- //         $.ajax({ -->
-<!-- //             url:"/bbs/commentRead.bbs", -->
-<!-- //             data:{ -->
-<!-- //                 commPageNum:commPageNum*10, -->
-<%-- //                 articleNumber:"${article.articleNumber}" --%>
-<!-- //             }, -->
-<!-- //             beforeSend:function() { -->
-<!-- //                 console.log("읽어오기 시작 전..."); -->
-<!-- //             }, -->
-<!-- //             complete:function() { -->
-<!-- //                 console.log("읽어오기 완료 후..."); -->
-<!-- //             }, -->
-<!-- //             success:function(data) { -->
-<!-- //                 console.log("comment를 정상적으로 조회하였습니다."); -->
-<!-- //                 showHtml(data, commPageNum); -->
-                
-<!-- //                 let position = $("#showComment table tr:last").position(); -->
-<!-- //                 $('html, body').animate({scrollTop : position.top}, 400);        // 두 번째 param은 스크롤 이동하는 시간 -->
-<!-- //             } -->
-<!-- //         }) -->
-<!-- //     } -->
-    
-   
-<!-- </script> -->
-   
       
     </div>
 

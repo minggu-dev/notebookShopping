@@ -23,7 +23,7 @@ public class ProInsertController implements Controller {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String saveDir = request.getServletContext().getRealPath("/save");
+		String saveDir = request.getServletContext().getRealPath("/images/productimg");
 		int maxSize = 1024 * 1024 * 100;//100MB
 		String encoding = "UTF-8";
 		MultipartRequest m = new MultipartRequest(request, saveDir, maxSize, encoding, new DefaultFileRenamePolicy());
@@ -58,7 +58,7 @@ public class ProInsertController implements Controller {
 		
 		
 		ProductService.insert(product);
-		ModelAndView mv = new ModelAndView(false, "test.jsp");
+		ModelAndView mv = new ModelAndView(false, "note?command=proAll");
 		
 		return mv;
 	}

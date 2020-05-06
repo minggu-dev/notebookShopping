@@ -143,12 +143,12 @@
       <table class="table table-striped table-bordered table-hover">
         <thead>
           <tr>
-            <th width="15%">답변상태</th>
+            <th width="10">답변상태</th>
             <th width="10%">번호</th>
-            <th width="25%">제목</th>
+            <th width="40%">제목</th>
             <th width="10%">작성자</th>
-            <th width="15%">작성일</th>          
-            <th width="20%">조회</th>
+            <th width="20%">작성일</th>          
+            <th width="10%">조회</th>
           </tr>
         </thead>
         <tbody>
@@ -156,10 +156,10 @@
         
           <c:forEach var="qna" items="${list}" varStatus="status">
             <tr>
-              <td>${qna.answerState == 1 ? '미답변' : '답변완료'}</td>
+              <td>${qna.answerState == 0 ? '미답변' : '답변완료'}</td>
               <td>${fn:length(list) - status.count + 1}</td>
-              <td><a href="#" onclick="checkPwd(${qna.qnaNo});">${qna.subject}</a></td>
-              <td>${qna.userId}</td>             
+              <td><a href="#" onclick="checkPwd(${qna.qnaNo});">${qna.password == null ? qna.subject : '잠긴글 입니다.'}</a></td>
+              <td>${qna.userId}</td>                    
               <td>${qna.createDate}</td>
               <td>${qna.viewCnt}</td> 
  			 </tr>
@@ -210,30 +210,5 @@
 	}
  	 
  </script>
-
-<script>
-
-	 $(document).ready(function(){
-
-			function checkPwd(){
-			var pass = $("#pwd").val();
-				
-				var pwd = prompt("비밀번호를 입력하세요.","비밀번호 ");
-				if(pwd != pass ){
-					alert("비밀번호가 잘못되었습니다.");
-					return;
-				}else{
-					document.getElementById('detail${status.count}').submit();
-				}
-			}
-	});
-		
-		
-
-
-
-</script>
-
-
 </body>
 </html>

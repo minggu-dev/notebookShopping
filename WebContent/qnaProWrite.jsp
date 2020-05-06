@@ -20,6 +20,17 @@
 				}
 			});
 		});
+		
+		$('input[name=list]').click(function(){
+			$('section').empty();
+			$.ajax({
+				url : "note",
+				data : "command=qnaProduct&serialNum=" + $('form[name=deletereview]').find('input[name=serialNum]').val(),
+				success : function(resourcedata) {
+					$('section').html(resourcedata);
+				}
+			});
+		})
 	});
 </script>
 <style>
@@ -86,7 +97,7 @@
              <td colspan="2" rowspan="1">
              
 				<div   style="margin-left:5px; float:right; display: inline-block;">
-        		<input type="button" class="btn btn-default" value="목록으로 돌아가기" onclick="document.location.href='qnaList.jsp'">
+        		<input type="button" name="list" class="btn btn-default" value="목록으로 돌아가기">
         		</div>
         		<div  style="float:right; display: inline-block;">
               	<input type="submit" name="save" class="btn btn-default" value="저장하기" >

@@ -30,24 +30,25 @@
 
 <style>
     #contentForm {
-      width: 20%;
       margin: 0 auto;
-      padding-top: 12%;
+      padding-top: 6%;
     }
  
     .table > thead > tr > th, .table > tbody > tr > th {
       background-color: #e6ecff;
       text-align: center;
     }
+    .home{
+    	width : 100%;
+    	height : 1000px;
+    	background-color: #FFFFFF;
+    }
+    .super_container{
+    	background-color: #FFFFFe;
+    }
   </style>
 
 </head>
-    
-    
-
-
-
-
 <body>
 
 
@@ -56,21 +57,12 @@
 
 <jsp:include page="header.jsp"/>
 
+ <div class="home">
 
-<div class="offset-lg-0 col-lg-3" >
 
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
  <% 
  String userId =(String)session.getAttribute("id");
-
 %>
 
              
@@ -78,7 +70,7 @@
 <form name=insertForm method="post" action="note?command=qnaInsert" >
 
               
- 
+<input type="hidden" name="userId" value="<%=userId %>">
 <div id= "contentForm">
          
         <div class="input-group input-group-sm" role="group" aria-label="...">
@@ -89,7 +81,6 @@
             <tr>
               <th width="30%">아이디</th>
               <td width="70%" ><%=userId %></td>
-              <input type="hidden" name="userId" value="<%=userId %>">
             </tr>
             
             <tr>
@@ -98,25 +89,6 @@
               <textarea rows="1" style="width:100%; resize: none;" name="subject"></textarea>  
               </td>
               </tr>
-
-              
-<!--               <tr> -->
-<!--               <th style="padding-top: 15px">일련번호</th> -->
-<!--               <td>  -->
-         			
-<!--               <select id="list" name="serialNum"> -->
-<%--               <c:forEach items="${list}" var="list"> --%>
-<%--              	 <option value="${list.serialNum}">${list.serialNum}</option> --%>
-<%--               </c:forEach> --%>
-<!--               </select> -->
-             
-<!--               </td> -->
-<!--               </tr> -->
-              
-<%--               <td><input type="text" name="subject" size="70" ><%=subject%> --%>
-<!--                     </td> -->
-<!--             </tr> -->
-            
           </thead>
           <tbody>
             <tr>
@@ -151,32 +123,26 @@
       
     </div>
   </form>
+  <br> <br> <br> <br> <br> <br> <br> <br>  
+  </div>
  
-
-    <% String myId =(String)session.getAttribute("id"); %>
-   
-  
- 
+ </div>
+ </div>
  <jsp:include page="footer.jsp"/>
  
  
   
     <script>
      jQuery(document).ready(function() {
-//      	var id = session.getAttribute("userId"); 
-//      	alert(id);
-
     
-       if(<%=session.getAttribute("id")%> == null) { 
-         alert("게시판을 이용하시려면 로그인하셔야 합니다."); 
-        location.href="login.jsp" 
+       if("<%=userId%>" == null) { 
+         	alert("게시판을 이용하시려면 로그인하셔야 합니다."); 
+        	location.href="login.jsp" ;
        }
        
     }); 
  </script>
 
-</div>
-</div>	
 </BODY>	
 </html>
 

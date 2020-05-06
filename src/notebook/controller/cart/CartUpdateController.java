@@ -3,8 +3,7 @@ package notebook.controller.cart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
+import net.sf.json.JSONObject;
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 import notebook.domain.CartList;

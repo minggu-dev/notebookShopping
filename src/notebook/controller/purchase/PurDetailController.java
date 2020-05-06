@@ -26,7 +26,7 @@ public class PurDetailController implements Controller {
 		OrderInfo info = PurchaseService.selectByNo(Integer.parseInt(orderNo), userId);
 		request.setAttribute("info", info);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("구매내역 상세보기");
+		mv.setViewName("orderInfoDetail.jsp");
 		return mv;
 	}
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,15 +10,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Sublime project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
 <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="styles/cart.css">
 <link rel="stylesheet" type="text/css" href="styles/cart_responsive.css">
 <link rel="stylesheet" type="text/css" href="styles/cart_info.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="assets/css/main.css" />
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <link rel="stylesheet" href="assets/css/main.css" />
 <script src="styles/bootstrap4/popper.js"></script>
 <script src="plugins/greensock/TweenMax.min.js"></script>
 <script src="plugins/greensock/TimelineMax.min.js"></script>
@@ -27,7 +26,6 @@
 <script src="plugins/easing/easing.js"></script>
 <script src="plugins/parallax-js-master/parallax.min.js"></script>
 <script src="js/cart.js"></script>
-
 </head>
 
 <style>
@@ -58,7 +56,7 @@ font-size: 15px;
 
 
 <body>
-<%@include file="myHeader.jsp" %>
+<jsp:include page="header.jsp"></jsp:include>
 <div class="super_container">
 
    
@@ -76,7 +74,20 @@ font-size: 15px;
          <div class="row">
             <div class="col">
                <!-- Column Titles -->
-
+      
+<!--                <div class="cart_info_columns clearfix" style="width: 1300px;"> -->
+               
+                  
+<!--                   <div class="cart_info_col cart_info_col_product" style="width:165px;">주문번호</div> -->
+<!--                   <div class="cart_info_col cart_info_col_my" style="width:130px;" > 유저아이디</div> -->
+<!--                   <div class="cart_info_col cart_info_col_quantity" style="width:160px;">구매일</div> -->
+<!--                   <div class="cart_info_col cart_info_col_total" style="width:155px;">배송상태</div> -->
+<!--                   <div class="cart_info_col cart_info_col_total"style="width:125px;">환불요청</div> -->
+<!--                   <div class="cart_info_col cart_info_col_total"style="width:125px;">배송지</div> -->
+<!--                   <div class="cart_info_col cart_info_col_total"style="width:110px;">총금액</div> -->
+<!--                   <div class="cart_info_col cart_info_col_total">주문취소(환불)</div> -->
+         
+<!--                </div> -->
 				<table>
 					<tr>
 					<th>주문번호</th>
@@ -125,7 +136,7 @@ font-size: 15px;
         	 
         	 </td>
         	 <td><a href="note?command=purDeliveryForm&orderNo=${orderInfo.orderNo}">${orderInfo.addrDelivery}</a></td>
-        	 <td><c:out value="${orderInfo.totalPrice}"></c:out></td>
+        	 <td><fmt:formatNumber><c:out value="${orderInfo.totalPrice}"></c:out></fmt:formatNumber></td>
         	 <td>
         	 	<c:choose>
 
@@ -133,10 +144,10 @@ font-size: 15px;
 						<button id="test_btn" name="delete" hidden="" >취소하기</button>
 					</c:when>	
 					<c:when test="${orderInfo.refundState == 1}">	
-						<button id="test_btn" name="delete" hidden="" >취소하기</button>
+						<button id="test_btn" name="deleteCancle" value="${orderInfo.orderNo}" >환불취소</button>
 					</c:when>				
 					<c:otherwise>					
-						<button id="test_btn" name="delete" value="${orderInfo.orderNo}">취소하기</button>		
+						<button id="test_btn" name="delete" value="${orderInfo.orderNo}">주문취소</button>		
 					</c:otherwise>				
 				</c:choose>
         	 </td>
@@ -159,15 +170,21 @@ font-size: 15px;
        </section> 
    </div>
     
-<%@include file="footer.jsp" %>
+<jsp:include page="footer.jsp"></jsp:include>
+
 
 <script>
 $("button[name=delete]").click(function(){
-	
-   alert("삭제되었습니다.");
    var orderNo=$(this).val();
    location="note?command=purRefundState&request=1&orderNo="+orderNo;
 });
+
+
+$("button[name=deleteCancle]").click(function(){
+   var orderNo=$(this).val();
+   location="note?command=purRefundState&orderNo="+orderNo;
+});
+
 
 $("button[name=orderDetail]").click(function(){
    alert("상품디테일");
@@ -175,6 +192,8 @@ $("button[name=orderDetail]").click(function(){
    
    location = "note?command=purDetail&orderNo="+orderNo;
 });
+
+
 </script>
 
 </body>

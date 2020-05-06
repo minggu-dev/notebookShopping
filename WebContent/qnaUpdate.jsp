@@ -29,23 +29,21 @@
 
 <style>
     #contentForm {
-      width: 20%;
       margin: 0 auto;
-      padding-top: 12%;
+      padding-top: 6%;
     }
  
     .table > thead > tr > th, .table > tbody > tr > th {
       background-color: #e6ecff;
       text-align: center;
     }
+    
+    .home{
+    	height : 1000px;
+    }
   </style>
 
 </head>
-    
-    
-
-
-
 
 <body>
 
@@ -55,17 +53,9 @@
 
 <jsp:include page="header.jsp"/>
 
+<div class="home">
 
-<div class="offset-lg-0 col-lg-3" >
 
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
  <% 
     String userId = request.getParameter("userId");
@@ -146,9 +136,15 @@
     </div>
   </form>
  
-
    
-  
+<br>
+<br>
+<br>
+<br>
+<br>
+
+</div>
+</div>	
  
  <jsp:include page="footer.jsp"/>
  
@@ -200,9 +196,6 @@ $('input[type=button][name=update]').click(function(){
 <!-- //       } -->
 <!-- //     }); -->
 <!--   </script> -->
-
-</div>
-</div>	
 </BODY>	
 </html>
 

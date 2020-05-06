@@ -1,6 +1,7 @@
 package notebook.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import notebook.dao.BoardAnswerDao;
 import notebook.dao.BoardAnswerDaoImpl;
@@ -26,9 +27,6 @@ public class AnswerService {
 	 */
 	public static void insert(BoardAnswer answer) throws SQLException, CannotModifyException{
 		int result = ans.insert(answer);
-		if(result == 0) {
-			throw new SQLException("등록되지 않았습니다.");
-		}
 	}
 	
 	/**
@@ -50,5 +48,10 @@ public class AnswerService {
 			throw new NotFoundException("답변을 찾을 수 없습니다.");
 		}
 		return answer;
+	}
+	
+	public static List<BoardAnswer> selectByQnaNo(int qnaNo) throws SQLException{
+		List<BoardAnswer> list = ans.selectByQnaNo(qnaNo);
+		return list;
 	}
 }

@@ -3,6 +3,8 @@ package notebook.controller.qna;
 import javax.servlet.http.HttpServletRequest;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.ParseConversionEvent;
+
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 import notebook.exception.NotEnoughParameterException;
@@ -20,13 +22,18 @@ public class QnADeleteController implements Controller {
 		if(qnaNo == null || qnaNo.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 		}
-		
-		QnAService.delete(Integer.parseInt(qnaNo), userId);
 		ModelAndView mv = new ModelAndView();
-		mv.setRedirect(true);//true 이면 Redirect로 간다.
-		mv.setViewName("note?command=qnaAll");//이동할 url
+		if(userId.equals("admin")) {
+			QnAService.admindelete(Integer.parseInt(qnaNo));
+			mv.setRedirect(true);
+			mv.setViewName("note?command=qnaAll");
+		}else {
+			QnAService.delete(Integer.parseInt(qnaNo), userId);
+			mv.setRedirect(true);//true 이면 Redirect로 간다.
+			mv.setViewName("qnaList.jsp");//이동할 url
+		}
+		
 		return mv;
 	}
 
 }
-

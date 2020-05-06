@@ -31,7 +31,7 @@ public class ProUpdateFormController implements Controller {
 		
 		request.setAttribute("product", product);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("상품 수정 폼");
+		mv.setViewName("manager_productUpdate.jsp");
 		
 		return mv;
 	}

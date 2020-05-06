@@ -8,6 +8,7 @@ import notebook.dao.BoardQnADao;
 import notebook.dao.BoardQnADaoImpl;
 import notebook.domain.BoardAnswer;
 import notebook.domain.BoardQnA;
+import notebook.domain.Product;
 import notebook.exception.CannotModifyException;
 import notebook.exception.NotFoundException;
 
@@ -90,5 +91,17 @@ public class QnAService {
 		}
 	}
 	
+	/**
+	 * 관리자 게시물 삭제
+	 * @param qnaNo
+	 * @throws SQLException
+	 * @throws CannotModifyException
+	 */
+	public static void admindelete(int qnaNo) throws SQLException, CannotModifyException{
+		int result = bd.admindelete(qnaNo);
+		if(result == 0) {
+			throw new CannotModifyException("삭제되지 않았습니다.");
+		}
+	}
 	
 }

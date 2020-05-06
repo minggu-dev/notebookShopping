@@ -145,7 +145,7 @@
         
           <c:forEach var="qna" items="${list}" varStatus="status">
             <tr>
-              <td>${qna.answerState == 1 ? '미답변' : '답변완료'}</td>
+              <td>${qna.answerState == 0 ? '미답변' : '답변완료'}</td>
               <td>${status.count}</td>
               <td id="subject"><a href="#" onclick="checkPwd('${qna.qnaNo}')">${qna.password == null ? qna.subject : '잠긴글 입니다.'}</a></td>
               <td>${qna.userId}</td>             

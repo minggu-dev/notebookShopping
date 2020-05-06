@@ -1,9 +1,9 @@
-<%@page import="notebook.domain.Users"%>
+<%@ page import="notebook.domain.Users"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-    
+<%response.setHeader("Cache-Control", "no-store"); %>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,19 +17,19 @@
 <link rel="stylesheet" type="text/css" href="styles/cart.css">
 <link rel="stylesheet" type="text/css" href="styles/cart_responsive.css">
 
-
 <!-- Css Styles -->
-    <link rel="stylesheet" href="css/themify-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="css/ie7.css" type="text/css">
-    <link rel="stylesheet" href="css/themify-icons.css" type="text/css">
+<link rel="stylesheet" href="css/themify-icons.css" type="text/css">
+<link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="stylesheet" href="css/ie7.css" type="text/css">
+<link rel="stylesheet" href="css/themify-icons.css" type="text/css">
+<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
     
-<script src="js/jquery-3.2.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="styles/bootstrap4/popper.js"></script>
 <script src="styles/bootstrap4/bootstrap.min.js"></script>
 <script src="plugins/greensock/TweenMax.min.js"></script>
@@ -42,15 +42,15 @@
 <script src="js/cart.js"></script>
 
  <!-- Js Plugins -->
-    <script src="js/js/jquery-ui.min.js"></script>
-    <script src="js/js/jquery.countdown.min.js"></script>
-    <script src="js/js/jquery.nice-select.min.js"></script>
-    <script src="js/js/jquery.zoom.min.js"></script>
-    <script src="js/js/jquery.dd.min.js"></script>
-    <script src="js/js/jquery.slicknav.js"></script>
-    <script src="js/js/owl.carousel.min.js"></script>
-    <script src="js/js/main.js"></script>
-	<script src="js/js/ie7.js"></script>
+<script src="js/js/jquery-ui.min.js"></script>
+<script src="js/js/jquery.countdown.min.js"></script>
+<script src="js/js/jquery.nice-select.min.js"></script>
+<script src="js/js/jquery.zoom.min.js"></script>
+<script src="js/js/jquery.dd.min.js"></script>
+<script src="js/js/jquery.slicknav.js"></script>
+<script src="js/js/owl.carousel.min.js"></script>
+<script src="js/js/main.js"></script>
+<script src="js/js/ie7.js"></script>
 
 
 </head>
@@ -155,7 +155,7 @@ button:hover {
                                     <td class="cart-title first-row">
                                         <h5>${result.product.modelName }<input type="hidden" name="serialNum" value="${result.product.serialNum }"></h5>
                                     </td>
-                                    <td class="p-price first-row" name="sell_price">${result.product.price}</td>
+                                    <td class="p-price first-row" name="sell_price"><fmt:formatNumber value="${result.product.price}"/></td>
                                     
                                     <td class="qua-col first-row">
                                         <div class="quantity">  <div class="pro-qty" name="count">
@@ -219,7 +219,7 @@ button:hover {
 						<div class="delivery_options">
 							<label class="delivery_option clearfix">기본배송지
 							
-								<input type="radio" name="addr" id="addr" value="">
+								<input type="radio" name="addr" id="addr" value="" checked>
 							
 								
 								<span class="checkmark"></span>
@@ -234,9 +234,6 @@ button:hover {
 													<!-- 주소지 -->
 													
 													<input type="text" name="newAddr" size="30" placeholder="받을 주소를 입력해주세요" focus>
-											
-													
-										
 									 </div>
 									 </li>
 									 </ul>
@@ -244,10 +241,6 @@ button:hover {
 						</div>
 						</form>
 					</div>
-					
-					
-
-					
 				</div>
 
 			<div class="col-lg-4 offset-lg-0">
@@ -256,10 +249,6 @@ button:hover {
 						<div class="section_subtitle">Final info</div>
 						<div class="cart_total_container">
 							<ul>
-								<li class="d-flex flex-row align-items-center justify-content-start">
-									<div class="cart_total_title">Subtotal</div>
-									<div class="cart_total_value ml-auto" name="sub_total"></div>
-								</li>
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_total_title">수량</div>
 									<div class="cart_total_value ml-auto" name="quantity"></div>
@@ -276,25 +265,16 @@ button:hover {
 			</div>
 		</div>
 
-<script language='javascript'>
-
-
+<script>
 //개별 상품삭제하기 버튼
-/* function Delete(delProduct) {
-  //alert('테스트');
-	
-     location.href = "Delete?productName=" + 상품이름;   //get방식으로 삭제할아이디를 넘김 */
-
  $(document).ready(function() {
   $(".content").hide(); //content 클래스를 가진 div를 표시/숨김(토글)
   $('input[name=newAddr]').hide();
  
 	
   var amount;
-
   var total;
   var sub_total;
- 
   var amt = Number();
   var qt = Number(0);
   var money = Number();
@@ -302,7 +282,7 @@ button:hover {
   
   $('tr[name=cart]').each(function(i, element) {
 		amt = $('input[name=amount]').eq(i).val(); //수량
-		money = $('td[name=sell_price]').eq(i).text();
+		money = ($('td[name=sell_price]').eq(i).text()).replace(/,/g ,"");
 		qt += parseInt(amt);
 		sum += amt * money;
 	});
@@ -313,21 +293,21 @@ button:hover {
 	
 	$('input[name=hidden_total]').val(sum);
   	
-	$('div[name=count]').on('click', function() {
+	//수량변경
+	$('div[name=count]').on('change', function() {
 		var qty = Number(0);
 		var all_total = Number();
 		  var sell_price = Number();
 		$('tr[name=cart]').each(function(i, element) {
 			amount = $('input[name=amount]').eq(i).val(); //수량
-			sell_price = $('td[name=sell_price]').eq(i).text();
+			sell_price = $('td[name=sell_price]').eq(i).text().replace(/,/g ,"");
 			//sell_price = $('fmt:formatNumber[type=number]').eq(i).val();
 			//alert(sell_price);
-			total = amount * sell_price;
-			all_total += amount * sell_price;
+			total = amount * parseInt(sell_price);
+			all_total += amount * parseInt(sell_price);
 			qty += parseInt(amount);
 			$('td>div[name=total]').eq(i).text(total.toLocaleString()+'원');  
 		});
-		$('div[name=sub_total]').text(all_total.toLocaleString()+'원');
 		$('div[name=quantity]').text(qty);
 		$('div[name=all_total]').text(all_total.toLocaleString()+'원');
 		$('input[name=hidden_total]').val(all_total);
@@ -335,23 +315,6 @@ button:hover {
 	var all_total;
 
 	
-	/* $('#update_cart').on('click', function(){
-		var quantity = Number(0);
-		$('tr[name=cart]').each(function(i, element) {
-			var update_amount = $('input[name=amount]').eq(i).val(); //수량
-			total += amount * sell_price;
-			quantity += parseInt(update_amount);
-		});
-		$('div[name=sub_total]').text(total.toLocaleString()+'원');
-		$('div[name=quantity]').text(quantity);
-		$('div[name=all_total]').text(total.toLocaleString()+'원');
-		
-	}); */
-	
-	
-	/* var serialNum = $('input[name=serialNum]').val();
-	var count = $('amount')
-	alert(list.userId); */
 	 $('#update_cart').click(function() {
 		 $('tr[name=cart]').each(function(i, element) {
 			var serialNum = $('input[name=serialNum]').eq(i).val();
@@ -365,63 +328,113 @@ button:hover {
 				success: function(jsonObj) {
 					if(jsonObj.status == 1){
 						alert("갱신 되었습니다.");
-						}
-					
+					}
 				}
-				
-			
 			});
 			
 		 });
-	
-		
 	}); 
-	
-	//기본 배송지
-	 $('#addr').on('click', function() {
-		//var id = $('input[name=userId]').val();
-		var an = $('#addr').val();
-		alert(an);
-		//alert(id);
-		/* $.ajax({
-			type: "POST",
-			url:"ajax",
-			data:"id="+ id,
-			success: function(arr){
-				$('#addr').val(arr);
-			}
-		}) */
-	}); 
-	
-	
 	
 	//구매하기
 	$('div[name=purchase]').on('click', function() {
+		if(<%=session.getAttribute("id") == null%>){
+			alert("로그인 후 이용해 주세요");
+			location.href="login.jsp";
+			return false;
+		}
 		//alert('dd');
 		var addrDelivery;
 		var totalPrice = $('input[name=hidden_total]').val();
-		
-	    addrDelivery = $('input[name=newAddr]').val();//새로운 주소 
-		
+		if($('#addr').is(":checked")){
+			addrDelivery = "${addr}";
+		}else{//기존주소 선택을 안했을때
+			addrDelivery = $('input[name=newAddr]').val();//새로운 주소 
+		}
+		if(totalPrice == 0){
+			alert('상품을 담아주세요');
+			return false;
+		}
+
 		$.ajax({
+			url:"note",			
 			type: "POST",
-			url:"note",
 			data: "command=purInsert&totalPrice=" + totalPrice +"&addrDelivery=" + addrDelivery,
 			success: function() {
-				location.href = "orderInfo.jsp";
+				location.href = "note?command=purUser";
 			}
 		});
+		return false;
 	});
 	
-  $(".heading").click(function()
-  {
-	  //$(this).next(".content").slideToggle(100);
+  $(".heading").click(function(){
 	  $('input[name=newAddr]').slideToggle(100);
   });
-});
 
+  var unUsercount = 0;
+  var unUserTotal = 0;
+  
+	for (var i = 0; i < sessionStorage.length; i++) {
+		if(sessionStorage.key(i).substr(0, 5) == 'cart:'){
+			var key = sessionStorage.key(i);
+			var serialNum = key.substr(5);
+			$('tbody[name=cart_info]').empty();
+			$.ajax({
+				url:"ajax",
+				data: "command=proDetail&serialNum=" + serialNum,
+				dataType : "json"	,
+				success : function(jsonObj){
+					var totalPrice = parseInt(sessionStorage.getItem("cart:" + jsonObj.serialNum)) * parseInt(jsonObj.price);
+					var trhtml = "";
+					trhtml += '<tr name="cart"><td class="cart-pic first-row"><img src="images/productimg/' + jsonObj.imgName + '" alt="모른다."></td><td class="cart-title first-row">';
+                    trhtml += '<h5>' + jsonObj.modelName + '<input type="hidden" name="serialNum" value="' + jsonObj.serialNum + '"></h5></td>';
+                    trhtml += '<td class="p-price first-row" name="sell_price">' + jsonObj.price.toLocaleString() + '</td><td class="qua-col first-row">';
+                    trhtml += '<div class="quantity"><div class="pro-qty" name="count"><input type="text" value="' + sessionStorage.getItem("cart:" + jsonObj.serialNum) + '" name="amount"></div></div></td>';
+                    trhtml += '<td class="total-price first-row"><div name="total">' + totalPrice.toLocaleString() + '원</div></td>';
+                    trhtml += '<td><div class="container"><button class="btn-delete" name="btn_delete">';
+                    trhtml += '<a href="cart.jsp" class="noUser">X</button></div></td></tr>';
+                    $('tbody[name=cart_info]').append(trhtml);
+                    unUsercount += parseInt(sessionStorage.getItem("cart:" + jsonObj.serialNum));
+                    unUserTotal += totalPrice;
+            		$('div[name=quantity]').html(unUsercount);
+            		$('div[name=all_total]').html(unUserTotal.toLocaleString()+'원');
+				}, error : function(e){
+					alert('error : ' + e);
+				}
+			});
+		}
+	}
+	
+	
+	$('tbody[name=cart_info]').on('click', 'tr>td>div>button>a', function(){
+		sessionStorage.removeItem('cart:' + $(this).parents('tr').find('input[name=serialNum]').val());
+	})
+	
+	$('tbody[name=cart_info]').on('change', 'input[name=amount]', function(){
+		if(<%=session.getAttribute("id") != null%>){
+			return false;
+		}
+		$(this).parents('tr').find('div[name=total]').html((parseInt($(this).val()) * parseInt($(this).parents('tr').find('td[name=sell_price]').html())).toLocaleString() + '원');
+		
+		unUsercount += parseInt($(this).val()) - parseInt(sessionStorage.getItem('cart:' + $(this).parents('tr').find('input[name=serialNum]').val()));
+		unUserTotal += parseInt($(this).val()) * parseInt($(this).parents('tr').find('td[name=sell_price]').html()) - parseInt(sessionStorage.getItem('cart:' + $(this).parents('tr').find('input[name=serialNum]').val())) * parseInt($(this).parents('tr').find('td[name=sell_price]').html());
+		sessionStorage.setItem('cart:' + $(this).parents('tr').find('input[name=serialNum]').val(),$(this).val());
+		
+		$('div[name=quantity]').html(unUsercount);
+		$('div[name=all_total]').html(unUserTotal.toLocaleString()+'원');
+	})
+ 
+	$('#clear_cart>a').click(function(){
+		if(<%=session.getAttribute("id") == null%>){
+			sessionStorage.clear();
+			location.href="cart.jsp";
+			return false;
+		}
+	})
+});
+ 
+ 
 </script>
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"/>
 </body>
 
 

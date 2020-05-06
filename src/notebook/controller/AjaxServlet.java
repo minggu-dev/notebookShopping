@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import notebook.controller.product.ProHomeController;
 
 @WebServlet("/ajax")
@@ -42,8 +42,13 @@ public class AjaxServlet extends HttpServlet {
 			
 		}finally {
 			PrintWriter out = response.getWriter();
-			JSONObject jsonObj = (JSONObject)request.getAttribute("jsonObj");
-			out.print(jsonObj);
+			if(request.getAttribute("jsonObj") instanceof JSONObject) {
+				JSONObject jsonObj = (JSONObject)request.getAttribute("jsonObj");
+				out.print(jsonObj);
+			}else {
+				JSONArray jsonArray = (JSONArray)request.getAttribute("jsonObj");
+				out.print(jsonArray);
+			}
 		}
 	}
 

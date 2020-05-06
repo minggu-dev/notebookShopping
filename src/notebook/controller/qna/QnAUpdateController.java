@@ -24,7 +24,7 @@ public class QnAUpdateController implements Controller {
 				String qnaNo = request.getParameter("qnaNo");
 				String userId = (String)request.getSession().getAttribute("id");
 				if(subject == null || subject.equals("") || content == null || content.equals("")||
-					password == null || password.equals("")|| qnaNo == null || qnaNo.equals("") || userId==null || userId.equals("")) {
+						qnaNo == null || qnaNo.equals("") || userId==null || userId.equals("")) {
 					throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
 				}
 				BoardQnA board = new BoardQnA(Integer.parseInt(qnaNo) ,userId, password);
@@ -34,7 +34,8 @@ public class QnAUpdateController implements Controller {
 				QnAService.update(board);//업데이트
 				ModelAndView mv = new ModelAndView();
 				//게시물 상세로
-				mv.setViewName("게시물로 가자");
+				mv.setRedirect(true);
+				mv.setViewName("note?command=qnaAll");
 				return mv;
 	}
 

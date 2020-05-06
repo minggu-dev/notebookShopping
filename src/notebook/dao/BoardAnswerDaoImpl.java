@@ -106,7 +106,7 @@ public class BoardAnswerDaoImpl implements BoardAnswerDao {
 			ps.close();
 			
 			//답변상태 바꾸기
-			 sql = "UPDATE board_answer SET answer_state = 1 WHERE qna_no = ?";
+			 sql = "UPDATE board_qna SET answer_state = 1 WHERE qna_no = ?";
 			 ps = con.prepareStatement(sql);
 			 ps.setInt(1, answer.getQnaNo());
 			 if(ps.executeUpdate() == 0) {

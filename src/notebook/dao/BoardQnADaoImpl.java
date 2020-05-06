@@ -184,4 +184,22 @@ public class BoardQnADaoImpl implements BoardQnADao {
 		}
 		return result;
 	}
+	
+	@Override
+	public int admindelete(int qnaNo) throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "DELETE board_qna WHERE qna_no = ?";
+		
+		int result = 0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, qnaNo);
+			result = ps.executeUpdate();
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
 }

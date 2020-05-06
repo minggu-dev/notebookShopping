@@ -30,17 +30,10 @@
 <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
 <link rel="stylesheet" type="text/css" href="styles/responsive.css">
 <link rel="stylesheet" href="assets/css/main.css" />
-<link href="vendors/datatables/dataTables.bootstrap.css" rel="stylesheet" media="screen">
 
-<!-- jQuery UI -->
-<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="vendors/datatables/js/jquery.dataTables.min.js"></script>
-<script src="vendors/datatables/dataTables.bootstrap.js"></script>
 <script src="js/custom.js"></script>
-<script src="js/tables.js"></script>
-<script src="js/jquery-3.2.1.min.js"></script>
+ <script src="js/tables.js"></script>
+ <script src="js/jquery-3.2.1.min.js"></script>
 <script src="styles/bootstrap4/popper.js"></script>
 <script src="styles/bootstrap4/bootstrap.min.js"></script>
 <script src="plugins/greensock/TweenMax.min.js"></script>
@@ -52,15 +45,22 @@
 <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
 <script src="plugins/easing/easing.js"></script>
 <script src="plugins/parallax-js-master/parallax.min.js"></script>
-</head>
+
+
+
+<script src="js/custom.js"></script>
+ <script src="js/tables.js"></script>
+ <script src="js/jquery-3.2.1.min.js"></script>
+  </head>
   <body>
+  
   	<div class="header">
 	     <div class="container">
 	        <div class="row">
 	           <div class="col-md-5">
 	              <!-- Logo -->
 	              <div class="logo">
-	                 <h1><a href="managerIndex.html">Bootstrap Admin Theme</a></h1>
+	                 <h1><a href="managerIndex.html">상품추가</a></h1>
 	              </div>
 	           </div>
 	        </div>
@@ -69,53 +69,44 @@
 
     <div class="page-content">
     	<div class="row">
-		  <div class="col-md-1">
+		  <div class="col-md-2">
 		  	<div class="sidebar content-box" style="display: block;">
                 <ul class="nav">
                     <!-- Main menu -->
-                    <li><a href="index.jsp"><i class="glyphicon glyphicon-home"></i> 홈으로</a></li>
-                    <li class="current"><a href="productAll.jsp"><i class="glyphicon glyphicon-list"></i> 상품정보</a></li>
-                    <li class="current"><a href="personInfoAll.jsp"><i class="glyphicon glyphicon-list"></i> 회원정보</a></li>
-                    <li class="current"><a href="tables.html"><i class="glyphicon glyphicon-list"></i> Q&A</a></li>
-                    <li class="current"><a href="manager_order.jsp"><i class="glyphicon glyphicon-list"></i> 주문정보</a></li>
-                         
+                    <li><a href="note"><i class="glyphicon glyphicon-home"></i> 홈으로</a></li>
+                    <li class="current"><a href="note?command=proAll"><i class="glyphicon glyphicon-list"></i> 상품정보</a></li>
+                    <li class="current"><a href="note?command=userAll"><i class="glyphicon glyphicon-list"></i> 회원정보</a></li>
+                    <li class="current"><a href="note?command=qnaAll"><i class="glyphicon glyphicon-list"></i> Q&A</a></li>
+                    <li class="current"><a href="note?command=purAll"><i class="glyphicon glyphicon-list"></i> 주문정보</a></li>
                 </ul>
              </div>
 		  </div>
-		  
-		  
-		  <!-- 정보 -->
-		  
-		  <section id="one" class="wrapper style1">
-				<div class="inner">
-					<article class="feature left">
-						<span class="image"><img src="images/pic01.jpg" alt="" /></span>
-						<div class="content">
-							<h2>내 정보(수정)</h2>
+ <!-- 정보 -->
+		  <form action="note?command=proInsert" method="post" enctype="multipart/form-data" >
+		  <section id="one" >
+							<h2>상품 추가</h2>
 							<table>
-								<tr><td>아이디</td><td><input type="text" disabled="disabled" value="아이디1"></td></tr>
-								<tr><td>비밀번호</td><td><input type="password" disabled="disabled" value="비번1"></td></tr>
-								<tr><td>이름</td><td><input type="text" disabled="disabled" value="이름1"></td></tr>
-								<tr><td>주소</td><td><input type="text"  disabled="disabled" value="주소1"></td></tr>
-								<tr><td>전화번호</td><td><input type="text" disabled="disabled" value="전화번호1"></td></tr>
-								<tr><td>질문</td><td><input type="text" disabled="disabled" value="질문1"></td></tr>
-								<tr><td>답변</td><td><input type="text" disabled="disabled" value="답변1"></td></tr>
-								<tr><td>회원상태(수정가능)</td><td><input type="text"  value="활성화"></td></tr>
-								<tr><td><button type="summit" name="update">수정완료</button></td>
+								<tr><td>모델명</td><td><input type="text" name="modelName"></td></tr>
+								<tr><td>회사이름</td><td><input type="text" name="company"></td></tr>
+								<tr><td>금액</td><td><input type="text"  name="price"></td></tr>
+								<tr><td>RAM</td><td><input type="text" name="ram"></td></tr>
+								<tr><td>CPU</td><td><input type="text" name="cpu"></td></tr>
+								<tr><td>화면 크기</td><td><input type="text" name="noteSize"></td></tr>
+								<tr><td>무게</td><td><input type="text"  name="noteWeight"></td></tr>
+								<tr><td>날짜</td><td><input type="text" name="launchDate"></td></tr>
+								<tr><td>이미지파일</td><td> <input type="file" name="file" ></td></tr>
+								<tr><td>설명파일</td><td> <input type="file" name="file2" ></td></tr>
+								<tr><td><button type="submit" name="add">추가완료</button></td>
 								<td><button type="button" name="back">뒤로가기</button></td></tr>
+								
 							</table>
-					
-						</div>
-					</article>
-					
-				</div>
+
 			</section>
-		 
-
-
-
+		 </form>
 		  </div>
+
 		</div>
+		
     </div>
 
     <footer>
@@ -129,11 +120,26 @@
     
        
 
+      <link href="vendors/datatables/dataTables.bootstrap.css" rel="stylesheet" media="screen">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="vendors/datatables/js/jquery.dataTables.min.js"></script>
+
+    <script src="vendors/datatables/dataTables.bootstrap.js"></script>
+
+
+
  
  
    <script>
      $("button[name=back]").click(function(){
-    	 location="personInfoAll.jsp"
+    	 location="productAll.jsp"
      });
      </script>
   </body>

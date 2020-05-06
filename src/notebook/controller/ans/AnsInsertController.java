@@ -22,10 +22,10 @@ public class AnsInsertController implements Controller {
 		String userId = (String)request.getSession().getAttribute("id");
 		
 		if(qnaNo == null || qnaNo.equals("") || content == null || content.equals("") || userId == null || userId.equals("")) {
-			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
+			throw new NotEnoughParameterException(qnaNo+content+userId+"입력값이 충분하지 않습니다.");
 		}
 
-		if(userId.equals("admin")) {
+		if(!userId.equals("admin")) {
 			throw new NotFoundException("관리자만 가능합니다.");
 		}
 		BoardAnswer board = new BoardAnswer();
@@ -36,7 +36,7 @@ public class AnsInsertController implements Controller {
 		ModelAndView mv = new ModelAndView();
 		mv.setRedirect(true);
 		//qnaNo으로 게시물 상세보기로 이동
-		mv.setViewName("");
+		mv.setViewName("note?command=qnaDetail&qnaNo=" + qnaNo);
 		return mv;
 	}
 

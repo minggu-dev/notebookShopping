@@ -42,7 +42,7 @@ public class ProUpdateController implements Controller {
 		Product product = new Product(serialNum, modelName, company, Integer.parseInt(price), Integer.parseInt(ram), cpu,Integer.parseInt(noteSize), Double.parseDouble(noteWeight)
 				, Integer.parseInt(stock), null, null);
 		ProductService.update(product);
-		ModelAndView mv = new ModelAndView(false, "관리자 페이지");
+		ModelAndView mv = new ModelAndView(false, "note?command=proAll");
 		return mv;
 	}
 

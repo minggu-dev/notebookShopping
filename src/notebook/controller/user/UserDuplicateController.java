@@ -3,12 +3,9 @@ package notebook.controller.user;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
+import net.sf.json.JSONObject;
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
-import notebook.domain.Users;
-import notebook.exception.DuplicateException;
 import notebook.exception.NotEnoughParameterException;
 import notebook.service.UserService;
 

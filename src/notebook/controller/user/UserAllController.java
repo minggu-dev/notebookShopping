@@ -20,7 +20,7 @@ public class UserAllController implements Controller {
 		List<Users> list = UserService.selectAll();
 		ModelAndView mv = new ModelAndView();
 		request.setAttribute("list", list);
-		mv.setViewName("관리자 페이지");
+		mv.setViewName("personInfoAll.jsp");
 		return mv;
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
@@ -45,7 +46,9 @@ public class ProSelectAllSortController implements Controller {
 		request.setAttribute("list", list);
 		request.setAttribute("pageObj", pageObj);
 		ModelAndView mv = new ModelAndView();
+		HttpSession session = request.getSession();
 		mv.setViewName("productAll.jsp");
+		
 		return mv;
 	}
 }

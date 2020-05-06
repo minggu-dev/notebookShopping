@@ -27,13 +27,14 @@ public class UserWithdrawalController implements Controller {
       }else {
           mv = new ModelAndView(true, "note");
       }
-      System.out.println(userId);
-      System.out.println(password);
+
       if(userId == null || userId.equals("") || password == null || password.equals("")) {
          throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
       }
       
       UserService.withdrawMember(userId, password);
+      request.getSession().removeAttribute("id");
+      
       return mv;
    }
 }

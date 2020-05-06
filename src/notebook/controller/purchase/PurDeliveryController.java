@@ -26,7 +26,7 @@ public class PurDeliveryController implements Controller {
 		}
 		
 		PurchaseService.updateAddr(Integer.parseInt(orderNo), addrDelivery, userId);
-		ModelAndView mv = new ModelAndView(false, "마이페이지로");
+		ModelAndView mv = new ModelAndView(false, "note?command=purUser");
 		return mv;
 	}
 

@@ -30,6 +30,7 @@ public class PurchaseService {
 	
 	public static OrderInfo selectByNo(int orderNo, String userId) throws SQLException, NotFoundException{
 		OrderInfo info = orderInfoDao.selectByNo(orderNo);
+		
 		if(info == null) {
 			throw new NotFoundException("주문 내역을 찾을 수 없습니다.");
 		}

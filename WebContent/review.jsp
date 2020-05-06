@@ -119,7 +119,7 @@ function formSubmit(){
 				<div>
 					<label>내용 </label>
 					<textarea class="form-control" name="content" rows="4" cols="80"
-						maxlength="500" placeholder="후기를 작성해 주세요(500자 제한)"></textarea>
+						maxlength="500" placeholder="후기를 작성해 주세요(500자 제한)" style="resize: none;"></textarea>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
 						type="button" class="btn btn-default" value="쓰기"
 						onclick="formSubmit()">

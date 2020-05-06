@@ -26,7 +26,8 @@ public class PurDeliveryFormController implements Controller {
 		OrderInfo info = PurchaseService.selectByNo(Integer.parseInt(orderNo), userId);
 		request.setAttribute("info", info);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("배송지 수정하기 폼으로");
+		
+		mv.setViewName("deliveryUpdate.jsp");
 		return mv;
 	}
 

@@ -20,14 +20,20 @@ public class UserPwdFindController implements Controller {
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String phone = request.getParameter("phone");
 		String answer = request.getParameter("answer");
-		if(phone == null || phone.equals("") || answer == null || answer.equals("")) {
-			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
-		}
-		Users user = UserService.selectByPhoneAns(phone, answer);
-		String pwd = user.getPwd();
-		request.setAttribute("pwd", pwd);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("로그인 창으로");
+		
+		try {
+			if(phone == null || phone.equals("") || answer == null || answer.equals("")) {
+				throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
+			}
+			Users user = UserService.selectByPhoneAns(phone, answer);
+			String pwd = user.getPwd();
+			request.setAttribute("pwd", pwd);
+			mv.setViewName("findByPasswordSuccess.jsp");
+		}catch (Exception e) {
+			mv.setViewName("findFail.jsp");
+			mv.setRedirect(true);
+		}
 		return mv;
 	}
 

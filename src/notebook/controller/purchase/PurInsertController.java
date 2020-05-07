@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import notebook.controller.Controller;
 import notebook.controller.ModelAndView;
 import notebook.domain.OrderInfo;
+import notebook.exception.CannotModifyException;
 import notebook.exception.NotEnoughParameterException;
 import notebook.service.PurchaseService;
 
@@ -21,6 +22,7 @@ public class PurInsertController implements Controller {
 		String userId = (String)request.getSession().getAttribute("id");
 		String totalPrice = request.getParameter("totalPrice");
 		String addrDelivery = request.getParameter("addrDelivery");
+		ModelAndView mv = new ModelAndView(true, "note?command=purUser");
 		
 		if(userId == null || userId.equals("") || totalPrice == null || totalPrice.equals("") || addrDelivery == null || addrDelivery.equals("")) {
 			throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
@@ -29,8 +31,11 @@ public class PurInsertController implements Controller {
 		info.setUserId(userId);
 		info.setTotalPrice(Integer.parseInt(totalPrice));
 		info.setAddrDelivery(addrDelivery);
-		PurchaseService.purchaseOrder(info);
-		ModelAndView mv = new ModelAndView(false, "구매성공 페이지");
+		try {
+			PurchaseService.purchaseOrder(info);
+		}catch (CannotModifyException e) {
+			mv.setViewName("purFail.jsp");
+		}
 		
 		return mv;
 	}

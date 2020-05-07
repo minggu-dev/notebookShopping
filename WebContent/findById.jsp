@@ -29,9 +29,22 @@
 <link rel="stylesheet" type="text/css" href="css/util.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendor/select2/select2.min.js"></script>
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+	<script src="js/main.js"></script>
+	
 <title>Insert title here</title>
 <style>
-
+.home{
+	background-color: #ebebeb;
+	height: 1000px;
+}
 </style>
 
 <script>
@@ -40,10 +53,11 @@
 </head>
 <body>
 
-<div class="super_container">
 <!-- Header -->
-<%@include file="header.jsp" %>
+<div class="super_container">
+<jsp:include page="header.jsp"/>
 
+<div class="home">
 <div class="container" style="position: relative; z-index:2;">
      <div class="limiter">
 		<div class="container-login100">
@@ -87,18 +101,8 @@
 	<div id="dropDownSelect1"></div>
     </div>
 	
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-	<script src="vendor/animsition/js/animsition.min.js"></script>
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="vendor/select2/select2.min.js"></script>
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-	<script src="vendor/countdowntime/countdowntime.js"></script>
-	<script src="js/main.js"></script>
-    
-    
-    <%@include file="footer.jsp" %>
+    </div>
+    <jsp:include page="footer.jsp"/>
 
 
 

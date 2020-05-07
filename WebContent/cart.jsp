@@ -153,7 +153,7 @@ button:hover {
                                 <tr name="cart">								<%-- ${l.product.imgName } --%>
                                     <td class="cart-pic first-row"><img src="images/productimg/${result.product.imgName }" alt="모른다."></td>
                                     <td class="cart-title first-row">
-                                        <h5>${result.product.modelName }<input type="hidden" name="serialNum" value="${result.product.serialNum }"></h5>
+                                        <h5><a href="note?command=proDetail&serialNum=${result.product.serialNum}">${result.product.modelName }</a><input type="hidden" name="serialNum" value="${result.product.serialNum }"></h5>
                                     </td>
                                     <td class="p-price first-row" name="sell_price"><fmt:formatNumber value="${result.product.price}"/></td>
                                     
@@ -187,7 +187,6 @@ button:hover {
 						<div class="cart_buttons_right ml-lg-auto">
 																		
 							<div class="button clear_cart_button" id="clear_cart"><a href="note?command=cartEmpty&userId=${l.userId }">장바구니 비우기</a></div>
-							<div class="button update_cart_button" id="update_cart"><%-- <a href="note?command=cartUpdate&userId=${l.userId }&serialNum=${l.product.serialNum}&count=${l.count}"> --%><a>장바구니 갱신</a><!-- </a> --></div>
 						</div>
 					</div>
 				</div>
@@ -264,6 +263,11 @@ button:hover {
 				</div>			
 			</div>
 		</div>
+		
+		<form name="purInfo" action="note?command=purInsert" method="post">
+			<input type="hidden" name="totalPrice" value="">
+			<input type="hidden" name="addrDelivery" value="">
+		</form>
 
 <script>
 //개별 상품삭제하기 버튼
@@ -297,7 +301,8 @@ button:hover {
 	$('div[name=count]').on('change', function() {
 		var qty = Number(0);
 		var all_total = Number();
-		  var sell_price = Number();
+		var sell_price = Number();
+		
 		$('tr[name=cart]').each(function(i, element) {
 			amount = $('input[name=amount]').eq(i).val(); //수량
 			sell_price = $('td[name=sell_price]').eq(i).text().replace(/,/g ,"");
@@ -308,32 +313,26 @@ button:hover {
 			qty += parseInt(amount);
 			$('td>div[name=total]').eq(i).text(total.toLocaleString()+'원');  
 		});
+		  
 		$('div[name=quantity]').text(qty);
 		$('div[name=all_total]').text(all_total.toLocaleString()+'원');
 		$('input[name=hidden_total]').val(all_total);
+		
+		var count = $(this).find('input[name=amount]').val();
+		var serialNum = $(this).parents('tr').find('input[name=serialNum]').val();
+		
+		$.ajax({
+			type: "POST",
+			url:"note",
+			data: "command=cartUpdate&serialNum=" + serialNum +"&count=" + count,
+			dataType:"json",
+			success: function(jsonObj) {
+				
+			}
+		});
 	});
 	var all_total;
 
-	
-	 $('#update_cart').click(function() {
-		 $('tr[name=cart]').each(function(i, element) {
-			var serialNum = $('input[name=serialNum]').eq(i).val();
-			var count = $('input[name=amount]').eq(i).val();
-			
-			$.ajax({
-				type: "POST",
-				url:"note",
-				data: "command=cartUpdate&serialNum=" + serialNum +"&count=" + count,
-				dataType:"json",
-				success: function(jsonObj) {
-					if(jsonObj.status == 1){
-						alert("갱신 되었습니다.");
-					}
-				}
-			});
-			
-		 });
-	}); 
 	
 	//구매하기
 	$('div[name=purchase]').on('click', function() {
@@ -342,27 +341,22 @@ button:hover {
 			location.href="login.jsp";
 			return false;
 		}
-		//alert('dd');
-		var addrDelivery;
-		var totalPrice = $('input[name=hidden_total]').val();
+		var $purForm = $('form[name=purInfo]');
+		
+		$purForm.find('input[name=totalPrice]').val($('input[name=hidden_total]').val());
+		
 		if($('#addr').is(":checked")){
-			addrDelivery = "${addr}";
+			$purForm.find('input[name=addrDelivery]').val("${addr}");
 		}else{//기존주소 선택을 안했을때
-			addrDelivery = $('input[name=newAddr]').val();//새로운 주소 
+			$purForm.find('input[name=addrDelivery]').val($('input[name=newAddr]').val());//새로운 주소 
 		}
-		if(totalPrice == 0){
+		
+		if($purForm.find('input[name=totalPrice]').val() == 0){
 			alert('상품을 담아주세요');
 			return false;
 		}
-
-		$.ajax({
-			url:"note",			
-			type: "POST",
-			data: "command=purInsert&totalPrice=" + totalPrice +"&addrDelivery=" + addrDelivery,
-			success: function() {
-				location.href = "note?command=purUser";
-			}
-		});
+		
+		$purForm.submit();
 		return false;
 	});
 	

@@ -118,7 +118,7 @@
 								<td><c:out value="${order.addrDelivery}" /></td>
 								<td class="center"><c:out value="${order.totalPrice}"  /></td>
 								<td><button name="delivery" value="${order.orderNo}" >배송수정</button></td>
-								<td><button name=refund value="${order.orderNo}">환불수정</button></td>			
+								<td><button name=refund value="${order.orderNo}">환불</button></td>			
 							</tr>
 						</c:forEach>
 						</tbody>

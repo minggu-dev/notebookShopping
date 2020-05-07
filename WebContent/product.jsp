@@ -75,7 +75,7 @@ legend.scheduler-border {
 <script>
 $(function(){
 	$('.cart_button').click(function(){
-		if(${requestScope.product.stock} < parseInt($('.quantity').val())){
+		if(${requestScope.product.stock} < parseInt($('.quantity').val()) || parseInt($('.quantity').val()) < 1){
 			alert('재고를 확인해 주세요');
 		}else{
 			if(${empty sessionScope.id}){

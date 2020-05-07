@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%response.setHeader("Cache-Control", "no-store"); %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -205,7 +206,7 @@
 								</div>
 								<div class="product_content">
 									<div class="product_title">
-										<a href="note?command=proDetail&serialNum=${pro.serialNum}">${pro.modelName}</a>
+										<a href="note?command=proDetail&serialNum=${pro.serialNum}">${pro.modelName}${pro.stock == 0 ? '[품절]' : ''}</a>
 									</div>
 									<div class="product_price">
 										<fmt:formatNumber value="${pro.price}" />
@@ -229,7 +230,7 @@
 								</div>
 								<div class="product_content">
 									<div class="product_title">
-										<a href="note?command=proDetail&serialNum=${pro.serialNum}">${pro.modelName}</a>
+										<a href="note?command=proDetail&serialNum=${pro.serialNum}">${pro.modelName}${pro.stock == 0 ? '[품절]' : ''}</a>
 									</div>
 									<div class="product_price">
 										<fmt:formatNumber value="${pro.price}" />

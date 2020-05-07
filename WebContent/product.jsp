@@ -77,6 +77,7 @@ $(function(){
 	$('.cart_button').click(function(){
 		if(${requestScope.product.stock} < parseInt($('.quantity').val()) || parseInt($('.quantity').val()) < 1){
 			alert('재고를 확인해 주세요');
+			$('.quantity').val(${requestScope.product.stock});
 		}else{
 			if(${empty sessionScope.id}){
 				if(sessionStorage.getItem('cart:' + $('form > input[name=serialNum]').val()) == null){

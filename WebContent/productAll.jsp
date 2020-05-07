@@ -4,7 +4,7 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-	
+<%response.setHeader("Cache-Control", "no-store"); %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -174,35 +174,20 @@ $(function(){
 							<c:otherwise>
 								<c:forEach items="${requestScope.list}" var="pro">
 									<div class="product" id="${pro.serialNum}">
-										<c:choose>
-											<c:when test="${pro.stock > 0}">
-												<div class="product_image">
-													<a href="note?command=proDetail&serialNum=${pro.serialNum}">
-														<img width=250px height=250px
-														src="images/productimg/${pro.imgName}" alt="">
-													</a>
-												</div>
-												<div class="product_content">
-													<div class="product_title">
-														<a href="note?command=proDetail&serialNum=${pro.serialNum}">${pro.modelName}</a>
-													</div>
-												</div>
-											</c:when>
-											<c:otherwise>
-												<div class="product_image">
-														<img width=250px height=250px
-														src="images/productimg/${pro.imgName}" alt="">
-												</div>
-												<div class="product_content">
-													<div class="product_title">
-														<a>${pro.modelName} [품절]</a>
-													</div>
-												</div>
-											</c:otherwise>
-										</c:choose>
-											<div class="product_price">
-												<fmt:formatNumber value="${pro.price}" />원
+										<div class="product_image">
+											<a href="note?command=proDetail&serialNum=${pro.serialNum}">
+												<img width=250px height=250px
+												src="images/productimg/${pro.imgName}" alt="">
+											</a>
+										</div>
+										<div class="product_content">
+											<div class="product_title">
+												<a href="note?command=proDetail&serialNum=${pro.serialNum}">${pro.modelName}${pro.stock == 0 ? '[품절]' : ''}</a>
 											</div>
+										</div>
+										<div class="product_price">
+											<fmt:formatNumber value="${pro.price}" />원
+										</div>
 									</div>
 								</c:forEach>
 							</c:otherwise>

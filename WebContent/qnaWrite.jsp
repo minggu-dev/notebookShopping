@@ -1,5 +1,6 @@
 <%@ page info="게시글 등록하기" contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%response.setHeader("Cache-Control", "no-store"); %>    
 <html lang="en">
 <head>
 

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%response.setHeader("Cache-Control", "no-store"); %>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -187,7 +188,6 @@ $("button[name=deleteCancle]").click(function(){
 
 
 $("button[name=orderDetail]").click(function(){
-   alert("상품디테일");
    var orderNo = $(this).val();
    
    location = "note?command=purDetail&orderNo="+orderNo;

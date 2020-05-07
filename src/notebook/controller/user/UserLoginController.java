@@ -44,13 +44,13 @@ public class UserLoginController implements Controller {
 			}else {
 				throw new NotFoundException("회원정보가 일치하지 않습니다. 다시 확인해주세요.");
 			}
+			if(userId.equals("admin")) {
+				mv.setViewName("managerIndex.jsp");
+			}
 		}catch (Exception e) {
 			mv.setViewName("loginFail.jsp");
 		}
 		
-		if(userId.equals("admin")) {
-			mv.setViewName("managerIndex.jsp");
-		}
 		
 		return mv;
 	}

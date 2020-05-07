@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%response.setHeader("Cache-Control", "no-store"); %>    
 <!DOCTYPE html>
 <html>
   <head>
@@ -42,7 +43,7 @@
 	           <div class="col-md-5">
 	              <!-- Logo -->
 	              <div class="logo">
-	                 <h1><a href="managerIndex.html">회원 전체 정보</a></h1>
+	                 <h1><a href="managerIndex.jsp">회원 전체 정보</a></h1>
 	              </div>
 	           </div>
 	        </div>
@@ -83,7 +84,6 @@
 								<th>이름</th>
 								<th>주소</th>
 								<th>전화번호</th>
-								<th>질문</th>
 								<th>답변</th>
 								<th>활동상태</th>
 								<th>회원비활성화</th>
@@ -99,9 +99,8 @@
 								<td><c:out value="${personInfo.name}"  /></td>
 								<td class="center"><c:out value="${personInfo.addr}" /></td>
 								<td class="center"><c:out value="${personInfo.phone}"  /></td>
-								<td>${personInfo.question}</td>
 								<td>${personInfo.answer}</td>
-								<td>${personInfo.state}</td>
+								<td>${personInfo.state == 1 ? '활성화' : '비활성화'}</td>
 								<td><button name="state" value="${personInfo.userId}" id="${personInfo.pwd}">비활성화</button></td>			
 							</tr>
 						</c:forEach>
@@ -132,11 +131,16 @@
 
     <script>
     	$("button[name=state]").click(function(){
-    		alert(1);
     		var id = $(this).val();
     		var password= $(this).attr("id");
     		location="note?command=userWithdraw&id="+id+"&password="+password;
     	});
+    	
+    	$("button[name=state]").each(function(){
+    		if($(this).parents('tr').find('td:nth-child(9)').html() == '비활성화'){
+    			$(this).hide();
+    		}
+    	})
     </script>
     
     <script>

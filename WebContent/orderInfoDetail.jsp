@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%response.setHeader("Cache-Control", "no-store"); %>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,7 +101,7 @@ height:50%;
 						<c:forEach items="${info.orderList}" var="order">
 							<tr class="odd gradeX">
 								<td><input type="text" value="${order.orderNo}" disabled></td>
-								<td><img src="images/productimg/${order.product.imgName}" style="width: 180px; height: 180px;"><span>${order.product.modelName }</span></td>
+								<td><img src="images/productimg/${order.product.imgName}" style="width: 180px; height: 180px; display:block"><span>${order.product.modelName }</span></td>
 								<td><input type="text" value="${order.product.company }" disabled></td>
 								<td><input type="text" value="${order.quantity}" disabled></td>
 								<td class="center"><input type="text" value="${order.product.price*order.quantity}" disabled></td>

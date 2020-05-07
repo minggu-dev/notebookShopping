@@ -2,6 +2,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+<%response.setHeader("Cache-Control", "no-store"); %>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,7 +60,7 @@ $(function(){
 			 success : function(jsonObj){
 				 $.each(jsonObj,function(index,item){
 					var trhtml = "";
-					trhtml += '<tr height="100"><th style="width:10%" name="minho"></th><td colspan="5" name="content">' + item.content + '</td>';
+					trhtml += '<tr height="100"><th style="width:10%" name="minho"></th><td colspan="5" name="content"><span style="font-size: 15px;"><b><pre>' + item.content + '</pre></b></span></td>';
 				    trhtml += '</tr>';
 				    $('table[name=minotest]').append(trhtml);
 				 });
@@ -154,7 +155,7 @@ $(function(){
         
         <tr height="400" valign="top">
         <th>내용</th>
-          <td colspan="4">${b.content}</td>
+          <td colspan="4"><span style="font-size: 15px;"><b><pre>${b.content}</pre></b></span></td>
         </tr>
         
         <tr>

@@ -20,20 +20,19 @@ public class UserWithdrawalController implements Controller {
       String adminId = (String)request.getSession().getAttribute("id");
       String userId=request.getParameter("id");
       String password = request.getParameter("password");
-      
+
+      if(userId == null || userId.equals("") || password == null || password.equals("")) {
+          throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
+      }
+      UserService.withdrawMember(userId, password);
       ModelAndView mv;
+      
       if((adminId).equals("admin")) {
           mv = new ModelAndView(true, "note?command=userAll");
       }else {
           mv = new ModelAndView(true, "note");
+          request.getSession().removeAttribute("id");
       }
-
-      if(userId == null || userId.equals("") || password == null || password.equals("")) {
-         throw new NotEnoughParameterException("입력값이 충분하지 않습니다.");
-      }
-      
-      UserService.withdrawMember(userId, password);
-      request.getSession().removeAttribute("id");
       
       return mv;
    }

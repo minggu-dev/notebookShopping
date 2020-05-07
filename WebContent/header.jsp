@@ -36,7 +36,7 @@
 				<div class="row">
 					<div class="col">
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
-							<div class="logo"><a href="#">노트북 쇼핑</a></div>
+							<div class="logo"><a href="note">노트북 쇼핑</a></div>
 							<nav class="main_nav">
 								<ul>
 									<li>

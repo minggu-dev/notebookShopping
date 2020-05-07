@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%response.setHeader("Cache-Control", "no-store"); %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -128,7 +129,7 @@
 							<label for="inputEmail" class="col-lg-2 control-label">주소</label>
 							<div class="col-lg-10">
 								<input type="text" class="form-control" id="email" name="addr"
-									data-rule-required="true" placeholder="이메일" maxlength="40" required>
+									data-rule-required="true" placeholder="주소" maxlength="40" required>
 							</div>
 						</div>
 						<div class="wrap-input100 validate-input m-b-36"

@@ -40,7 +40,7 @@ public class UserDaoImpl implements UserDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM users";
+		String sql = "SELECT * FROM users order by state";
 		List<Users> list = new ArrayList<Users>();
 		try {
 			con = DbUtil.getConnection();
